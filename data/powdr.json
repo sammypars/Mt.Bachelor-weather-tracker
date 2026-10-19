@@ -1,11 +1,11 @@
 {
- "fetched_at": "2026-10-19T14:00:58.380Z",
- "checked_at": "2026-10-19T14:00:58.380Z",
+ "fetched_at": "2026-10-19T19:58:45.907Z",
+ "checked_at": "2026-10-19T19:58:45.907Z",
  "source": "http://powdrforecasts.weebly.com/mt-bachelor.html",
- "pdf_url": "http://powdrforecasts.weebly.com/uploads/1/2/9/3/12933500/mtb101826.pdf",
- "issued": "2026-10-18",
+ "pdf_url": "http://powdrforecasts.weebly.com/uploads/1/2/9/3/12933500/mtb101926.pdf",
+ "issued": "2026-10-19",
  "images": [
-  "http://powdrforecasts.weebly.com/uploads/1/2/9/3/12933500/screen-shot-2026-10-17-at-4-54-00-am_orig.png"
+  "http://powdrforecasts.weebly.com/uploads/1/2/9/3/12933500/screen-shot-2026-10-19-at-4-43-28-am_orig.png"
  ],
  "forecaster": "JOE NICHOLLS",
  "base": {
@@ -14,147 +14,12 @@
    {
     "title": "Day-1 Forecast 6,300 FT",
     "elevation_ft": 6300,
-    "date": "Sunday, October 18, 2026",
-    "rows": [
-     {
-      "time": "6:00 AM",
-      "temp_f": 34,
-      "wet_bulb_f": 32,
-      "rh_pct": 85,
-      "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
-      "lifted_index": 12,
-      "wind_dir": "SE",
-      "wind_sus_mph": 3,
-      "wind_gust_mph": null,
-      "sky": "Mstly cldy"
-     },
-     {
-      "time": "9:00 AM",
-      "temp_f": 39,
-      "wet_bulb_f": 36,
-      "rh_pct": 75,
-      "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
-      "lifted_index": 12,
-      "wind_dir": "SE",
-      "wind_sus_mph": 3,
-      "wind_gust_mph": null,
-      "sky": "Mstly cldy"
-     },
-     {
-      "time": "12:00 PM",
-      "temp_f": 52,
-      "wet_bulb_f": 44,
-      "rh_pct": 50,
-      "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
-      "lifted_index": 9,
-      "wind_dir": "W",
-      "wind_sus_mph": 5,
-      "wind_gust_mph": null,
-      "sky": "Ptly cldy"
-     },
-     {
-      "time": "3:00 PM",
-      "temp_f": 56,
-      "wet_bulb_f": 46,
-      "rh_pct": 45,
-      "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
-      "lifted_index": 6,
-      "wind_dir": "W",
-      "wind_sus_mph": 5,
-      "wind_gust_mph": null,
-      "sky": "Mstly cldy"
-     },
-     {
-      "time": "6:00 PM",
-      "temp_f": 50,
-      "wet_bulb_f": 41,
-      "rh_pct": 45,
-      "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
-      "lifted_index": 7,
-      "wind_dir": "W",
-      "wind_sus_mph": 5,
-      "wind_gust_mph": null,
-      "sky": "Ptly cldy"
-     },
-     {
-      "time": "9:00 PM",
-      "temp_f": 44,
-      "wet_bulb_f": 38,
-      "rh_pct": 55,
-      "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
-      "lifted_index": 10,
-      "wind_dir": "N",
-      "wind_sus_mph": 5,
-      "wind_gust_mph": null,
-      "sky": "Ptly cldy"
-     },
-     {
-      "time": "12:00 AM",
-      "temp_f": 39,
-      "wet_bulb_f": 36,
-      "rh_pct": 75,
-      "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
-      "lifted_index": 11,
-      "wind_dir": "SE",
-      "wind_sus_mph": 3,
-      "wind_gust_mph": null,
-      "sky": "Ptly cldy"
-     },
-     {
-      "time": "3:00 AM",
-      "temp_f": 34,
-      "wet_bulb_f": 32,
-      "rh_pct": 85,
-      "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
-      "lifted_index": 12,
-      "wind_dir": "SE",
-      "wind_sus_mph": 3,
-      "wind_gust_mph": null,
-      "sky": "Mstly cldy"
-     },
-     {
-      "time": "6:00 AM",
-      "temp_f": 32,
-      "wet_bulb_f": 31,
-      "rh_pct": 90,
-      "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
-      "lifted_index": 12,
-      "wind_dir": "SE",
-      "wind_sus_mph": 3,
-      "wind_gust_mph": null,
-      "sky": "Mstly cldy"
-     }
-    ],
-    "liquid_total": null,
-    "snow_total": null
-   },
-   {
-    "title": "Day-2 Forecast 6,300 FT",
-    "elevation_ft": 6300,
     "date": "Monday, October 19, 2026",
     "rows": [
      {
       "time": "6:00 AM",
-      "temp_f": 32,
-      "wet_bulb_f": 31,
+      "temp_f": 40,
+      "wet_bulb_f": 39,
       "rh_pct": 90,
       "tstorm_risk": null,
       "precip_amount": null,
@@ -167,8 +32,8 @@
      },
      {
       "time": "9:00 AM",
-      "temp_f": 36,
-      "wet_bulb_f": 34,
+      "temp_f": 42,
+      "wet_bulb_f": 40,
       "rh_pct": 80,
       "tstorm_risk": null,
       "precip_amount": null,
@@ -191,7 +56,7 @@
       "wind_dir": "SE",
       "wind_sus_mph": 5,
       "wind_gust_mph": null,
-      "sky": "Mstly cldy"
+      "sky": "Cloudy"
      },
      {
       "time": "3:00 PM",
@@ -205,12 +70,12 @@
       "wind_dir": "SE",
       "wind_sus_mph": 5,
       "wind_gust_mph": null,
-      "sky": "Mstly cldy"
+      "sky": "Cloudy"
      },
      {
       "time": "6:00 PM",
-      "temp_f": 41,
-      "wet_bulb_f": 34,
+      "temp_f": 42,
+      "wet_bulb_f": 35,
       "rh_pct": 45,
       "tstorm_risk": null,
       "precip_amount": null,
@@ -219,12 +84,12 @@
       "wind_dir": "SE",
       "wind_sus_mph": 5,
       "wind_gust_mph": null,
-      "sky": "Mstly cldy"
+      "sky": "Cloudy"
      },
      {
       "time": "9:00 PM",
-      "temp_f": 37,
-      "wet_bulb_f": 32,
+      "temp_f": 39,
+      "wet_bulb_f": 34,
       "rh_pct": 55,
       "tstorm_risk": null,
       "precip_amount": null,
@@ -233,21 +98,21 @@
       "wind_dir": "N",
       "wind_sus_mph": 5,
       "wind_gust_mph": null,
-      "sky": "Mstly cldy"
+      "sky": "Cloudy"
      },
      {
       "time": "12:00 AM",
-      "temp_f": 35,
-      "wet_bulb_f": 31,
+      "temp_f": 36,
+      "wet_bulb_f": 32,
       "rh_pct": 65,
       "tstorm_risk": null,
       "precip_amount": null,
       "precip_chance": null,
-      "lifted_index": 7,
+      "lifted_index": 8,
       "wind_dir": "NE",
       "wind_sus_mph": 5,
       "wind_gust_mph": null,
-      "sky": "Cloudy"
+      "sky": "Mstly cldy"
      },
      {
       "time": "3:00 AM",
@@ -257,16 +122,16 @@
       "tstorm_risk": null,
       "precip_amount": null,
       "precip_chance": null,
-      "lifted_index": 8,
+      "lifted_index": 9,
       "wind_dir": "NE",
       "wind_sus_mph": 5,
       "wind_gust_mph": null,
-      "sky": "Cloudy"
+      "sky": "Mstly cldy"
      },
      {
       "time": "6:00 AM",
-      "temp_f": 33,
-      "wet_bulb_f": 31,
+      "temp_f": 34,
+      "wet_bulb_f": 32,
       "rh_pct": 80,
       "tstorm_risk": null,
       "precip_amount": null,
@@ -275,7 +140,142 @@
       "wind_dir": "NE",
       "wind_sus_mph": 5,
       "wind_gust_mph": null,
-      "sky": "Cloudy"
+      "sky": "Mstly cldy"
+     }
+    ],
+    "liquid_total": null,
+    "snow_total": null
+   },
+   {
+    "title": "Day-2 Forecast 6,300 FT",
+    "elevation_ft": 6300,
+    "date": "Tuesday, October 20, 2026",
+    "rows": [
+     {
+      "time": "6:00 AM",
+      "temp_f": 34,
+      "wet_bulb_f": 32,
+      "rh_pct": 80,
+      "tstorm_risk": null,
+      "precip_amount": null,
+      "precip_chance": null,
+      "lifted_index": 9,
+      "wind_dir": "SE",
+      "wind_sus_mph": 3,
+      "wind_gust_mph": null,
+      "sky": "Mstly cldy"
+     },
+     {
+      "time": "9:00 AM",
+      "temp_f": 37,
+      "wet_bulb_f": 34,
+      "rh_pct": 75,
+      "tstorm_risk": null,
+      "precip_amount": null,
+      "precip_chance": null,
+      "lifted_index": 10,
+      "wind_dir": "SE",
+      "wind_sus_mph": 3,
+      "wind_gust_mph": null,
+      "sky": "Mstly cldy"
+     },
+     {
+      "time": "12:00 PM",
+      "temp_f": 47,
+      "wet_bulb_f": 39,
+      "rh_pct": 45,
+      "tstorm_risk": null,
+      "precip_amount": null,
+      "precip_chance": null,
+      "lifted_index": 8,
+      "wind_dir": "SE",
+      "wind_sus_mph": 5,
+      "wind_gust_mph": null,
+      "sky": "Mstly cldy"
+     },
+     {
+      "time": "3:00 PM",
+      "temp_f": 51,
+      "wet_bulb_f": 41,
+      "rh_pct": 40,
+      "tstorm_risk": null,
+      "precip_amount": null,
+      "precip_chance": null,
+      "lifted_index": 5,
+      "wind_dir": "SE",
+      "wind_sus_mph": 5,
+      "wind_gust_mph": null,
+      "sky": "Ptly cldy"
+     },
+     {
+      "time": "6:00 PM",
+      "temp_f": 47,
+      "wet_bulb_f": 39,
+      "rh_pct": 45,
+      "tstorm_risk": null,
+      "precip_amount": null,
+      "precip_chance": null,
+      "lifted_index": 6,
+      "wind_dir": "SE",
+      "wind_sus_mph": 5,
+      "wind_gust_mph": null,
+      "sky": "Ptly cldy"
+     },
+     {
+      "time": "9:00 PM",
+      "temp_f": 43,
+      "wet_bulb_f": 37,
+      "rh_pct": 55,
+      "tstorm_risk": null,
+      "precip_amount": null,
+      "precip_chance": null,
+      "lifted_index": 10,
+      "wind_dir": "N",
+      "wind_sus_mph": 5,
+      "wind_gust_mph": null,
+      "sky": "Ptly cldy"
+     },
+     {
+      "time": "12:00 AM",
+      "temp_f": 40,
+      "wet_bulb_f": 36,
+      "rh_pct": 65,
+      "tstorm_risk": null,
+      "precip_amount": null,
+      "precip_chance": null,
+      "lifted_index": 10,
+      "wind_dir": "NE",
+      "wind_sus_mph": 5,
+      "wind_gust_mph": null,
+      "sky": "Ptly cldy"
+     },
+     {
+      "time": "3:00 AM",
+      "temp_f": 38,
+      "wet_bulb_f": 35,
+      "rh_pct": 75,
+      "tstorm_risk": null,
+      "precip_amount": null,
+      "precip_chance": null,
+      "lifted_index": 10,
+      "wind_dir": "NE",
+      "wind_sus_mph": 5,
+      "wind_gust_mph": null,
+      "sky": "Ptly cldy"
+     },
+     {
+      "time": "6:00 AM",
+      "temp_f": 37,
+      "wet_bulb_f": 35,
+      "rh_pct": 80,
+      "tstorm_risk": null,
+      "precip_amount": null,
+      "precip_chance": null,
+      "lifted_index": 11,
+      "wind_dir": "NE",
+      "wind_sus_mph": 5,
+      "wind_gust_mph": null,
+      "sky": "Ptly cldy"
      }
     ],
     "liquid_total": null,
@@ -288,78 +288,6 @@
   "days": [
    {
     "title": "Day-1 Forecast 7,800 FT",
-    "elevation_ft": 7800,
-    "date": "Sunday, October 18, 2026",
-    "rows": [
-     {
-      "time": "6:00 AM",
-      "wind_dir": "SW",
-      "wind_sus_mph": 12,
-      "wind_gust_mph": null,
-      "sky": "Mstly cldy"
-     },
-     {
-      "time": "9:00 AM",
-      "wind_dir": "SW",
-      "wind_sus_mph": 15,
-      "wind_gust_mph": 25,
-      "sky": "Mstly cldy"
-     },
-     {
-      "time": "12:00 PM",
-      "wind_dir": "SW",
-      "wind_sus_mph": 15,
-      "wind_gust_mph": 25,
-      "sky": "Ptly cldy"
-     },
-     {
-      "time": "3:00 PM",
-      "wind_dir": "S",
-      "wind_sus_mph": 15,
-      "wind_gust_mph": 25,
-      "sky": "Mstly cldy"
-     },
-     {
-      "time": "6:00 PM",
-      "wind_dir": "S",
-      "wind_sus_mph": 17,
-      "wind_gust_mph": 30,
-      "sky": "Ptly cldy"
-     },
-     {
-      "time": "9:00 PM",
-      "wind_dir": "S",
-      "wind_sus_mph": 20,
-      "wind_gust_mph": 35,
-      "sky": "Ptly cldy"
-     },
-     {
-      "time": "12:00 AM",
-      "wind_dir": "SW",
-      "wind_sus_mph": 17,
-      "wind_gust_mph": 30,
-      "sky": "Ptly cldy"
-     },
-     {
-      "time": "3:00 AM",
-      "wind_dir": "SW",
-      "wind_sus_mph": 15,
-      "wind_gust_mph": 25,
-      "sky": "Mstly cldy"
-     },
-     {
-      "time": "6:00 AM",
-      "wind_dir": "SW",
-      "wind_sus_mph": 12,
-      "wind_gust_mph": null,
-      "sky": "Mstly cldy"
-     }
-    ],
-    "liquid_total": null,
-    "snow_total": null
-   },
-   {
-    "title": "Day-2 Forecast 7,800 FT",
     "elevation_ft": 7800,
     "date": "Monday, October 19, 2026",
     "rows": [
@@ -379,52 +307,124 @@
      },
      {
       "time": "12:00 PM",
-      "wind_dir": "W",
+      "wind_dir": "SW",
       "wind_sus_mph": 10,
       "wind_gust_mph": null,
-      "sky": "Mstly cldy"
+      "sky": "Cloudy"
      },
      {
       "time": "3:00 PM",
-      "wind_dir": "W",
+      "wind_dir": "SW",
       "wind_sus_mph": 10,
       "wind_gust_mph": null,
-      "sky": "Mstly cldy"
+      "sky": "Cloudy"
      },
      {
       "time": "6:00 PM",
-      "wind_dir": "W",
+      "wind_dir": "S",
       "wind_sus_mph": 15,
       "wind_gust_mph": 25,
-      "sky": "Mstly cldy"
+      "sky": "Cloudy"
      },
      {
       "time": "9:00 PM",
       "wind_dir": "S",
       "wind_sus_mph": 15,
       "wind_gust_mph": 25,
-      "sky": "Mstly cldy"
+      "sky": "Cloudy"
      },
      {
       "time": "12:00 AM",
       "wind_dir": "SE",
       "wind_sus_mph": 12,
       "wind_gust_mph": null,
-      "sky": "Cloudy"
+      "sky": "Mstly cldy"
      },
      {
       "time": "3:00 AM",
       "wind_dir": "SE",
-      "wind_sus_mph": 10,
+      "wind_sus_mph": 12,
       "wind_gust_mph": null,
-      "sky": "Cloudy"
+      "sky": "Mstly cldy"
      },
      {
       "time": "6:00 AM",
       "wind_dir": "SE",
+      "wind_sus_mph": 12,
+      "wind_gust_mph": null,
+      "sky": "Mstly cldy"
+     }
+    ],
+    "liquid_total": null,
+    "snow_total": null
+   },
+   {
+    "title": "Day-2 Forecast 7,800 FT",
+    "elevation_ft": 7800,
+    "date": "Tuesday, October 20, 2026",
+    "rows": [
+     {
+      "time": "6:00 AM",
+      "wind_dir": "SE",
+      "wind_sus_mph": 12,
+      "wind_gust_mph": null,
+      "sky": "Mstly cldy"
+     },
+     {
+      "time": "9:00 AM",
+      "wind_dir": "SE",
+      "wind_sus_mph": 15,
+      "wind_gust_mph": 25,
+      "sky": "Mstly cldy"
+     },
+     {
+      "time": "12:00 PM",
+      "wind_dir": "S",
+      "wind_sus_mph": 17,
+      "wind_gust_mph": 30,
+      "sky": "Mstly cldy"
+     },
+     {
+      "time": "3:00 PM",
+      "wind_dir": "S",
+      "wind_sus_mph": 17,
+      "wind_gust_mph": 30,
+      "sky": "Ptly cldy"
+     },
+     {
+      "time": "6:00 PM",
+      "wind_dir": "S",
+      "wind_sus_mph": 17,
+      "wind_gust_mph": 30,
+      "sky": "Ptly cldy"
+     },
+     {
+      "time": "9:00 PM",
+      "wind_dir": "SE",
+      "wind_sus_mph": 15,
+      "wind_gust_mph": 25,
+      "sky": "Ptly cldy"
+     },
+     {
+      "time": "12:00 AM",
+      "wind_dir": "SE",
+      "wind_sus_mph": 12,
+      "wind_gust_mph": null,
+      "sky": "Ptly cldy"
+     },
+     {
+      "time": "3:00 AM",
+      "wind_dir": "E",
+      "wind_sus_mph": 10,
+      "wind_gust_mph": null,
+      "sky": "Ptly cldy"
+     },
+     {
+      "time": "6:00 AM",
+      "wind_dir": "E",
       "wind_sus_mph": 8,
       "wind_gust_mph": null,
-      "sky": "Cloudy"
+      "sky": "Ptly cldy"
      }
     ],
     "liquid_total": null,
@@ -436,25 +436,17 @@
   "title": "Extended Outlook 6,300FT",
   "days": [
    {
-    "day": "Tue 10/20",
-    "min_temp_f": 33,
-    "max_temp_f": 50,
-    "precip_chance": "0%",
-    "precip_amount": "Trace",
-    "lifted_index": 5
-   },
-   {
     "day": "Wed 10/21",
     "min_temp_f": 37,
     "max_temp_f": 55,
     "precip_chance": "0%",
-    "precip_amount": "None",
-    "lifted_index": 4
+    "precip_amount": "Trace",
+    "lifted_index": 2
    },
    {
     "day": "Thu 10/22",
     "min_temp_f": 36,
-    "max_temp_f": 46,
+    "max_temp_f": 45,
     "precip_chance": "30%",
     "precip_amount": "<0.05\"",
     "lifted_index": 4
@@ -462,12 +454,20 @@
    {
     "day": "Fri 10/23",
     "min_temp_f": 27,
-    "max_temp_f": 40,
+    "max_temp_f": 37,
     "precip_chance": "0%",
     "precip_amount": "None",
+    "lifted_index": 14
+   },
+   {
+    "day": "Sat 10/24",
+    "min_temp_f": 28,
+    "max_temp_f": 40,
+    "precip_chance": "50%",
+    "precip_amount": "0.15\"",
     "lifted_index": 11
    }
   ]
  },
- "discussion": "The developing low pressure will take a sharp move southward offshore, and while I brought a lot of cloudiness, I don't believe we'll see any precipitation. A little bit of an increase in moisture Thursday, so we could see a chance of rain and snow showers, but definitely much cooler."
+ "discussion": "The satellite images shows a very well developed circulation offshore and this system is forecasted to move southward today and tomorrow. We could see a couple of showers this afternoon, and another chance on Thursday. A couple of models show an increase in moisture this weekend and could be mainly snow."
 }
