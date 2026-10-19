@@ -43,6 +43,9 @@ h1,h2,h3{margin:0;text-wrap:balance}
 .num{font-family:var(--display);font-variant-numeric:tabular-nums}
 .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:grid;gap:14px;align-content:start;min-width:0}
+.card>*{min-width:0}
+#powBody{display:grid;gap:14px}
+.map-controls>*{min-width:0}
 .card h2{font:600 22px/1 var(--display);letter-spacing:.03em;text-transform:uppercase}
 .head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
 .note{font-size:13px;color:var(--muted);margin:0}
@@ -181,7 +184,7 @@ td .bar{display:inline-block;height:6px;border-radius:3px;background:var(--wind)
 .map-box{position:relative;height:560px;border-radius:10px;overflow:hidden;border:1px solid var(--line)}
 @media (max-width:640px){.map-box{height:420px}}
 #map{position:absolute;inset:0;background:var(--accent-soft)}
-#fieldLayer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:450}
+#fieldLayer{position:absolute;left:0;top:0;pointer-events:none}
 .map-controls{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 20px;align-items:center}
 @media (max-width:640px){.map-controls{grid-template-columns:1fr}}
 .ctl-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:4px}
@@ -387,7 +390,8 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
       <h2 id="mapH">Mountain map</h2>
       <span class="pill" id="mapPill">--</span>
     </div>
-    <div class="map-box"><div id="map"></div><canvas id="fieldLayer" aria-hidden="true"></canvas></div>
+    <div class="map-box"><div id="map"></div></div>
+    <canvas id="fieldLayer" aria-hidden="true" hidden></canvas>
     <div class="map-controls">
       <div>
         <div class="ctl-row">
@@ -592,8 +596,8 @@ function renderGlance(){
 function renderProfile(){
   const P=state.pt,i=state.i0;if(!P)return;
   const fl=P.summit.hourly.fl_ft[i],snowLvl=state.nws?nwsSnowLevelNow(state.nws.grid):null;
-  const W=300,H=190,yFt=ft=>H-14-(ft-4000)/(10500-4000)*(H-30);
-  const pk=yFt(9065),base=yFt(5800);
+  const W=300,H=190,yFt=ft=>H-12-(ft-5000)/(10000-5000)*(H-26);
+  const pk=yFt(9065),base=yFt(5600);
   // Mt. Bachelor is a near-symmetric cone; draw it with a slight shoulder
   let svg=`<defs><linearGradient id="mtg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".55"/><stop offset="1" stop-color="var(--accent)" stop-opacity=".18"/></linearGradient></defs>`;
   svg+=`<path d="M10 ${H-10} L60 ${base} L120 ${yFt(8200)} L150 ${pk} L180 ${yFt(8300)} L250 ${base} L290 ${H-10} Z" fill="url(#mtg)"/>`;
@@ -601,13 +605,13 @@ function renderProfile(){
   if(flY!=null&&fl<9600){const capY=Math.max(pk,flY);svg+=`<path d="M${150-(capY-pk)*1.05} ${capY} L150 ${pk} L${150+(capY-pk)*1.05} ${capY} Z" fill="#F4F8FB" opacity=".85"/>`}
   for(const k of ["base","mid","summit"]){const e=ELEV[k],y=yFt(e.ft),t=P[k].hourly.temperature_2m[i];
     const pre=P[k].hourly.precipitation[i]>0.005?(t<=33?"snow":t<=36?"mix":"rain"):"";
-    svg+=`<line x1="150" x2="226" y1="${y}" y2="${y}" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2 3"/><circle cx="150" cy="${y}" r="3" fill="var(--ink)"/>
+    svg+=`<line x1="${k==="summit"?150:k==="mid"?112:77}" x2="226" y1="${y}" y2="${y}" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2 3"/>
     <text x="230" y="${y+4}" font-family="var(--display)" font-size="20" font-weight="600" fill="${t<=32?"var(--cold)":"var(--temp)"}">${r0(t)}°</text>
-    <text x="146" y="${y-5}" text-anchor="end" font-family="var(--body)" font-size="10" fill="var(--muted)">${e.name} ${e.ft.toLocaleString()}'${pre?" · "+pre:""}</text>`}
-  if(flY!=null){svg+=`<line x1="4" x2="${W-4}" y1="${flY}" y2="${flY}" stroke="var(--cold)" stroke-width="2" stroke-dasharray="6 4"/><text x="6" y="${flY-4}" font-family="var(--body)" font-size="10" font-weight="600" fill="var(--cold)">Freezing ${Math.round(fl/100)*100} ft${fl>10500?" (above chart)":""}</text>`}
+    <text x="4" y="${y+4}" font-family="var(--body)" font-size="10.5" font-weight="500" fill="var(--ink)">${e.name} ${e.ft.toLocaleString()}'${pre?" · "+pre:""}</text>`}
+  if(flY!=null){svg+=`<line x1="4" x2="${W-24}" y1="${flY}" y2="${flY}" stroke="var(--cold)" stroke-width="2" stroke-dasharray="6 4"/><text x="${W-4}" y="${flY+3}" text-anchor="end" font-family="var(--body)" font-size="9" font-weight="600" fill="var(--cold)">32&#176;</text>`}
   $("profile").innerHTML=svg;
   setPill("flPill",fl==null?"--":fl<6300?"Snow to base":fl<9065?"Snow up top":"Above summit",fl<6300?"snow":fl<9065?"":"warn");
-  $("profNote").textContent=(snowLvl?`NOAA snow level ${Math.round(snowLvl/100)*100} ft. `:"")+"Temperatures from Open-Meteo at each elevation for this hour.";
+  $("profNote").innerHTML=`<b style="color:var(--cold)">Freezing level ${fl==null?"--":(Math.round(fl/100)*100).toLocaleString()+" ft"}</b> (dashed line)${snowLvl?`, NOAA snow level ${(Math.round(snowLvl/100)*100).toLocaleString()} ft`:""}. Temperatures from Open-Meteo for this hour.`;
 }
 
 /* ================= Mt. Bachelor report and status ================= */
@@ -661,7 +665,7 @@ function renderOutlook(){
       const temps=d.rows.slice(0,8).map(r=>r.temp_f).filter(v=>v!=null);if(!temps.length)continue;const sky=d.rows.find(r=>r.time==="12:00 PM")?.sky||d.rows[0]?.sky;
       pwDays[k]={hi:Math.max(...temps),lo:Math.min(...temps),txt:expandSky(sky)+(d.snow_total?`, ${d.snow_total} snow`:"")}}
     for(const e of pw.extended?.days||[]){const m=e.day.match(/(\d{1,2})\/(\d{1,2})/);if(!m)continue;const y=+today.slice(0,4);const k=`${y}-${m[1].padStart(2,"0")}-${m[2].padStart(2,"0")}`;
-      pwDays[k]={hi:e.max_temp_f,lo:e.min_temp_f,txt:[e.precip_chance&&e.precip_chance!=="0%"?e.precip_chance+" precip":"Dry",e.precip_amount&&!/none/i.test(e.precip_amount)?e.precip_amount:""].filter(Boolean).join(", ")}}}
+      pwDays[k]={hi:e.max_temp_f,lo:e.min_temp_f,txt:/none/i.test(e.precip_amount||"none")?(e.precip_chance&&e.precip_chance!=="0%"?e.precip_chance+" chance, none expected":"Dry"):`${e.precip_amount} precip${e.precip_chance&&e.precip_chance!=="0%"?", "+e.precip_chance+" chance":""}`}}}
   let html="";
   for(let k=0;k<D.time.length;k++){
     const key=D.time[k];if(key<today)continue;
@@ -818,7 +822,7 @@ function drawSky(t){
   // stars at night
   if(!sc.day){sx.fillStyle="rgba(255,255,255,.7)";for(let k=0;k<50;k++){const x=(k*137.5%1)*SW||((k*97)%SW),y=((k*53)%Math.max(1,SH*.5));sx.globalAlpha=.3+.5*Math.abs(Math.sin(t/900+k));sx.fillRect((k*197)%SW,y,1.4,1.4)}sx.globalAlpha=1}
   // the cone of Mt. Bachelor, right of center
-  const cx=SW*.72,peak=SH*.2,bY=SH+4,half=Math.min(SW*.46,SH*1.5);
+  const narrow=SW<600,cx=narrow?SW*.66:SW*.72,peak=narrow?SH*.34:SH*.2,bY=SH+4,half=narrow?SW*.62:Math.min(SW*.46,SH*1.5);
   const g=sx.createLinearGradient(0,peak,0,bY);g.addColorStop(0,sc.day?"rgba(60,90,120,.55)":"rgba(20,35,52,.75)");g.addColorStop(1,sc.day?"rgba(30,55,80,.75)":"rgba(10,20,30,.9)");
   sx.fillStyle=g;sx.beginPath();sx.moveTo(cx-half,bY);sx.lineTo(cx-half*.3,SH*.55);sx.lineTo(cx-half*.06,peak+6);sx.quadraticCurveTo(cx,peak-3,cx+half*.06,peak+6);sx.lineTo(cx+half*.35,SH*.6);sx.lineTo(cx+half,bY);sx.closePath();sx.fill();
   // snowcap, lower when the freezing level is low
@@ -853,6 +857,7 @@ function initMap(){
   const imagery=L.layerGroup([L.tileLayer(esri("World_Imagery"),{maxZoom:16,attribution:"Imagery &copy; Esri, Maxar, Earthstar Geographics"}),L.tileLayer(esri("Reference/World_Boundaries_and_Places"),{maxZoom:16})]);
   const street=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:16,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
   topo.addTo(map);
+  const fp=map.createPane("field");fp.style.zIndex=450;fp.style.pointerEvents="none";const fc=$("fieldLayer");fc.hidden=false;fp.appendChild(fc);
   // NOAA NEXRAD radar via Iowa Environmental Mesonet: current frame plus the last 50 minutes
   const frames=["-m50m","-m45m","-m40m","-m35m","-m30m","-m25m","-m20m","-m15m","-m10m","-m05m",""];
   radar.layers=frames.map(f=>L.tileLayer(`https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-900913${f}/{z}/{x}/{y}.png`,{opacity:0,maxNativeZoom:11,maxZoom:16,attribution:"Radar: NOAA NEXRAD via IEM"}));
@@ -878,7 +883,7 @@ function startRadar(){radar.on=true;stopRadarTimer();const show=k=>{radar.layers
   if(!reduce)radar.timer=setInterval(()=>{radar.idx=(radar.idx+1)%radar.layers.length;show(radar.idx)},radar.idx===radar.layers.length-1?700:450);}
 function stopRadarTimer(){clearInterval(radar.timer);radar.timer=null}
 function stopRadar(){radar.on=false;stopRadarTimer();const lab=$("radarTime");if(lab)lab.hidden=true}
-function initField(){const [c,W,H]=fit($("fieldLayer"));Object.assign(fl,{ctx:c,W,H,dirty:true});fl.parts=Array.from({length:Math.round(W*H/900)},newP)}
+function initField(){const cv=$("fieldLayer"),sz=map.getSize();cv.style.width=sz.x+"px";cv.style.height=sz.y+"px";const [c,W,H]=fit(cv);Object.assign(fl,{ctx:c,W,H,dirty:true});fl.parts=Array.from({length:Math.round(W*H/900)},newP)}
 function newP(){const max=1.5+Math.random()*2.5;return {x:Math.random()*(fl.W||1),y:Math.random()*(fl.H||1),age:Math.random()*max,max,s:.75+Math.random()*.5}}
 function gAt(lat,lon,fn){ // bilinear interpolation on the forecast grid
   if(!G.data)return null;const fi=Math.max(0,Math.min(G.nlat-1.001,(lat-G.lat0)/G.dlat)),fj=Math.max(0,Math.min(G.nlon-1.001,(lon-G.lon0)/G.dlon));
@@ -916,7 +921,7 @@ function buildField(){
 function metersPerPixel(){const lat=map.getCenter().lat;return 40075016.686*Math.cos(lat*Math.PI/180)/(256*Math.pow(2,map.getZoom()))}
 let lastF=0;
 function drawField(){
-  const c=fl.ctx;if(!c||!map)return;if(fl.dirty)buildField();const f=fl.field;const now=performance.now(),dt=Math.min(.1,(now-(lastF||now))/1000);lastF=now;
+  const c=fl.ctx;if(!c||!map)return;L.DomUtil.setPosition($("fieldLayer"),map.containerPointToLayerPoint([0,0]));if(fl.dirty)buildField();const f=fl.field;const now=performance.now(),dt=Math.min(.1,(now-(lastF||now))/1000);lastF=now;
   c.clearRect(0,0,fl.W,fl.H);if(!f)return;c.imageSmoothingEnabled=true;c.drawImage(f.cv,0,0,f.gw*FS,f.gh*FS);
   if(mapMode==="wind"){
     const mpp=metersPerPixel(),k=0.44704/mpp*40; // 40x real speed so the motion reads at mountain scale
@@ -984,7 +989,7 @@ function renderStnMarkers(){
   if(!map)return;stnLayer.clearLayers();const S=state.mtb?.stations;if(!S)return;
   for(const [k,rows] of Object.entries(S)){const l=stationLatest(rows),ll=stationLoc(k);if(!l||!ll)continue;const stale=(Date.now()-new Date(l.t))/36e5>12;
     const dir=l.wind_dir||0,windy=l.wind_avg_mph>0;
-    const html=`<div class="stn${stale?" stale":""}">${windy?`<svg viewBox="0 0 46 46"><g transform="rotate(${(dir+180)%360} 23 23)"><path d="M23 -3 L28 7 L23 4 L18 7 Z" fill="var(--wind)"/></g></svg>`:""}${windy?r0(l.wind_avg_mph):r0(l.temp_f)+"°"}</div>`;
+    const html=`<div class="stn${stale?" stale":""}">${windy?`<svg viewBox="0 0 46 46"><g transform="rotate(${(dir+180)%360} 23 23)"><path d="M23 -3 L28 7 L23 4 L18 7 Z" fill="var(--wind)"/></g></svg>`:""}<span style="display:grid;line-height:1;text-align:center">${windy?r0(l.wind_avg_mph)+'<small style="font:500 8px var(--body);color:var(--muted)">mph</small>':r0(l.temp_f)+"°"}</span></div>`;
     L.marker(ll,{icon:L.divIcon({className:"stn-icon",html,iconSize:[46,46],iconAnchor:[23,23]})}).addTo(stnLayer)
       .bindPopup(`<b>${esc(STN[k]||k)} station</b><br>${l.temp_f!=null?r0(l.temp_f)+"°F<br>":""}${windy?`Wind ${r0(l.wind_avg_mph)} mph from ${compassName(dir)}, gust ${r0(l.wind_max_mph)}<br>`:""}<span style="color:var(--muted)">${stale?"Offline, last report "+esc(ago(l.t)):"Reported "+fmt(l.t,{hour:"numeric",minute:"2-digit"})+" PT"}. Location approximate.</span>`)}
 }
