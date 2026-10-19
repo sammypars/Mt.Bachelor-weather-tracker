@@ -1,0 +1,23 @@
+{
+  "name": "mt.bachelor-weather-tracker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sammypars/mt.bachelor-weather-tracker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sammypars/mt.bachelor-weather-tracker/issues"
+  },
+  "homepage": "https://github.com/sammypars/mt.bachelor-weather-tracker#readme",
+  "dependencies": {
+    "pdfjs-dist": "^4.4.168"
+  }
+}

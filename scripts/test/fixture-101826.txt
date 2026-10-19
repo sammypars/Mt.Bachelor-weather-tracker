@@ -1,0 +1,118 @@
+=== PAGE 1
+714: 165|Mount Bachelor Base Forecast
+672: 227|Day-1 Forecast 6,300 FT
+661: 59|Date:  109|Sunday, October 18, 2026
+650: 109|Temp  146|Wet  179|R.H.  208|t-strm  242|Precipitation  304|Precip  342|Lifted  404|Wind
+645: 71|Time  473|Sky
+640: 117|°F  140|Bulb °F  185|%  215|risk  254|amount  303|Chance  343|Index
+639: 394|Sus  433|Gusts
+629: 462|Mstly cldy
+628: 52|1.111111111  68|6:00 AM  116|34  151|32  184|85  350|12  382|SE  413|3
+618: 462|Mstly cldy
+617: 52|3.888888889  68|9:00 AM  116|39  151|36  184|75  350|12  382|SE  413|3
+607: 464|Ptly cldy
+606: 52|11.11111111  64|12:00 PM  116|52  151|44  184|50  353|9  382|W  413|5
+595: 69|3:00 PM  116|56  151|46  184|45  353|6  462|Mstly cldy
+594: 52|13.33333333  382|W  413|5
+584: 69|6:00 PM  116|50  151|41  184|45  353|7  464|Ptly cldy
+583: 52|10  382|W  413|5
+572: 69|9:00 PM  116|44  151|38  184|55  350|10  464|Ptly cldy
+571: 52|6.666666667  383|N  413|5
+561: 464|Ptly cldy
+560: 52|3.888888889  63|12:00 AM  116|39  151|36  184|75  350|11  382|SE  413|3
+549: 68|3:00 AM  116|34  151|32  184|85  350|12  462|Mstly cldy
+548: 52|1.111111111  382|SE  413|3
+537: 68|6:00 AM  116|32  151|31  184|90  350|12  462|Mstly cldy
+536: 52|0  382|SE  413|3
+525: 149|24-Hour Liquid Total:  313|24-Hour Snow Total:
+503: 227|Day-2 Forecast 6,300 FT
+492: 59|Date:  109|Monday, October 19, 2026
+481: 109|Temp  146|Wet  179|R.H.  208|t-strm  242|Precipitation  304|Precip  342|Lifted  404|Wind
+476: 71|Time  473|Sky
+471: 117|°F  140|Bulb °F  185|%  215|risk  254|amount  303|Chance  343|Index
+470: 394|Sus  433|Gusts
+459: 68|6:00 AM  116|32  151|31  184|90  350|12  462|Mstly cldy
+458: 52|0  382|SE  413|3
+448: 462|Mstly cldy
+447: 52|2.222222222  68|9:00 AM  116|36  151|34  184|80  350|12  382|SE  413|3
+436: 64|12:00 PM  116|44  151|36  184|45  353|9  462|Mstly cldy
+435: 52|6.666666667  382|SE  413|5
+424: 69|3:00 PM  116|46  151|37  184|40  353|5  462|Mstly cldy
+423: 52|7.777777778  382|SE  413|5
+413: 462|Mstly cldy
+412: 52|5  69|6:00 PM  116|41  151|34  184|45  353|4  382|SE  413|5
+401: 69|9:00 PM  116|37  151|32  184|55  353|6  462|Mstly cldy
+400: 52|2.777777778  383|N  413|5
+389: 63|12:00 AM  116|35  151|31  184|65  353|7  468|Cloudy
+388: 52|1.666666667  382|NE  413|5
+378: 68|3:00 AM  116|34  151|31  184|75  353|8  468|Cloudy
+377: 52|1.111111111  382|NE  413|5
+366: 68|6:00 AM  116|33  151|31  184|80  353|9  468|Cloudy
+365: 52|0.5555555556  382|NE  413|5
+354: 149|24-Hour Liquid Total:  313|24-Hour Snow Total:
+332: 223|Extended Outlook 6,300FT
+321: 76|Highlights  149|Tue 10/20  229|Wed 10/21  329|Thu 10/22  447|Fri 10/23
+310: 67|Minimum Temp:  165|33  247|37  346|36  461|27
+299: 65|Maximum Temp:  165|50  247|55  346|46  461|40
+288: 163|0%  245|0%  341|30%  459|0%
+287: 59|Precipitation chance
+277: 160|Trace  241|None  336|<0.05"  455|None
+276: 56|Precipitation amount
+266: 85|Lifted Index  168|5  249|4  348|4  461|11
+239: 109|The developing low pressure will take a sharp move southward offshore, and while I
+228: 109|brought a lot of cloudiness, I don't believe we'll see any precipitation. A little bit of an
+218: 109|increase in moisture Thursday, so we could see a chance of rain and snow showers, but
+208: 109|definitely much cooler.
+158: 57|Discussion
+148: 60|on storm
+138: 69|event
+22: 238|JOE NICHOLLS 801-558-4700
+=== PAGE 2
+710: 156|Top of Pine Winds
+661: 173|Day-1 Forecast 7,800 FT
+649: 60|Date:  144|Sunday, October 18, 2026
+636: 227|Wind
+630: 87|Time  367|Sky
+623: 202|Sus  296|Gusts
+611: 354|Mstly cldy
+610: 98|6:00 AM  169|SW  240|12
+599: 354|Mstly cldy
+598: 98|9:00 AM  169|SW  240|15  326|25
+586: 357|Ptly cldy
+585: 92|12:00 PM  169|SW  240|15  326|25
+572: 98|3:00 PM  354|Mstly cldy
+571: 172|S  240|15  326|25
+559: 98|6:00 PM  357|Ptly cldy
+558: 172|S  240|17  326|30
+545: 98|9:00 PM  357|Ptly cldy
+544: 172|S  240|20  326|35
+532: 91|12:00 AM  357|Ptly cldy
+531: 169|SW  240|17  326|30
+518: 98|3:00 AM  354|Mstly cldy
+517: 169|SW  240|15  326|25
+505: 98|6:00 AM  354|Mstly cldy
+504: 169|SW  240|12
+478: 173|Day-2 Forecast 7,800 FT
+465: 60|Date:  144|Monday, October 19, 2026
+452: 227|Wind
+446: 87|Time  367|Sky
+439: 202|Sus  296|Gusts
+427: 98|6:00 AM  354|Mstly cldy
+426: 169|SW  240|12
+413: 98|9:00 AM  354|Mstly cldy
+412: 169|SW  240|12
+400: 92|12:00 PM  354|Mstly cldy
+399: 170|W  240|10
+386: 98|3:00 PM  354|Mstly cldy
+385: 170|W  240|10
+373: 98|6:00 PM  354|Mstly cldy
+372: 170|W  240|15  326|25
+359: 98|9:00 PM  354|Mstly cldy
+358: 172|S  240|15  326|25
+346: 91|12:00 AM  361|Cloudy
+345: 170|SE  240|12
+332: 98|3:00 AM  361|Cloudy
+331: 170|SE  240|10
+319: 98|6:00 AM  361|Cloudy
+318: 170|SE  243|8
+22: 238|JOE NICHOLLS 801-558-4700
