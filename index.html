@@ -699,7 +699,7 @@ function renderPowdr(){
   $("powTabs").querySelectorAll(".tab").forEach(b=>b.onclick=()=>{powTab=+b.dataset.p;renderPowdr()});
   const issuedAge=p.issued?Math.round((new Date(dayKey(Date.now()))-new Date(p.issued))/864e5):null;
   setPill("powPill",p.issued?(issuedAge<=0?"Issued today":issuedAge===1?"Issued yesterday":"Issued "+issuedAge+" days ago"):"Latest",issuedAge>2?"warn":"good");
-  $("powMeta").innerHTML=`${p.forecaster?esc(titleCase(p.forecaster))+" &middot; ":""}<a href="${esc(p.pdf_url)}" target="_blank" rel="noopener">Open the PDF</a>`;
+  $("powMeta").textContent=p.forecaster?titleCase(p.forecaster):"";
   let html="";
   if(powTab<days.length){
     const d=days[powTab],up=(p.upper?.days||[])[powTab]||{rows:[]};
