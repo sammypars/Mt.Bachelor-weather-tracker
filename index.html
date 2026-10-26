@@ -1162,6 +1162,14 @@ function setResort(key,first){
 document.querySelectorAll("#resortSwitch button,#miniSwitch button").forEach(b=>b.addEventListener("click",()=>setResort(b.dataset.r)));
 $("miniSwitch").addEventListener("keydown",e=>{if(!/^Arrow(Left|Right)$/.test(e.key))return;e.preventDefault();const next=R.key==="bachelor"?"willamette":"bachelor";setResort(next);$("miniSwitch").querySelector(`[data-r="${next}"]`).focus()});
 // show the compact switch in the sticky bar once the big one is out of view
+// keyboard: 1 for Mt. Bachelor, 2 for Willamette Pass (ignored while typing or with modifier keys)
+document.addEventListener("keydown",e=>{
+  if(e.metaKey||e.ctrlKey||e.altKey||e.repeat)return;
+  const t=e.target;if(t&&(t.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)))return;
+  const k={"1":"bachelor","2":"willamette"}[e.key];if(!k)return;
+  e.preventDefault();setResort(k);
+});
+document.querySelectorAll("#resortSwitch button,#miniSwitch button").forEach(b=>b.title=`${b.dataset.r==="bachelor"?"Mt. Bachelor":"Willamette Pass"} (press ${b.dataset.r==="bachelor"?1:2})`);
 if("IntersectionObserver" in window)new IntersectionObserver(([e])=>$("qnav").classList.toggle("stuck",!e.isIntersecting),{rootMargin:"-56px 0px 0px 0px"}).observe($("resortSwitch"));
 else $("qnav").classList.add("stuck");
 $("resortSwitch").addEventListener("keydown",e=>{if(!/^Arrow(Left|Right|Up|Down)$/.test(e.key))return;e.preventDefault();const next=R.key==="bachelor"?"willamette":"bachelor";setResort(next);$("resortSwitch").querySelector(`[data-r="${next}"]`).focus()});
