@@ -270,7 +270,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
 
   <div class="resort-switch" role="radiogroup" aria-label="Choose a mountain" id="resortSwitch">
     <button type="button" role="radio" data-r="bachelor" aria-checked="true"><b>Mt. Bachelor</b><span>Summit 9,065 ft &middot; Bend</span></button>
-    <button type="button" role="radio" data-r="willamette" aria-checked="false"><b>Willamette Pass</b><span>Summit 6,683 ft &middot; Highway 58</span></button>
+    <button type="button" role="radio" data-r="willamette" aria-checked="false"><b>Willamette Pass</b><span>Summit 6,683 ft &middot; Hwy 58</span></button>
   </div>
 
   <section class="sky" aria-label="Current conditions">
@@ -485,11 +485,11 @@ const RESORTS={
     links:[["Mt. Bachelor mountain report","https://www.mtbachelor.com/the-mountain/mountain-report/"],["Powdr Forecasts","http://powdrforecasts.weebly.com/mt-bachelor.html"],["NWS Pendleton","https://www.weather.gov/pdt/"],["Central Oregon Avalanche Center","https://www.coavalanche.org/"]],
     collected:"Mt. Bachelor, Powdr and avalanche data are"},
   willamette:{key:"willamette",name:"Willamette Pass",place:"Willamette Pass, Oregon",
-    summit:[43.6090,-122.0170],view:[43.6035,-122.0255],zoom:14,grid:[43.603,-122.026],
+    summit:[43.6090,-122.0170],view:[43.6035,-122.0255],zoom:13.5,grid:[43.603,-122.026],
     elev:{base:{ft:5120,m:1561,name:"Base"},mid:{ft:5900,m:1798,name:"Mid-mountain"},summit:{ft:6683,m:2037,name:"Eagle Peak"}},prof:[4200,7500],
     nws:{grid:"PQR/116,12",office:"PQR",officeName:"Portland"},noaaNote:"forecast point at the top of Eagle Peak, Willamette Pass",
     data:"willamette.json",liftsFile:"lifts-willamette.geojson",powdr:false,avy:false,stations:false,
-    landmarks:[[[43.6090,-122.0170],"Eagle Peak 6,683 ft",true,"top"],[[43.5975,-122.0345],"Base lodge 5,120 ft",false,"left"]],
+    landmarks:[[[43.6090,-122.0170],"Eagle Peak 6,683 ft",true,"top"],[[43.5975,-122.0345],"Base lodge 5,120 ft",false,"right"]],
     ytCams:[{id:"sNVA6oC7vcM",name:"Base Area"},{id:"uav7cBNVv0k",name:"EPA"}],
     roadTitle:"Road cams on Highway 58",
     roadCams:[["Willamette Pass_pid3351.JPG","OR 58 at the pass, looking west"],["WillamettePass_pid658.jpg","OR 58 at the pass, looking east"],
