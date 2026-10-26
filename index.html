@@ -108,8 +108,16 @@ h1,h2,h3{margin:0;text-wrap:balance}
 @media (max-width:560px){.sky-inner{grid-template-columns:1fr}.sky-right{justify-items:start;text-align:left}.hero-pills{justify-content:flex-start}}
 
 /* Quick nav */
-.qnav{position:sticky;top:0;z-index:1000;display:flex;gap:4px;overflow-x:auto;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:8px 2px;margin:-8px 0;scrollbar-width:none}
-.qnav::-webkit-scrollbar{display:none}
+.qnav{position:sticky;top:0;z-index:1000;display:flex;align-items:center;gap:8px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding:8px 2px;margin:-8px 0}
+.qnav-links{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;min-width:0;flex:1}
+.qnav-links::-webkit-scrollbar{display:none}
+/* compact mountain switch, slides in once the big switch scrolls away */
+.mini-switch{flex:none;display:flex;gap:2px;padding:3px;border-radius:999px;background:var(--surface);border:1px solid var(--line);max-width:0;opacity:0;overflow:hidden;margin-right:-8px;transition:max-width .25s,opacity .2s,margin .25s;visibility:hidden}
+.qnav.stuck .mini-switch{max-width:260px;opacity:1;margin-right:0;visibility:visible}
+.mini-switch button{appearance:none;border:0;background:transparent;color:var(--muted);font:600 15px/1 var(--display);letter-spacing:.05em;text-transform:uppercase;padding:7px 12px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.mini-switch button[aria-checked="true"]{background:var(--ink);color:var(--bg)}
+.mini-switch button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:420px){.mini-switch button{padding:7px 9px;font-size:14px}}
 .qnav a{flex:none;text-decoration:none;color:var(--ink);font:500 14px var(--body);padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
 .qnav a:hover{border-color:var(--accent);color:var(--accent)}
 
@@ -310,7 +318,12 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
     </div>
   </section>
 
-  <nav class="qnav" aria-label="Sections">
+  <nav class="qnav" aria-label="Sections" id="qnav">
+    <div class="mini-switch" role="radiogroup" aria-label="Choose a mountain" id="miniSwitch">
+      <button type="button" role="radio" data-r="bachelor" aria-checked="true">Bachelor</button>
+      <button type="button" role="radio" data-r="willamette" aria-checked="false">Willamette</button>
+    </div>
+    <div class="qnav-links">
     <a href="#glance">At a glance</a>
     <a href="#outlook">7-day outlook</a>
     <a href="#powdr" id="navPowdr">Powdr report</a>
@@ -319,6 +332,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
     <a href="#noaa">NOAA forecast</a>
     <a href="#stationsSec" id="navStations">Stations</a>
     <a href="#cams">Webcams</a>
+    </div>
   </nav>
 
   <section class="alerts" id="alerts" aria-label="Warnings and alerts"></section>
@@ -1116,7 +1130,7 @@ async function load(){
 function applyResortChrome(){
   document.title=R.name+" Weather";
   $("placeName").innerHTML=`${esc(R.place)} &middot; ${ELEV.summit.name==="Summit"?"Summit":esc(ELEV.summit.name)} ${ELEV.summit.ft.toLocaleString()} ft`;
-  $("resortSwitch").querySelectorAll("button").forEach(b=>b.setAttribute("aria-checked",b.dataset.r===R.key));
+  document.querySelectorAll("#resortSwitch button,#miniSwitch button").forEach(b=>b.setAttribute("aria-checked",b.dataset.r===R.key));
   $("powdr").hidden=!R.powdr;$("navPowdr").hidden=!R.powdr;
   $("stationsSec").hidden=!R.stations;$("navStations").hidden=!R.stations;
   $("noaaNote").textContent=`National Weather Service, ${R.nws.officeName} office, ${R.noaaNote}.`;
@@ -1145,7 +1159,11 @@ function setResort(key,first){
     renderCams();load();
   }
 }
-$("resortSwitch").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>setResort(b.dataset.r)));
+document.querySelectorAll("#resortSwitch button,#miniSwitch button").forEach(b=>b.addEventListener("click",()=>setResort(b.dataset.r)));
+$("miniSwitch").addEventListener("keydown",e=>{if(!/^Arrow(Left|Right)$/.test(e.key))return;e.preventDefault();const next=R.key==="bachelor"?"willamette":"bachelor";setResort(next);$("miniSwitch").querySelector(`[data-r="${next}"]`).focus()});
+// show the compact switch in the sticky bar once the big one is out of view
+if("IntersectionObserver" in window)new IntersectionObserver(([e])=>$("qnav").classList.toggle("stuck",!e.isIntersecting),{rootMargin:"-56px 0px 0px 0px"}).observe($("resortSwitch"));
+else $("qnav").classList.add("stuck");
 $("resortSwitch").addEventListener("keydown",e=>{if(!/^Arrow(Left|Right|Up|Down)$/.test(e.key))return;e.preventDefault();const next=R.key==="bachelor"?"willamette":"bachelor";setResort(next);$("resortSwitch").querySelector(`[data-r="${next}"]`).focus()});
 $("refresh").addEventListener("click",()=>{load();renderCams()});
 (function(){let k=null;try{k=new URL(location.href).searchParams.get("mtn")||(/willamette/i.test(location.hash)?"willamette":null)}catch(e){}
