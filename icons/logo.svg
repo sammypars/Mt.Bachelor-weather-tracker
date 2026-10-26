@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0D2033"/>
+      <stop offset=".45" stop-color="#2E5C82"/>
+      <stop offset=".78" stop-color="#C9A58E"/>
+      <stop offset="1" stop-color="#F2C08A"/>
+    </linearGradient>
+    <linearGradient id="front" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2A577D"/>
+      <stop offset=".5" stop-color="#1F4566"/>
+      <stop offset=".5" stop-color="#16344F"/>
+      <stop offset="1" stop-color="#112A40"/>
+    </linearGradient>
+    <linearGradient id="back" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#6F9CC0"/>
+      <stop offset=".5" stop-color="#5A88AE"/>
+      <stop offset=".5" stop-color="#4A7699"/>
+      <stop offset="1" stop-color="#416A8C"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#sky)"/>
+
+  <!-- wind streaks -->
+  <g fill="none" stroke="#C4E8F3" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M52 100 H258 C 294 100 308 68 284 54 C 268 45 250 54 250 70" stroke-width="18"/>
+    <path d="M92 150 H206 C 244 150 258 184 234 199 C 219 208 201 199 201 184" stroke-width="14" opacity=".75"/>
+  </g>
+
+  <!-- back peak: Willamette Pass -->
+  <path d="M-30 512 L150 262 L330 512 Z" fill="url(#back)"/>
+  <path d="M150 262 L186 312 L172 306 L160 322 L146 304 L130 318 L120 304 Z" fill="#EAF2F8"/>
+
+  <!-- front peak: Mt. Bachelor's cone -->
+  <path d="M120 512 L322 196 Q 336 176 350 196 L552 512 Z" fill="url(#front)"/>
+  <path d="M322 196 Q 336 176 350 196 L396 268 L376 260 L362 282 L342 258 L326 280 L310 258 L290 270 Z" fill="#F4F8FB"/>
+
+  <!-- tree line -->
+  <path fill="#0A1824" d="M0 512 V448
+    L14 420 L28 448 L40 412 L54 448 L66 424 L80 448 L94 404 L108 448 L120 426 L134 448
+    L148 414 L162 448 L174 428 L188 448 L202 408 L216 448 L228 430 L242 448 L256 416 L270 448
+    L282 426 L296 448 L310 404 L324 448 L336 428 L350 448 L364 414 L378 448 L390 424 L404 448
+    L418 410 L432 448 L444 428 L458 448 L472 416 L486 448 L498 430 L512 448 V512 Z"/>
+</svg>

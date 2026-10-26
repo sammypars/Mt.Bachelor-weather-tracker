@@ -39,6 +39,10 @@ The collector is `scripts/collect.mjs` and the Powdr PDF parser is `scripts/powd
 
 If the Powdr PDF layout changes, the parser test is `node scripts/test/run-fixture.mjs`, which reads a captured copy of the October 18, 2026 layout.
 
+## Logo and home screen
+
+The logo source is `icons/logo.svg`. `icons/` also holds the favicon, the 180 px `apple-touch-icon.png` Safari uses when you add the site to your home screen, Android/Chrome icons and `manifest.webmanifest`, so the saved app is named "Ski Weather" and opens full screen.
+
 ## Hosting
 
 GitHub Pages, deployed from the `main` branch root. The page has no build step: `index.html` plus the JSON files in `data/`.
