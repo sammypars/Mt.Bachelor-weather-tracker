@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mt. Bachelor Weather</title>
-<meta name="description" content="Mt. Bachelor ski resort weather: summit and base forecasts, new snow, wind, NOAA forecasts and alerts, the daily Powdr Forecasts report, an interactive snow, wind and radar map, and live webcams.">
+<meta name="description" content="Ski weather for Mt. Bachelor and Willamette Pass: summit and base forecasts, new snow, wind, NOAA forecasts and alerts, the daily Powdr Forecasts report, an interactive snow, wind and radar map, resort webcams and ODOT road cams.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2310202C'/%3E%3Cpath d='M6 50 L32 14 L58 50 Z' fill='%234C7FA6'/%3E%3Cpath d='M24 25 L32 14 L40 25 L36 23 L32 27 L28 23 Z' fill='%23F4F8FB'/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
@@ -56,6 +56,18 @@ h1,h2,h3{margin:0;text-wrap:balance}
 .pill.bad{background:var(--danger-soft);color:var(--danger)}
 .pill.good{background:var(--good-soft);color:var(--good)}
 .pill.snow{background:var(--snow-soft);color:var(--snow)}
+
+/* Mountain switch */
+.resort-switch{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:6px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}
+.resort-switch button{appearance:none;border:0;border-radius:12px;background:transparent;color:var(--ink);cursor:pointer;padding:14px 18px;display:grid;gap:5px;text-align:left;min-width:0;transition:background .2s,color .2s}
+.resort-switch button b{font:700 clamp(24px,4.4vw,40px)/1 var(--display);letter-spacing:.02em;text-transform:uppercase}
+.resort-switch button span{font:500 13px/1.3 var(--body);color:var(--muted)}
+.resort-switch button:hover{background:var(--bg)}
+.resort-switch button[aria-checked="true"]{background:var(--ink);color:var(--bg)}
+.resort-switch button[aria-checked="true"] span{color:color-mix(in srgb,var(--bg) 72%,transparent)}
+.resort-switch button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@media (max-width:520px){.resort-switch button{padding:12px}.resort-switch button span{font-size:12px}}
+.switching .wrap>section{opacity:.45;transition:opacity .2s}
 
 /* Hero */
 .sky{position:relative;border-radius:14px;overflow:hidden;min-height:320px;background:linear-gradient(var(--sky-top),var(--sky-bot));color:#fff}
@@ -234,6 +246,8 @@ td .bar{display:inline-block;height:6px;border-radius:3px;background:var(--wind)
 .station canvas{width:100%;height:40px;display:block}
 
 /* Webcams */
+.cam-groups{display:grid;gap:18px}
+.cam-group{display:grid;gap:8px}
 .cams{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
 .cam{appearance:none;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--bg);padding:0;cursor:zoom-in;text-align:left;color:var(--ink);display:grid}
 .cam img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;background:var(--accent-soft)}
@@ -242,6 +256,7 @@ td .bar{display:inline-block;height:6px;border-radius:3px;background:var(--wind)
 dialog.lightbox{border:0;padding:0;background:transparent;max-width:min(1200px,96vw)}
 dialog.lightbox::backdrop{background:rgba(5,10,14,.85)}
 dialog.lightbox img{width:100%;height:auto;border-radius:10px;display:block}
+dialog.lightbox iframe{width:min(1200px,96vw);aspect-ratio:16/9;border:0;border-radius:10px;display:block;background:#000}
 dialog.lightbox p{color:#fff;margin:8px 0 0;font:500 14px var(--body);display:flex;justify-content:space-between}
 dialog.lightbox button{appearance:none;border:1px solid rgba(255,255,255,.5);background:transparent;color:#fff;border-radius:999px;padding:4px 12px;cursor:pointer;font:500 13px var(--body)}
 
@@ -253,11 +268,16 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
 <body>
 <div class="wrap">
 
+  <div class="resort-switch" role="radiogroup" aria-label="Choose a mountain" id="resortSwitch">
+    <button type="button" role="radio" data-r="bachelor" aria-checked="true"><b>Mt. Bachelor</b><span>Summit 9,065 ft &middot; Bend</span></button>
+    <button type="button" role="radio" data-r="willamette" aria-checked="false"><b>Willamette Pass</b><span>Summit 6,683 ft &middot; Highway 58</span></button>
+  </div>
+
   <section class="sky" aria-label="Current conditions">
     <canvas id="sky" aria-hidden="true"></canvas>
     <div class="sky-inner">
       <div style="display:grid;gap:10px;align-content:start">
-        <div><div class="label">Now on</div><div class="place">Mt. Bachelor, Oregon &middot; Summit 9,065 ft</div></div>
+        <div><div class="label">Now on</div><div class="place" id="placeName">Mt. Bachelor, Oregon &middot; Summit 9,065 ft</div></div>
         <div class="bigtemp num" id="nowTemp">--<sup>&deg;F</sup></div>
         <div class="cond" id="nowCond">Loading conditions</div>
       </div>
@@ -275,11 +295,11 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
   <nav class="qnav" aria-label="Sections">
     <a href="#glance">At a glance</a>
     <a href="#outlook">7-day outlook</a>
-    <a href="#powdr">Powdr report</a>
+    <a href="#powdr" id="navPowdr">Powdr report</a>
     <a href="#hourly">Hourly</a>
     <a href="#mapSec">Map</a>
     <a href="#noaa">NOAA forecast</a>
-    <a href="#stationsSec">Stations</a>
+    <a href="#stationsSec" id="navStations">Stations</a>
     <a href="#cams">Webcams</a>
   </nav>
 
@@ -422,7 +442,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
     </div>
     <div id="noaaPeriods" class="periods"><p class="note">Loading the National Weather Service forecast</p></div>
     <div id="noaaAfd" hidden><pre class="afd" id="afd">Loading</pre></div>
-    <p class="note">National Weather Service, Pendleton office, forecast point at the summit of Mt. Bachelor.</p>
+    <p class="note" id="noaaNote">National Weather Service, Pendleton office, forecast point at the summit of Mt. Bachelor.</p>
   </section>
 
   <section class="card" id="stationsSec" aria-labelledby="stH">
@@ -431,33 +451,56 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
   </section>
 
   <section class="card" id="cams" aria-labelledby="camH">
-    <div class="head"><h2 id="camH">Webcams</h2><span class="note">Refreshes every 5 minutes. Tap a camera to enlarge.</span></div>
-    <div class="cams" id="camGrid"></div>
+    <div class="head"><h2 id="camH">Webcams</h2><span class="note" id="camNote">Refreshes every 5 minutes. Tap a camera to enlarge.</span></div>
+    <div class="cam-groups" id="camGrid"></div>
   </section>
 
   <footer>
-    <div class="links">
-      <a href="https://www.mtbachelor.com/the-mountain/mountain-report/" target="_blank" rel="noopener">Mt. Bachelor mountain report</a>
-      <a href="http://powdrforecasts.weebly.com/mt-bachelor.html" target="_blank" rel="noopener">Powdr Forecasts</a>
-      <a href="https://forecast.weather.gov/MapClick.php?lat=43.9792&lon=-121.6886" target="_blank" rel="noopener">NOAA point forecast</a>
-      <a href="https://www.weather.gov/pdt/" target="_blank" rel="noopener">NWS Pendleton</a>
-      <a href="https://www.coavalanche.org/" target="_blank" rel="noopener">Central Oregon Avalanche Center</a>
-      <a href="https://open-meteo.com" target="_blank" rel="noopener">Open-Meteo</a>
-      <a href="https://mesonet.agron.iastate.edu/" target="_blank" rel="noopener">IEM NEXRAD radar</a>
-      <a href="https://tripcheck.com" target="_blank" rel="noopener">ODOT TripCheck</a>
-    </div>
-    <div>Times are Pacific. Mt. Bachelor, Powdr and avalanche data are collected every hour by a GitHub Action in this repository; NOAA, Open-Meteo and radar load live in your browser. Not an official forecast. Always check conditions before heading up.</div>
+    <div class="links" id="footLinks"></div>
+    <div id="footNote"></div>
   </footer>
 </div>
 
-<dialog class="lightbox" id="lightbox"><img id="lbImg" alt=""><p><span id="lbCap"></span><button type="button" id="lbClose">Close</button></p></dialog>
+<dialog class="lightbox" id="lightbox"><img id="lbImg" alt=""><iframe id="lbFrame" title="Live webcam" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen hidden></iframe><p><span id="lbCap"></span><button type="button" id="lbClose">Close</button></p></dialog>
 
 <script>
 /* ================= constants ================= */
 const TZ="America/Los_Angeles";
-const SUMMIT=[43.9792,-121.6886], PINE_LODGE=[43.99045,-121.68697], CLOUDCHASER=[43.98159,-121.66176];
-const ELEV={base:{ft:6300,m:1920,name:"Base"},mid:{ft:7800,m:2377,name:"Pine Marten"},summit:{ft:9065,m:2763,name:"Summit"}};
-const NWS="https://api.weather.gov", GRID="PDT/23,40";
+const PINE_LODGE=[43.99045,-121.68697], CLOUDCHASER=[43.98159,-121.66176];
+const NWS="https://api.weather.gov";
+const TC="https://tripcheck.com/RoadCams/cams/";
+/* Each mountain the page can show. Everything location-specific lives here. */
+const RESORTS={
+  bachelor:{key:"bachelor",name:"Mt. Bachelor",place:"Mt. Bachelor, Oregon",
+    summit:[43.9792,-121.6886],view:[43.986,-121.688],zoom:13,grid:[43.985,-121.695],
+    elev:{base:{ft:6300,m:1920,name:"Base"},mid:{ft:7800,m:2377,name:"Pine Marten"},summit:{ft:9065,m:2763,name:"Summit"}},prof:[5000,10000],
+    nws:{grid:"PDT/23,40",office:"PDT",officeName:"Pendleton"},noaaNote:"forecast point at the summit of Mt. Bachelor",
+    data:"mtbachelor.json",liftsFile:"lifts.geojson",powdr:true,avy:true,stations:true,
+    landmarks:[[[43.9792,-121.6886],"Summit 9,065 ft",true,"top"],[PINE_LODGE,"Pine Marten Lodge 7,775 ft",false,"right"]],
+    mtnCams:[[12,"Tumalo Mtn and top of Pine Marten"],[11,"Outback lift line"],[3,"The Cone"],[9,"Pine Marten Lodge"],[1,"Base of Pine Marten lift"],[13,"West Village base and parking"],[5,"Sunrise base"],[2,"Rock Bar patio"],[16,"Nordic Center"]],
+    roadTitle:"Road cams on the way up",
+    roadCams:[["Century Dr at MP 21.11 W_pid3557.JPG","Century Dr MP 21, facing uphill"],["Century Dr at MP 21.11 E_pid3545.JPG","Century Dr MP 21, facing downhill"],
+      ["US97 at Colorado_pid3157.JPG","US 97 at Colorado Ave, Bend"],["LavaButte_pid631.jpg","US 97 at Lava Butte, looking south"],["Lava Butte S_pid1923.JPG","US 97 at Lava Butte, looking north"],
+      ["Santiam Pass_pid2728.JPG","US 20 at Santiam Pass"],["Santiam Pass WB_pid5258.jpg","US 20 at Santiam Pass, westbound view"]],
+    links:[["Mt. Bachelor mountain report","https://www.mtbachelor.com/the-mountain/mountain-report/"],["Powdr Forecasts","http://powdrforecasts.weebly.com/mt-bachelor.html"],["NWS Pendleton","https://www.weather.gov/pdt/"],["Central Oregon Avalanche Center","https://www.coavalanche.org/"]],
+    collected:"Mt. Bachelor, Powdr and avalanche data are"},
+  willamette:{key:"willamette",name:"Willamette Pass",place:"Willamette Pass, Oregon",
+    summit:[43.6090,-122.0170],view:[43.6035,-122.0255],zoom:14,grid:[43.603,-122.026],
+    elev:{base:{ft:5120,m:1561,name:"Base"},mid:{ft:5900,m:1798,name:"Mid-mountain"},summit:{ft:6683,m:2037,name:"Eagle Peak"}},prof:[4200,7500],
+    nws:{grid:"PQR/116,12",office:"PQR",officeName:"Portland"},noaaNote:"forecast point at the top of Eagle Peak, Willamette Pass",
+    data:"willamette.json",liftsFile:"lifts-willamette.geojson",powdr:false,avy:false,stations:false,
+    landmarks:[[[43.6090,-122.0170],"Eagle Peak 6,683 ft",true,"top"],[[43.5975,-122.0345],"Base lodge 5,120 ft",false,"left"]],
+    ytCams:[{id:"sNVA6oC7vcM",name:"Base Area"},{id:"uav7cBNVv0k",name:"EPA"}],
+    roadTitle:"Road cams on Highway 58",
+    roadCams:[["Willamette Pass_pid3351.JPG","OR 58 at the pass, looking west"],["WillamettePass_pid658.jpg","OR 58 at the pass, looking east"],
+      ["ORE58 at Salt Creek Tunnel WB_pid3021.JPG","OR 58 at Salt Creek Tunnel, westbound"],["ORE58 at Salt Creek Tunnel EB_pid3025.JPG","OR 58 at Salt Creek Tunnel, eastbound"],
+      ["ORE58 at Crestview E_pid4183.jpg","OR 58 in Oakridge"],["US97 at Crescent North_pid2119.JPG","US 97 at Crescent, east side"]],
+    links:[["Willamette Pass conditions","https://www.willamettepass.ski/weather-conditions-webcams/"],["NWS Portland","https://www.weather.gov/pqr/"],["Avalanche.org map","https://avalanche.org/"]],
+    collected:"Willamette Pass resort data is"}
+};
+const CAM_NAMES={"epa":"Top of Eagle Peak Accelerator","base area":"Base area"};
+let R,SUMMIT,ELEV,GRID;
+const isOpen=s=>/^open/i.test(s||"");
 const $=id=>document.getElementById(id);
 const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -503,6 +546,7 @@ async function getPoint(){
   return {base,mid,summit};
 }
 const G={lat0:43.925,dlat:0.02,nlat:7,lon0:-121.785,dlon:0.03,nlon:7,data:null};
+function pickResort(k){R=RESORTS[k]||RESORTS.bachelor;SUMMIT=R.summit;ELEV=R.elev;GRID=R.nws.grid;G.lat0=R.grid[0]-3*G.dlat;G.lon0=R.grid[1]-3*G.dlon}
 async function getGrid(){
   const la=[],lo=[];for(let i=0;i<G.nlat;i++)for(let j=0;j<G.nlon;j++){la.push((G.lat0+i*G.dlat).toFixed(4));lo.push((G.lon0+j*G.dlon).toFixed(4))}
   const u=`https://api.open-meteo.com/v1/forecast?latitude=${la.join(",")}&longitude=${lo.join(",")}&hourly=temperature_2m,precipitation,snowfall,wind_speed_10m,wind_direction_10m,wind_gusts_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=${encodeURIComponent(TZ)}&forecast_days=4`;
@@ -515,7 +559,7 @@ async function getNWS(){
     getJSON(`${NWS}/gridpoints/${GRID}/forecast`,opt),
     getJSON(`${NWS}/gridpoints/${GRID}`,opt),
     getJSON(`${NWS}/alerts/active?point=${SUMMIT[0]},${SUMMIT[1]}`,opt),
-    getJSON(`${NWS}/products/types/AFD/locations/PDT`,opt)]);
+    getJSON(`${NWS}/products/types/AFD/locations/${R.nws.office}`,opt)]);
   let afd=null;
   if(afdList.status==="fulfilled"){const id=afdList.value["@graph"]?.[0]?.id;if(id){try{afd=await getJSON(`${NWS}/products/${id}`,opt)}catch(e){}}}
   return {fc:fc.value||null,fcErr:fc.reason?.message,grid:grid.value||null,alerts:alerts.status==="fulfilled"?alerts.value.features:null,alertErr:alerts.reason?.message,afd};
@@ -563,7 +607,7 @@ function renderHero(){
 }
 function renderHeroPills(){
   const out=[];const m=state.mtb;
-  if(m){const open=(m.lifts||[]).filter(l=>l.season==="winter"&&l.status==="open").length;const tot=(m.lifts||[]).filter(l=>l.season==="winter").length;
+  if(m){const open=(m.lifts||[]).filter(l=>l.season==="winter"&&isOpen(l.status)).length;const tot=(m.lifts||[]).filter(l=>l.season==="winter").length;
     out.push(open?`${open} of ${tot} lifts open`:"Lifts closed");
     const od=openingDay(m.snow_report?.report_text);if(od&&!open)out.push(od)}
   const P=state.pt;if(P){const s=P.summit.hourly,i=state.i0;const sn=sumRange(s.snowfall,i,i+24);
@@ -596,13 +640,14 @@ function renderGlance(){
 function renderProfile(){
   const P=state.pt,i=state.i0;if(!P)return;
   const fl=P.summit.hourly.fl_ft[i],snowLvl=state.nws?nwsSnowLevelNow(state.nws.grid):null;
-  const W=300,H=190,yFt=ft=>H-12-(ft-5000)/(10000-5000)*(H-26);
-  const pk=yFt(9065),base=yFt(5600);
-  // Mt. Bachelor is a near-symmetric cone; draw it with a slight shoulder
+  const [lo,hi]=R.prof,top=ELEV.summit.ft,vert=top-ELEV.base.ft;
+  const W=300,H=190,yFt=ft=>H-12-(ft-lo)/(hi-lo)*(H-26);
+  const pk=yFt(top),base=yFt(ELEV.base.ft-vert*.25);
+  // a stylized peak with a slight shoulder
   let svg=`<defs><linearGradient id="mtg" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="var(--accent)" stop-opacity=".55"/><stop offset="1" stop-color="var(--accent)" stop-opacity=".18"/></linearGradient></defs>`;
-  svg+=`<path d="M10 ${H-10} L60 ${base} L120 ${yFt(8200)} L150 ${pk} L180 ${yFt(8300)} L250 ${base} L290 ${H-10} Z" fill="url(#mtg)"/>`;
+  svg+=`<path d="M10 ${H-10} L60 ${base} L120 ${yFt(top-vert*.31)} L150 ${pk} L180 ${yFt(top-vert*.28)} L250 ${base} L290 ${H-10} Z" fill="url(#mtg)"/>`;
   const flY=fl==null?null:Math.max(8,Math.min(H-10,yFt(fl)));
-  if(flY!=null&&fl<9600){const capY=Math.max(pk,flY);svg+=`<path d="M${150-(capY-pk)*1.05} ${capY} L150 ${pk} L${150+(capY-pk)*1.05} ${capY} Z" fill="#F4F8FB" opacity=".85"/>`}
+  if(flY!=null&&fl<top+(hi-top)*.6){const capY=Math.max(pk,flY);svg+=`<path d="M${150-(capY-pk)*1.05} ${capY} L150 ${pk} L${150+(capY-pk)*1.05} ${capY} Z" fill="#F4F8FB" opacity=".85"/>`}
   for(const k of ["base","mid","summit"]){const e=ELEV[k],y=yFt(e.ft),t=P[k].hourly.temperature_2m[i];
     const pre=P[k].hourly.precipitation[i]>0.005?(t<=33?"snow":t<=36?"mix":"rain"):"";
     svg+=`<line x1="${k==="summit"?150:k==="mid"?112:77}" x2="226" y1="${y}" y2="${y}" stroke="var(--muted)" stroke-width="1" stroke-dasharray="2 3"/>
@@ -610,30 +655,33 @@ function renderProfile(){
     <text x="4" y="${y+4}" font-family="var(--body)" font-size="10.5" font-weight="500" fill="var(--ink)">${e.name} ${e.ft.toLocaleString()}'${pre?" · "+pre:""}</text>`}
   if(flY!=null){svg+=`<line x1="4" x2="${W-24}" y1="${flY}" y2="${flY}" stroke="var(--cold)" stroke-width="2" stroke-dasharray="6 4"/><text x="${W-4}" y="${flY+3}" text-anchor="end" font-family="var(--body)" font-size="9" font-weight="600" fill="var(--cold)">32&#176;</text>`}
   $("profile").innerHTML=svg;
-  setPill("flPill",fl==null?"--":fl<6300?"Snow to base":fl<9065?"Snow up top":"Above summit",fl<6300?"snow":fl<9065?"":"warn");
+  const B=ELEV.base.ft;setPill("flPill",fl==null?"--":fl<B?"Snow to base":fl<top?"Snow up top":"Above summit",fl<B?"snow":fl<top?"":"warn");
   $("profNote").innerHTML=`<b style="color:var(--cold)">Freezing level ${fl==null?"--":(Math.round(fl/100)*100).toLocaleString()+" ft"}</b> (dashed line)${snowLvl?`, NOAA snow level ${(Math.round(snowLvl/100)*100).toLocaleString()} ft`:""}. Temperatures from Open-Meteo for this hour.`;
 }
 
 /* ================= Mt. Bachelor report and status ================= */
 function renderMtb(){
   const m=state.mtb;
-  if(!m){$("report").textContent="Waiting for the first data update from Mt. Bachelor.";setPill("repPill","Pending","warn");return}
+  if(!m){$("report").textContent=`Waiting for the first data update from ${R.name}.`;setPill("repPill","Pending","warn");
+    for(const id of ["baseDepth","repOver","rep24","rep48","rep7","repMon","repTot","liftsOpen","trailsOpen","groomed"])$(id).textContent="--";
+    $("liftList").innerHTML="";$("repDate").textContent=R.name+" report";$("mtnAge").textContent=R.name;renderHeroPills();return}
   const r=m.snow_report||{},c=r.computed||{},u=r.unit==="cm"?"cm":'"';
   $("baseDepth").textContent=r.base_depth??"--";
   const put=(id,v)=>$(id).textContent=v==null?"--":v+u;
   put("repOver",r.overnight);put("rep24",c["24_hour"]);put("rep48",c["48_hour"]);put("rep7",c["7_day"]);put("repMon",c.month);put("repTot",c.total);
-  $("repDate").textContent=r.date?"Report "+new Date(r.date.replace(" ","T")).toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}):"Mt. Bachelor report";
+  $("repDate").textContent=r.date?"Report "+new Date(r.date.replace(" ","T")).toLocaleString("en-US",{month:"short",day:"numeric",hour:"numeric",minute:"2-digit"}):R.name+" report";
   const stale=(Date.now()-new Date(m.fetched_at))/36e5>3;
   setPill("repPill",stale?"Data "+ago(m.fetched_at):(c["24_hour"]>0?"New snow":"Updated "+ago(m.fetched_at)),stale?"warn":c["24_hour"]>0?"snow":"");
   $("report").textContent=r.report_text||"No report text posted.";
-  const wl=(m.lifts||[]).filter(l=>l.season==="winter");const open=wl.filter(l=>l.status==="open");
+  const wl=(m.lifts||[]).filter(l=>l.season==="winter");const open=wl.filter(l=>isOpen(l.status));
   $("liftsOpen").innerHTML=`${open.length}<small> / ${wl.length}</small>`;
   const t=m.trails||{};$("trailsOpen").innerHTML=`${t.winter_open??"--"}<small> / ${t.winter_total??"--"}</small>`;$("groomed").textContent=t.groomed??"--";
-  $("liftList").innerHTML=wl.map(l=>`<span class="lift ${l.status==="open"?"open":/hold/i.test(l.status)?"hold":""}" title="${esc(l.hours||"")}"><i></i>${esc(l.name)}</span>`).join("");
-  $("mtnAge").textContent="Mt. Bachelor, updated "+ago(m.fetched_at);
+  $("liftList").innerHTML=wl.map(l=>`<span class="lift ${isOpen(l.status)?"open":/hold/i.test(l.status)?"hold":""}" title="${esc(l.hours||"")}"><i></i>${esc(l.name)}</span>`).join("");
+  $("mtnAge").textContent=R.name+", updated "+ago(m.fetched_at);
   renderHeroPills();
 }
 function renderAvy(){
+  if(!R.avy){$("avy").innerHTML=`No center zone<br><small style="font:500 12px var(--body)"><a href="https://avalanche.org/" target="_blank" rel="noopener">avalanche.org</a></small>`;return}
   const a=state.avy;const z=a?.zones?.[0];
   if(!z){$("avy").textContent="--";return}
   if(z.off_season||z.danger_level<=0||z.danger_level==null){$("avy").innerHTML=`No rating<br><small style="font:500 12px var(--body)">${esc(z.off_season?"Off season":"Not issued")}</small>`;return}
@@ -647,9 +695,9 @@ function renderAlerts(){
   for(const a of list){const p=a.properties;const sev=/Extreme|Severe/.test(p.severity);
     const t=`${fmt(p.onset||p.effective,{weekday:"short",hour:"numeric",minute:"2-digit"})} to ${fmt(p.ends||p.expires,{weekday:"short",hour:"numeric",minute:"2-digit"})}`;
     html+=`<details class="alert${sev?" severe":""}"><summary><h3>${esc(p.event)}</h3><span class="when">${esc(t)} &middot; National Weather Service</span></summary><p>${esc(p.headline||"")}\n\n${esc(p.description||"")}${p.instruction?"\n\n"+esc(p.instruction):""}</p></details>`}
-  for(const a of state.mtb?.alerts||[])html+=`<details class="alert"><summary><h3>${esc(a.title||"Mt. Bachelor alert")}</h3><span class="when">Mt. Bachelor</span></summary><p>${esc(a.body)}</p></details>`;
-  if(!html){html=nws&&nws.alerts?`<div class="alert none"><summary><h3>No active weather warnings</h3><span class="when">National Weather Service, Mt. Bachelor summit</span></summary></div>`
-    :`<div class="alert none"><h3>Warnings unavailable</h3><p class="err">${esc(nws?.alertErr||"Could not reach weather.gov")}. Check weather.gov/pdt directly.</p></div>`}
+  for(const a of state.mtb?.alerts||[])html+=`<details class="alert"><summary><h3>${esc(a.title||R.name+" alert")}</h3><span class="when">${esc(R.name)}</span></summary><p>${esc(a.body)}</p></details>`;
+  if(!html){html=nws&&nws.alerts?`<div class="alert none"><summary><h3>No active weather warnings</h3><span class="when">National Weather Service, ${esc(R.name)} summit</span></summary></div>`
+    :`<div class="alert none"><h3>Warnings unavailable</h3><p class="err">${esc(nws?.alertErr||"Could not reach weather.gov")}. Check weather.gov/${R.nws.office.toLowerCase()} directly.</p></div>`}
   box.innerHTML=html;
 }
 
@@ -730,7 +778,7 @@ function drawChart(){
   const s=P.summit.hourly,b=P.base.hourly,m=P.mid.hourly;const sl=a=>a.slice(i0,i0+N);
   const L=44,R=chartMode==="snow"?40:12,T=12,B=26,pw=W-L-R,ph=H-T-B;
   let series=[],bars=null,lo,hi,unit,right=null;
-  if(chartMode==="temp"){series=[["Summit",sl(s.temperature_2m),css("--temp"),false],["Pine Marten",sl(m.temperature_2m),css("--accent"),true],["Base",sl(b.temperature_2m),css("--good"),false]];unit="°F"}
+  if(chartMode==="temp"){series=[["Summit",sl(s.temperature_2m),css("--temp"),false],[ELEV.mid.name,sl(m.temperature_2m),css("--accent"),true],["Base",sl(b.temperature_2m),css("--good"),false]];unit="°F"}
   else if(chartMode==="snow"){bars=[sl(s.snowfall),css("--snow")];series=[["Chance of precip",sl(s.precipitation_probability),css("--rain"),true,"r"]];unit='"';right=[0,100]}
   else{series=[["Summit wind",sl(s.wind_speed_10m),css("--wind"),false],["Summit gusts",sl(s.wind_gusts_10m),css("--wind"),true],["Base wind",sl(b.wind_speed_10m),css("--muted"),false]];unit=" mph"}
   const vals=[...series.filter(z=>z[4]!=="r").flatMap(z=>z[1]),...(bars?bars[0]:[])].filter(v=>v!=null);
@@ -776,7 +824,7 @@ function renderStrip(){
 function renderNoaa(){
   const n=state.nws,box=$("noaaPeriods");
   const per=n?.fc?.properties?.periods;
-  if(!per){box.innerHTML=`<p class="err">${esc(n?.fcErr||"NOAA forecast unavailable")}. Try Refresh, or open the <a href="https://forecast.weather.gov/MapClick.php?lat=43.9792&lon=-121.6886" target="_blank" rel="noopener">NOAA point forecast</a>.</p>`}
+  if(!per){box.innerHTML=`<p class="err">${esc(n?.fcErr||"NOAA forecast unavailable")}. Try Refresh, or open the <a href="https://forecast.weather.gov/MapClick.php?lat=${SUMMIT[0]}&lon=${SUMMIT[1]}" target="_blank" rel="noopener">NOAA point forecast</a>.</p>`}
   else box.innerHTML=per.slice(0,14).map((p,k)=>`<details class="period"${k<2?" open":""}><summary><b>${esc(p.name)}</b><span class="t" style="color:${p.isDaytime?"var(--temp)":"var(--cold)"}">${p.isDaytime?"High":"Low"} ${p.temperature}&deg;</span><span class="s">${icon(textKind(p.shortForecast),p.isDaytime).replace("<svg",'<svg style="width:22px;height:22px;vertical-align:middle;margin-right:6px"')}${esc(p.shortForecast)}</span></summary><p>${esc(p.detailedForecast)}</p></details>`).join("");
   $("afd").textContent=n?.afd?.productText?n.afd.productText.trim():"The forecaster discussion is not available right now.";
 }
@@ -803,13 +851,30 @@ function renderStations(){
 }
 
 /* ================= webcams ================= */
-const CAMS=[[12,"Tumalo Mtn and top of Pine Marten"],[11,"Outback lift line"],[3,"The Cone"],[9,"Pine Marten Lodge"],[1,"Base of Pine Marten lift"],[13,"West Village base and parking"],[5,"Sunrise base"],[2,"Rock Bar patio"],[16,"Nordic Center"]];
-const ROADCAMS=[["https://tripcheck.com/RoadCams/cams/Century%20Dr%20at%20MP%2021.11%20W_pid3557.JPG","Century Dr MP 21, facing uphill"],["https://tripcheck.com/RoadCams/cams/Century%20Dr%20at%20MP%2021.11%20E_pid3545.JPG","Century Dr MP 21, facing downhill"]];
-function camList(){const t=Math.floor(Date.now()/3e5);return [...CAMS.map(([id,n])=>[`https://api.mtbachelor.com/api/v1/cams/mtn/${id}?t=${t}`,n,"Mt. Bachelor"]),...ROADCAMS.map(([u,n])=>[`${u}?rand=${t}`,n,"ODOT road cam"])]}
-function renderCams(){
-  $("camGrid").innerHTML=camList().map(([u,n,s],k)=>`<button class="cam" type="button" data-k="${k}"><img loading="lazy" src="${esc(u)}" alt="${esc(n)} webcam"><span>${esc(n)}<em>${esc(s)}</em></span></button>`).join("");
-  $("camGrid").querySelectorAll(".cam").forEach(b=>b.onclick=()=>{const [u,n,s]=camList()[+b.dataset.k];$("lbImg").src=u;$("lbImg").alt=n;$("lbCap").textContent=n+" · "+s;$("lightbox").showModal()});
+function camList(){
+  const t=Math.floor(Date.now()/3e5),out=[];
+  for(const [id,n] of R.mtnCams||[])out.push({src:`https://api.mtbachelor.com/api/v1/cams/mtn/${id}?t=${t}`,name:n,source:R.name,group:"mtn"});
+  // Willamette Pass streams its cams on YouTube; the list comes from the resort page when the collector has it
+  const yt=state.mtb?.webcams?.length?state.mtb.webcams:(R.ytCams||[]);
+  if(R.ytCams)for(const c of yt)out.push({src:`https://i.ytimg.com/vi/${c.id}/hqdefault_live.jpg?t=${t}`,big:`https://i.ytimg.com/vi/${c.id}/maxresdefault_live.jpg?t=${t}`,yt:c.id,name:CAM_NAMES[(c.name||"").toLowerCase()]||c.name,source:"Live stream",group:"mtn"});
+  for(const [f,n] of R.roadCams)out.push({src:TC+encodeURIComponent(f)+`?rand=${t}`,name:n,source:"ODOT TripCheck",group:"road"});
+  return out;
 }
+function renderCams(){
+  const list=camList();state.cams=list;
+  const grp=(g,title)=>{const items=list.map((c,k)=>[c,k]).filter(([c])=>c.group===g);if(!items.length)return "";
+    return `<div class="cam-group"><div class="label">${esc(title)}</div><div class="cams">${items.map(([c,k])=>`<button class="cam" type="button" data-k="${k}"><img loading="lazy" src="${esc(c.src)}" alt="${esc(c.name)} webcam"><span>${esc(c.name)}<em>${esc(c.source)}</em></span></button>`).join("")}</div></div>`};
+  $("camGrid").innerHTML=grp("mtn","On the mountain")+grp("road",R.roadTitle);
+  $("camGrid").querySelectorAll(".cam").forEach(b=>b.onclick=()=>openCam(state.cams[+b.dataset.k]));
+  $("camNote").textContent=R.ytCams?"Mountain cams are live streams, tap one to watch. Road cams refresh every 5 minutes.":"Refreshes every 5 minutes. Tap a camera to enlarge.";
+}
+function openCam(c){
+  if(!c)return;const img=$("lbImg"),fr=$("lbFrame");
+  if(c.yt){img.hidden=true;img.removeAttribute("src");fr.hidden=false;fr.src=`https://www.youtube-nocookie.com/embed/${encodeURIComponent(c.yt)}?autoplay=1&mute=1&rel=0`}
+  else{fr.hidden=true;fr.src="about:blank";img.hidden=false;img.src=c.big||c.src;img.alt=c.name}
+  $("lbCap").textContent=c.name+" · "+c.source;$("lightbox").showModal();
+}
+$("lightbox").addEventListener("close",()=>{$("lbFrame").src="about:blank"});
 $("lbClose").onclick=()=>$("lightbox").close();$("lightbox").addEventListener("click",e=>{if(e.target===$("lightbox"))$("lightbox").close()});
 
 /* ================= hero canvas: the mountain, sky, clouds and snowfall ================= */
@@ -821,12 +886,12 @@ function drawSky(t){
   sx.clearRect(0,0,SW,SH);
   // stars at night
   if(!sc.day){sx.fillStyle="rgba(255,255,255,.7)";for(let k=0;k<50;k++){const x=(k*137.5%1)*SW||((k*97)%SW),y=((k*53)%Math.max(1,SH*.5));sx.globalAlpha=.3+.5*Math.abs(Math.sin(t/900+k));sx.fillRect((k*197)%SW,y,1.4,1.4)}sx.globalAlpha=1}
-  // the cone of Mt. Bachelor, right of center
+  // the mountain, right of center
   const narrow=SW<600,cx=narrow?SW*.66:SW*.72,peak=narrow?SH*.34:SH*.2,bY=SH+4,half=narrow?SW*.62:Math.min(SW*.46,SH*1.5);
   const g=sx.createLinearGradient(0,peak,0,bY);g.addColorStop(0,sc.day?"rgba(60,90,120,.55)":"rgba(20,35,52,.75)");g.addColorStop(1,sc.day?"rgba(30,55,80,.75)":"rgba(10,20,30,.9)");
   sx.fillStyle=g;sx.beginPath();sx.moveTo(cx-half,bY);sx.lineTo(cx-half*.3,SH*.55);sx.lineTo(cx-half*.06,peak+6);sx.quadraticCurveTo(cx,peak-3,cx+half*.06,peak+6);sx.lineTo(cx+half*.35,SH*.6);sx.lineTo(cx+half,bY);sx.closePath();sx.fill();
   // snowcap, lower when the freezing level is low
-  const fl=state.pt?state.pt.summit.hourly.fl_ft[state.i0]:8000;const capFrac=Math.max(.08,Math.min(.75,(9065-Math.min(9065,fl||8000))/2800+.12));
+  const S=ELEV.summit.ft,V=S-ELEV.base.ft,fl=(state.pt?state.pt.summit.hourly.fl_ft[state.i0]:null)??S-V*.4;const capFrac=Math.max(.08,Math.min(.75,(S-Math.min(S,fl))/V+.12));
   const capY=peak+(bY-peak)*capFrac*.6;const k=(capY-peak)/(SH*.55-peak);
   sx.fillStyle=sc.day?"rgba(246,250,253,.92)":"rgba(210,222,235,.75)";sx.beginPath();
   sx.moveTo(cx-half*.06,peak+6);sx.quadraticCurveTo(cx,peak-3,cx+half*.06,peak+6);
@@ -851,7 +916,7 @@ function puff(x,y,w){sx.beginPath();sx.ellipse(x,y,w*.5,w*.17,0,0,7);sx.ellipse(
 let map,fl={},hourOff=0,mapMode="wind",liftLayer,stnLayer,radar={layers:[],idx:0,timer:null,on:false};
 function initMap(){
   if(!window.L){$("map").innerHTML='<p class="err" style="padding:16px">The map library did not load. Check your connection and refresh.</p>';return}
-  map=L.map("map",{zoomSnap:.5,minZoom:9,maxZoom:16}).setView([43.986,-121.688],13);
+  map=L.map("map",{zoomSnap:.5,minZoom:9,maxZoom:16}).setView(R.view,R.zoom);
   const esri=s=>`https://server.arcgisonline.com/ArcGIS/rest/services/${s}/MapServer/tile/{z}/{y}/{x}`;
   const topo=L.tileLayer(esri("World_Topo_Map"),{maxZoom:16,attribution:"Tiles &copy; Esri, USGS, NOAA"});
   const imagery=L.layerGroup([L.tileLayer(esri("World_Imagery"),{maxZoom:16,attribution:"Imagery &copy; Esri, Maxar, Earthstar Geographics"}),L.tileLayer(esri("Reference/World_Boundaries_and_Places"),{maxZoom:16})]);
@@ -865,18 +930,21 @@ function initMap(){
   const radarGroup=L.layerGroup(radar.layers);
   liftLayer=L.layerGroup().addTo(map);stnLayer=L.layerGroup().addTo(map);
   const places=L.layerGroup().addTo(map);
-  L.circleMarker(SUMMIT,{radius:6,color:css("--ink"),weight:2,fillColor:css("--ink"),fillOpacity:1}).addTo(places).bindTooltip("Summit 9,065 ft",{permanent:true,direction:"top",offset:[0,-6],className:"lm peak"});
-  L.circleMarker(PINE_LODGE,{radius:4,color:css("--ink"),weight:2,fillColor:css("--surface"),fillOpacity:1}).addTo(places).bindTooltip("Pine Marten Lodge 7,775 ft",{permanent:true,direction:"right",offset:[6,0],className:"lm"});
-  state.places=places;
+  state.places=places;drawPlaces();
   L.control.layers({"Terrain":topo,"Satellite":imagery,"Street":street},{"NOAA radar, last hour":radarGroup,"Lifts":liftLayer,"Weather stations":stnLayer,"Landmarks":places},{position:"topleft",collapsed:matchMedia("(max-width:640px)").matches}).addTo(map);
   map.on("overlayadd",e=>{if(e.layer===radarGroup)startRadar()});map.on("overlayremove",e=>{if(e.layer===radarGroup)stopRadar()});
   map.on("baselayerchange",e=>{fl.sat=e.name==="Satellite";fl.ctx&&fl.ctx.clearRect(0,0,fl.W,fl.H)});
   const badge=L.control({position:"topright"});badge.onAdd=()=>{const d=L.DomUtil.create("div","map-badge");d.id="mapBadge";return d};badge.addTo(map);
   const rt=L.control({position:"bottomleft"});rt.onAdd=()=>{const d=L.DomUtil.create("div","radar-time");d.id="radarTime";d.hidden=true;return d};rt.addTo(map);
-  const re=L.control({position:"bottomright"});re.onAdd=()=>{const b=L.DomUtil.create("button","map-btn");b.type="button";b.textContent="Recenter";L.DomEvent.disableClickPropagation(b);b.onclick=()=>map.setView([43.986,-121.688],13);return b};re.addTo(map);
+  const re=L.control({position:"bottomright"});re.onAdd=()=>{const b=L.DomUtil.create("button","map-btn");b.type="button";b.textContent="Recenter";L.DomEvent.disableClickPropagation(b);b.onclick=()=>map.setView(R.view,R.zoom);return b};re.addTo(map);
   map.on("move zoom",()=>{fl.dirty=true});
   new ResizeObserver(()=>{map.invalidateSize();initField()}).observe($("map"));
   initField();
+}
+function drawPlaces(){
+  const pl=state.places;if(!pl)return;pl.clearLayers();state.wvAdded=false;
+  for(const [ll,label,peak,dir] of R.landmarks){const off=dir==="top"?[0,-6]:dir==="left"?[-6,0]:[6,0];
+    L.circleMarker(ll,{radius:peak?6:4,color:css("--ink"),weight:2,fillColor:css(peak?"--ink":"--surface"),fillOpacity:1}).addTo(pl).bindTooltip(label,{permanent:true,direction:dir,offset:off,className:"lm"+(peak?" peak":"")})}
 }
 function startRadar(){radar.on=true;stopRadarTimer();const show=k=>{radar.layers.forEach((l,j)=>l.setOpacity(j===k?.75:0));const lab=$("radarTime");lab.hidden=false;
   const mins=radar.label[k];lab.textContent=mins?`Radar ${mins} min ago`:"Radar now";};radar.idx=radar.layers.length-1;show(radar.idx);
@@ -950,7 +1018,7 @@ const LEG={
 function rampCss(stops){const lo=stops[0][0],hi=stops[stops.length-1][0];return "linear-gradient(90deg,"+stops.slice(1).map(([v,c])=>`rgba(${c[0]|0},${c[1]|0},${c[2]|0},${Math.max(.6,c[3])}) ${Math.round((Math.log(v+1)-Math.log(lo+1))/(Math.log(hi+1)-Math.log(lo+1))*100)}%`).join(",")+")"}
 function renderLegend(){const [t,stops,ticks,note]=LEG[mapMode];
   $("mapLegend").innerHTML=`<div class="label" style="margin-bottom:6px">${esc(t)}</div><div class="ramp" style="background:${mapMode==="temp"?"linear-gradient(90deg,rgb(110,60,180),rgb(60,90,220),rgb(70,150,235),rgb(150,210,245),#fff,rgb(150,220,170),rgb(120,200,90),rgb(245,215,70),rgb(245,150,50),rgb(220,60,40))":rampCss(stops)}"></div><div class="rampticks">${ticks.map(x=>`<span>${x}</span>`).join("")}</div>`;
-  $("mapNote").textContent=note+" Forecast data from Open-Meteo. Station circles show the latest real readings from Mt. Bachelor's own weather stations.";}
+  $("mapNote").textContent=note+" Forecast data from Open-Meteo."+(R.stations?" Station circles show the latest real readings from Mt. Bachelor's own weather stations.":"");}
 function updateMap(){
   const P=state.pt;if(!P)return;const s=P.summit.hourly,i=Math.min(s.time.length-1,state.i0+hourOff),t=s.time[i];
   const lab=hourOff===0?"Now":new Date(t+":00").toLocaleString("en-US",{weekday:"short",hour:"numeric"});
@@ -965,18 +1033,18 @@ function updateMap(){
   if(mapMode==="wind")setPill("mapPill",g>=45?"Wind holds possible":g>=25?"Breezy up top":"Light wind",g>=45?"bad":g>=25?"warn":"");
   else if(mapMode==="snow")setPill("mapPill",snowTo>=6?"Powder building":snowTo>=1?"Some new snow":"Little new snow",snowTo>=1?"snow":"");
   else if(mapMode==="precip")setPill("mapPill",s.precipitation[i]<.005?"Dry this hour":s.temperature_2m[i]<=33?"Snowing":"Rain or mix",s.precipitation[i]<.005?"":"snow");
-  else setPill("mapPill",s.fl_ft[i]<6300?"Below freezing everywhere":s.fl_ft[i]<9065?"Freezing line on the mountain":"Above freezing to the top",s.fl_ft[i]<9065?"":"warn");
+  else setPill("mapPill",s.fl_ft[i]<ELEV.base.ft?"Below freezing everywhere":s.fl_ft[i]<ELEV.summit.ft?"Freezing line on the mountain":"Above freezing to the top",s.fl_ft[i]<ELEV.summit.ft?"":"warn");
   fl.dirty=true;
 }
 function renderLifts(){
   if(!map)return;liftLayer.clearLayers();const L2=state.liftGeo;if(!L2)return;const st=state.mtb?.lifts||[];
   const norm=s=>(s||"").toLowerCase().replace(/express|chair|lift|quad|triple|\s+/g,"");
   for(const f of L2.features){const nm=f.properties.name||"Lift";const m=st.find(l=>norm(l.name)===norm(nm)||norm(l.name).includes(norm(nm))||norm(nm).includes(norm(l.name)));
-    const open=m?.status==="open";const ll=f.geometry.coordinates.map(([a,b])=>[b,a]);
+    const open=isOpen(m?.status);const ll=f.geometry.coordinates.map(([a,b])=>[b,a]);
     L.polyline(ll,{color:"#0B1419",weight:6,opacity:.55,interactive:false}).addTo(liftLayer);
     L.polyline(ll,{color:open?css("--good"):"#F4F8FB",weight:3,dashArray:open?null:"6 5"}).addTo(liftLayer).bindTooltip(`${esc(nm)}${m?" &middot; "+esc(m.status):""}`,{sticky:true,className:"lm"});
     // landmark at the bottom of Pine Marten (West Village) and Sunrise (OSM lifts run bottom to top)
-    if(/pine marten/i.test(nm)&&!state.wvAdded){state.wvAdded=true;L.circleMarker(ll[0],{radius:4,color:css("--ink"),weight:2,fillColor:css("--surface"),fillOpacity:1}).addTo(state.places).bindTooltip("West Village base 6,300 ft",{permanent:true,direction:"left",offset:[-6,0],className:"lm"})}
+    if(R.key==="bachelor"&&/pine marten/i.test(nm)&&!state.wvAdded){state.wvAdded=true;L.circleMarker(ll[0],{radius:4,color:css("--ink"),weight:2,fillColor:css("--surface"),fillOpacity:1}).addTo(state.places).bindTooltip("West Village base 6,300 ft",{permanent:true,direction:"left",offset:[-6,0],className:"lm"})}
   }
 }
 function stationLoc(key){
@@ -1009,17 +1077,61 @@ function tickLive(){const d=new Date();$("liveClock").innerHTML=d.toLocaleTimeSt
 tickLive();setInterval(tickLive,15000);
 function loop(t){drawSky(t);drawField();requestAnimationFrame(loop)}
 
+/* ================= loading and switching mountains ================= */
+const cache={};let loadTok=0;
+const RENDERERS=[renderHero,renderGlance,renderMtb,renderAvy,renderAlerts,renderOutlook,renderPowdr,drawChart,renderStrip,renderNoaa,renderStations,renderLifts,renderStnMarkers,renderLegend,updateMap,renderCams];
+function renderAll(){const safe=f=>{try{f()}catch(e){console.error(f.name,e)}};RENDERERS.forEach(safe)}
 async function load(){
+  const tok=++loadTok,key=R.key;
   $("updated").textContent="Updating";
-  const [pt,nws,mtb,pow,avy,lifts]=await Promise.allSettled([getPoint(),getNWS(),getLocal("mtbachelor.json"),getLocal("powdr.json"),getLocal("avalanche.json"),getLocal("lifts.geojson")]);
-  if(pt.status==="fulfilled")state.pt=pt.value;else $("nowCond").textContent="Forecast unavailable. Check your connection and press Refresh.";
+  const none=Promise.resolve(null);
+  const [pt,nws,mtb,pow,avy,lifts]=await Promise.allSettled([getPoint(),getNWS(),getLocal(R.data),R.powdr?getLocal("powdr.json"):none,R.avy?getLocal("avalanche.json"):none,getLocal(R.liftsFile)]);
+  if(tok!==loadTok)return; // the person switched mountains while this was loading
+  document.body.classList.remove("switching");
+  if(pt.status==="fulfilled")state.pt=pt.value;else{state.pt=null;$("nowCond").textContent="Forecast unavailable. Check your connection and press Refresh."}
   state.nws=nws.value||null;state.mtb=mtb.value||null;state.powdr=pow.value||null;state.avy=avy.value||null;state.liftGeo=lifts.value||null;
-  const safe=f=>{try{f()}catch(e){console.error(f.name,e)}};
-  [renderHero,renderGlance,renderMtb,renderAvy,renderAlerts,renderOutlook,renderPowdr,drawChart,renderStrip,renderNoaa,renderStations,renderLifts,renderStnMarkers,renderLegend,updateMap].forEach(safe);
+  renderAll();
   $("updated").textContent="Updated "+new Date().toLocaleTimeString("en-US",{timeZone:TZ,hour:"numeric",minute:"2-digit"})+" PT";
-  getGrid().then(()=>{fl.dirty=true}).catch(e=>{$("mapNote").textContent="Map forecast layer unavailable right now. "+e.message});
+  cache[key]={at:Date.now(),pt:state.pt,nws:state.nws,mtb:state.mtb,powdr:state.powdr,avy:state.avy,liftGeo:state.liftGeo,grid:null};
+  getGrid().then(()=>{if(tok!==loadTok)return;fl.dirty=true;cache[key].grid={data:G.data,time:G.time}}).catch(e=>{if(tok===loadTok)$("mapNote").textContent="Map forecast layer unavailable right now. "+e.message});
 }
+function applyResortChrome(){
+  document.title=R.name+" Weather";
+  $("placeName").innerHTML=`${esc(R.place)} &middot; ${ELEV.summit.name==="Summit"?"Summit":esc(ELEV.summit.name)} ${ELEV.summit.ft.toLocaleString()} ft`;
+  $("resortSwitch").querySelectorAll("button").forEach(b=>b.setAttribute("aria-checked",b.dataset.r===R.key));
+  $("powdr").hidden=!R.powdr;$("navPowdr").hidden=!R.powdr;
+  $("stationsSec").hidden=!R.stations;$("navStations").hidden=!R.stations;
+  $("noaaNote").textContent=`National Weather Service, ${R.nws.officeName} office, ${R.noaaNote}.`;
+  $("footLinks").innerHTML=[...R.links,["NOAA point forecast",`https://forecast.weather.gov/MapClick.php?lat=${SUMMIT[0]}&lon=${SUMMIT[1]}`],["Open-Meteo","https://open-meteo.com"],["IEM NEXRAD radar","https://mesonet.agron.iastate.edu/"],["ODOT TripCheck","https://tripcheck.com"]]
+    .map(([t,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join("");
+  $("footNote").textContent=`Times are Pacific. ${R.collected} collected every hour by a GitHub Action in this repository; NOAA, Open-Meteo, radar and road cams load live in your browser. Not an official forecast. Always check conditions before heading up.`;
+}
+function setResort(key,first){
+  if(!RESORTS[key])key="bachelor";if(!first&&R&&R.key===key)return;
+  pickResort(key);setPlay(false);hourOff=0;$("hourSlider").value=0;
+  try{localStorage.setItem("mtn",key)}catch(e){}
+  try{const u=new URL(location.href);if(key==="bachelor")u.searchParams.delete("mtn");else u.searchParams.set("mtn",key);history.replaceState(null,"",u)}catch(e){}
+  applyResortChrome();
+  if(first)return;
+  powTab=0;state.wvAdded=false;G.data=null;G.time=null;fl.dirty=true;
+  if(map){map.setView(R.view,R.zoom);drawPlaces();liftLayer.clearLayers();stnLayer.clearLayers()}
+  const c=cache[key];
+  if(c&&Date.now()-c.at<10*60*1000){
+    loadTok++;document.body.classList.remove("switching");
+    Object.assign(state,{pt:c.pt,nws:c.nws,mtb:c.mtb,powdr:c.powdr,avy:c.avy,liftGeo:c.liftGeo});
+    if(c.grid){G.data=c.grid.data;G.time=c.grid.time}
+    renderAll();if(!c.grid)getGrid().then(()=>{fl.dirty=true}).catch(()=>{});
+  }else{
+    Object.assign(state,{pt:null,nws:null,mtb:null,powdr:null,avy:null,liftGeo:null});
+    document.body.classList.add("switching");$("nowCond").textContent="Loading conditions";
+    renderCams();load();
+  }
+}
+$("resortSwitch").querySelectorAll("button").forEach(b=>b.addEventListener("click",()=>setResort(b.dataset.r)));
+$("resortSwitch").addEventListener("keydown",e=>{if(!/^Arrow(Left|Right|Up|Down)$/.test(e.key))return;e.preventDefault();const next=R.key==="bachelor"?"willamette":"bachelor";setResort(next);$("resortSwitch").querySelector(`[data-r="${next}"]`).focus()});
 $("refresh").addEventListener("click",()=>{load();renderCams()});
+(function(){let k=null;try{k=new URL(location.href).searchParams.get("mtn")||(/willamette/i.test(location.hash)?"willamette":null)}catch(e){}
+  if(!k){try{k=localStorage.getItem("mtn")}catch(e){}}setResort(k||"bachelor",true)})();
 initSky();addEventListener("resize",()=>{initSky();drawChart()});
 renderCams();setInterval(renderCams,5*60*1000);
 initMap();load();requestAnimationFrame(loop);

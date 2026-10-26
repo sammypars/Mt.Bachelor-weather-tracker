@@ -5,7 +5,9 @@
 //   data/mtbachelor.json  Mt. Bachelor's own conditions API (snow report, lifts, trails, forecast, summit station)
 //   data/powdr.json       Daily Powdr Forecasts PDF, parsed into tables
 //   data/avalanche.json   Central Oregon Avalanche Center danger (avalanche.org)
+//   data/willamette.json  Willamette Pass snow report, lifts, trails and webcam ids (scraped from willamettepass.ski)
 //   data/lifts.geojson    Lift lines from OpenStreetMap (fetched once, then cached)
+//   data/lifts-willamette.geojson  Same, for Willamette Pass
 
 import fs from "node:fs/promises";
 import path from "node:path";
@@ -185,10 +187,132 @@ async function avalanche() {
   });
 }
 
-// ---------- Lift lines from OpenStreetMap (one-time) ----------
+// ---------- Willamette Pass ----------
+// The resort's WordPress site renders its snow report, lifts, trails and webcam embeds
+// server-side on one page. We scrape it into the same shape as mtbachelor.json so the
+// page can render either resort with the same code.
+async function willamette() {
+  const PAGE = "https://www.willamettepass.ski/weather-conditions-webcams/";
+  const html = await get(PAGE, "text");
+  // Current conditions and "updated" times are filled in by the site's own JS from this file
+  let wx = null;
+  try { wx = await get("https://www.willamettepass.ski/wp-content/uploads/sites/13/m-json/weather.json?nocache=" + Date.now()); } catch (e) { console.warn("  willamette weather.json failed:", e.message); }
+  const text = (s) => stripHtml(s || "").replace(/\s+/g, " ").trim();
+  const num = (s) => { const m = String(s ?? "").replace(/,/g, "").match(/-?\d+(\.\d+)?/); return m ? Number(m[0]) : null; };
+  const first = (re) => { const m = html.match(re); return m ? m[1] : null; };
+
+  // Snow totals: value then label, the first occurrence of each label wins
+  const totals = {};
+  for (const m of html.matchAll(/m-snow-totals-top[^>]*>\s*([^<]*?)\s*<\/div>\s*<div class="m-snow-totals-label[^>]*>\s*([^<]*?)\s*<\/div>/g)) {
+    const label = text(m[2]).toLowerCase();
+    if (!(label in totals)) totals[label] = text(m[1]);
+  }
+  if (!Object.keys(totals).length) throw new Error("Willamette Pass page has no snow totals (layout change?)");
+  const frac = (s) => { const m = String(s || "").match(/(\d+)\s*\/\s*(\d+)/); return m ? [Number(m[1]), Number(m[2])] : [null, null]; };
+
+  // "April 24, 2026 1:06 pm" -> "2026-04-24 13:06:00" (Pacific local, same format as the Mt. Bachelor API)
+  const toLocal = (s) => {
+    const m = String(s || "").match(/([A-Za-z]+)\s+(\d{1,2}),?\s+(\d{4}),?\s+(\d{1,2}):(\d{2})\s*([ap])\.?m/i);
+    if (!m) return null;
+    const mo = ["january","february","march","april","may","june","july","august","september","october","november","december"].indexOf(m[1].toLowerCase());
+    if (mo < 0) return null;
+    let h = Number(m[4]) % 12; if (/p/i.test(m[6])) h += 12;
+    const p = (n) => String(n).padStart(2, "0");
+    return `${m[3]}-${p(mo + 1)}-${p(m[2])} ${p(h)}:${m[5]}:00`;
+  };
+  const updatedText = text(wx?.conditions_table_updated || first(/Snowfall totals updated:\s*([^<]+)/i));
+
+  const todays = first(/class="m-todays-report"[\s\S]*?<div class="m-fs-reg m-mt-20">([\s\S]*?)<\/div>/);
+  const status = text(first(/class="[^"]*m-alert-bright[^"]*">([\s\S]*?)<\/div>/));
+
+  // Lifts
+  const lifts = [];
+  for (const m of html.matchAll(/<li class="m-lift-status-([\w-]+)">([\s\S]*?)<\/li>/g)) {
+    const name = text(m[2].match(/m-lift-header">([\s\S]*?)<\/h3>/)?.[1]);
+    if (!name) continue;
+    const raw = m[1].toLowerCase();
+    lifts.push({
+      name: name.replace(/^The\s+/i, ""),
+      status: raw === "on-hold" ? "hold" : raw.replace(/-/g, " "),
+      type: (m[2].match(/<img[^>]*alt="([^"]*)"/)?.[1] || "").trim() || null,
+      season: "winter",
+      hours: text(m[2].match(/Hours:\s*([^<]+)/)?.[1]),
+    });
+  }
+
+  // Trails
+  const trailRows = [];
+  for (const m of html.matchAll(/<li class="m-filter-target ([^"]+)">([\s\S]*?)<\/li>/g)) {
+    const cls = m[1];
+    const name = text(m[2].match(/<h4[^>]*>([\s\S]*?)<\/h4>/)?.[1]);
+    if (!name) continue;
+    trailRows.push({
+      name,
+      open: /m-filter-value-open\b/.test(cls),
+      groomed: /m-filter-value-groomed\b/.test(cls),
+      level: cls.match(/m-filter-value-(green|blue|black|double-black)\b/)?.[1] || null,
+    });
+  }
+  const sections = [...html.matchAll(/m-lift-header" role="button">([^<]+)<\/h3>([\s\S]*?)<\/div>\s*<div>\s*<div class="m-lifts-and-trails-meta[^>]*>\s*<div>([^<]+)<\/div>/g)]
+    .map((m) => ({ name: text(m[1]), access: text(m[2]).replace(/^Access via\s*/i, ""), meta: text(m[3]) }));
+  const [tOpen, tTot] = frac(totals["trails open"]);
+
+  // Webcams (YouTube live streams)
+  const webcams = [];
+  for (const m of html.matchAll(/youtube\.com\/embed\/([\w-]{6,})[\s\S]*?<\/iframe>[\s\S]*?has-m-h-small-font-size">\s*([^<]+?)\s*</g)) {
+    if (!webcams.some((w) => w.id === m[1])) webcams.push({ id: m[1], name: text(m[2]) });
+  }
+
+  await save("willamette.json", {
+    fetched_at: now(),
+    source: PAGE,
+    status_text: status || null,
+    current: wx
+      ? {
+          temp_f: num(wx.current_temperature),
+          high_f: num(wx.max_temp),
+          low_f: num(wx.min_temp),
+          wind: wx.wind && wx.wind !== "NA" ? wx.wind : null,
+          condition: wx.current_weather || null,
+          updated: wx.date || null,
+          provider: wx.weather_provider || null,
+        }
+      : null,
+    forecast: [],
+    snow_report: {
+      date: toLocal(updatedText),
+      date_text: updatedText || null,
+      unit: "in",
+      overnight: null,
+      new_amount: num(totals["24 hr"]),
+      base_depth: num(totals["base depth"]),
+      computed: { "24_hour": num(totals["24 hr"]), "48_hour": num(totals["48 hr"]), "7_day": num(totals["7 day"]), month: null, total: num(totals["season total"]) },
+      report_text: [status, text(todays)].filter(Boolean).join("\n\n"),
+      report_updated: text(wx?.todays_report_updated) || null,
+    },
+    alerts: [],
+    lifts,
+    trails: {
+      total: tTot ?? trailRows.length,
+      winter_total: tTot ?? trailRows.length,
+      winter_open: tOpen ?? trailRows.filter((t) => t.open).length,
+      groomed: trailRows.filter((t) => t.open && t.groomed).length,
+      open_names: trailRows.filter((t) => t.open).map((t) => t.name),
+      sections,
+    },
+    stations: {},
+    webcams,
+  });
+}
+
+// ---------- Lift lines from OpenStreetMap (one-time per resort) ----------
 async function liftLines() {
-  if (await exists("lifts.geojson")) return;
-  const q = '[out:json][timeout:60];way["aerialway"](43.95,-121.73,44.02,-121.63);out geom;';
+  await liftLinesFor("lifts.geojson", "43.95,-121.73,44.02,-121.63");
+  await liftLinesFor("lifts-willamette.geojson", "43.585,-122.055,43.625,-122.0");
+}
+async function liftLinesFor(file, bbox) {
+  if (await exists(file)) return;
+  const q = `[out:json][timeout:60];way["aerialway"](${bbox});out geom;`;
   const mirrors = ["https://overpass-api.de/api/interpreter", "https://overpass.private.coffee/api/interpreter", "https://maps.mail.ru/osm/tools/overpass/api/interpreter"];
   for (const u of mirrors) {
     try {
@@ -197,7 +321,7 @@ async function liftLines() {
         .filter((e) => e.geometry && /chair_lift|gondola|mixed_lift|drag_lift|t-bar|platter|magic_carpet|rope_tow/.test(e.tags?.aerialway || ""))
         .map((e) => ({ type: "Feature", properties: { name: e.tags.name || null, kind: e.tags.aerialway }, geometry: { type: "LineString", coordinates: e.geometry.map((g) => [g.lon, g.lat]) } }));
       if (!features.length) throw new Error("no lifts returned");
-      await save("lifts.geojson", { type: "FeatureCollection", attribution: "OpenStreetMap contributors", features });
+      await save(file, { type: "FeatureCollection", attribution: "OpenStreetMap contributors", features });
       return;
     } catch (e) {
       console.warn("  overpass mirror failed:", u, e.message);
@@ -205,7 +329,7 @@ async function liftLines() {
   }
 }
 
-const jobs = { mtBachelor, powdr, avalanche, liftLines };
+const jobs = { mtBachelor, willamette, powdr, avalanche, liftLines };
 let failures = 0;
 for (const [name, fn] of Object.entries(jobs)) {
   try {

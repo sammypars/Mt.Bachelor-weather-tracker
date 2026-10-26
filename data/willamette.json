@@ -1,0 +1,112 @@
+{
+ "fetched_at": "2026-10-26T17:13:00.000Z",
+ "source": "https://www.willamettepass.ski/weather-conditions-webcams/",
+ "status_text": "Willamette Pass is currently closed.",
+ "current": {
+  "temp_f": 37,
+  "high_f": 35,
+  "low_f": 33,
+  "wind": null,
+  "condition": "Snow then Rain/Snow",
+  "updated": "October 26, 2026, 10:13 am",
+  "provider": "NOAA"
+ },
+ "forecast": [],
+ "snow_report": {
+  "date": "2026-04-24 13:06:00",
+  "date_text": "April 24, 2026 1:06 pm",
+  "unit": "in",
+  "overnight": null,
+  "new_amount": 0,
+  "base_depth": 0,
+  "computed": {
+   "24_hour": 0,
+   "48_hour": 0,
+   "7_day": 0,
+   "month": null,
+   "total": 47
+  },
+  "report_text": "Willamette Pass is currently closed.\n\nOperations at Willamette Pass continue to remain paused due to warm weather. Check back often for the most up-to-date mountain info moving forward.",
+  "report_updated": null
+ },
+ "alerts": [],
+ "lifts": [
+  {
+   "name": "Magic Carpet (Conveyor)",
+   "status": "closed",
+   "type": "Magic Carpet",
+   "season": "winter",
+   "hours": "9am-4pm"
+  },
+  {
+   "name": "Sleepy Hollow",
+   "status": "closed",
+   "type": "3 Person",
+   "season": "winter",
+   "hours": "9am-4pm"
+  },
+  {
+   "name": "Midway",
+   "status": "closed",
+   "type": "3 Person",
+   "season": "winter",
+   "hours": "9am-4pm"
+  },
+  {
+   "name": "Twilight",
+   "status": "closed",
+   "type": "3 Person",
+   "season": "winter",
+   "hours": "9am-4pm"
+  },
+  {
+   "name": "Eagle Peak Accelerator",
+   "status": "closed",
+   "type": "6 Person",
+   "season": "winter",
+   "hours": "9am-4pm"
+  },
+  {
+   "name": "Peak 2",
+   "status": "closed",
+   "type": "3 Person",
+   "season": "winter",
+   "hours": "9:30am-3:30pm"
+  }
+ ],
+ "trails": {
+  "total": 30,
+  "winter_total": 30,
+  "winter_open": 0,
+  "groomed": 0,
+  "open_names": [],
+  "sections": [
+   {
+    "name": "Frontside",
+    "access": "The Magic Carpet (Conveyor), Sleepy Hollow, Midway, Twilight",
+    "meta": "0/21 Trails Open • Hours: 9am-4pm"
+   },
+   {
+    "name": "Backside",
+    "access": "",
+    "meta": "0/8 Trails Open • Hours: 9:30am-3:30pm"
+   },
+   {
+    "name": "Sleepy Hollow Beginner Area",
+    "access": "The Magic Carpet (Conveyor), Sleepy Hollow",
+    "meta": "0/1 Trails Open • Hours: 9am-4pm"
+   }
+  ]
+ },
+ "stations": {},
+ "webcams": [
+  {
+   "id": "sNVA6oC7vcM",
+   "name": "Base Area"
+  },
+  {
+   "id": "uav7cBNVv0k",
+   "name": "EPA"
+  }
+ ]
+}
