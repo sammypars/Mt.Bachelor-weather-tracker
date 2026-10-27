@@ -987,7 +987,7 @@ function initField(){const cv=$("fieldLayer"),sz=map.getSize();cv.style.width=sz
 function newP(){const max=1.5+Math.random()*2.5;return {x:Math.random()*(fl.W||1),y:Math.random()*(fl.H||1),age:Math.random()*max,max,s:.75+Math.random()*.5}}
 function gAt(lat,lon,fn){ // bilinear interpolation on the forecast grid
   if(!G.data)return null;const fi=Math.max(0,Math.min(G.nlat-1.001,(lat-G.lat0)/G.dlat)),fj=Math.max(0,Math.min(G.nlon-1.001,(lon-G.lon0)/G.dlon));
-  const i=Math.floor(fi),j=Math.floor(fj),a=fi-i,b=fj-j,v=(ii,jj)=>fn(G.data[ii*G.nlon+jj]);
+  const i=Math.floor(fi),j=Math.floor(fj),a=fi-i,b=fj-j,v=(ii,jj)=>fn(G.data[ii*G.nlon+jj],ii*G.nlon+jj);
   return v(i,j)*(1-a)*(1-b)+v(i,j+1)*(1-a)*b+v(i+1,j)*a*(1-b)+v(i+1,j+1)*a*b;
 }
 function gridIdx(){if(!G.time)return 0;const now=Date.now();let i=0;for(let k=0;k<G.time.length;k++){if(omTime(G.time[k])<=now)i=k;else break}return i+hourOff}
@@ -999,19 +999,21 @@ const RAMPS={
 function ramp(name,v){const S=RAMPS[name];if(v==null||v<S[0][0])return [0,0,0,0];
   for(let k=1;k<S.length;k++)if(v<S[k][0]){const [v0,c0]=S[k-1],[v1,c1]=S[k],f=(v-v0)/(v1-v0);return c0.map((x,n)=>x+(c1[n]-x)*f)}return S[S.length-1][1]}
 const FS=7;
-function fieldValue(lat,lon,ti){
+function fieldValue(lat,lon,ti,snowTot){
   if(mapMode==="temp")return gAt(lat,lon,p=>p.h.temperature_2m[ti]);
   if(mapMode==="precip")return gAt(lat,lon,p=>p.h.precipitation[ti]);
-  if(mapMode==="snow"){const t0=gridIdx()-hourOff;return gAt(lat,lon,p=>sumRange(p.h.snowfall,t0,ti+1))}
+  if(mapMode==="snow")return gAt(lat,lon,(p,k)=>snowTot[k]);
   return gAt(lat,lon,p=>p.h.wind_speed_10m[ti]);
 }
 function buildField(){
-  if(!map||!fl.W||!G.data)return;const ti=gridIdx();const gw=Math.ceil(fl.W/FS),gh=Math.ceil(fl.H/FS);
+  if(!map||!fl.W||!G.data)return;const ti=gridIdx(),t0=ti-hourOff;
+  // snow totals once per forecast point, not once per pixel cell (that made the snow layer freeze the page)
+  const snowTot=mapMode==="snow"?G.data.map(p=>sumRange(p.h.snowfall,t0,ti+1)):null;const gw=Math.ceil(fl.W/FS),gh=Math.ceil(fl.H/FS);
   const cv=fl.field&&fl.field.gw===gw&&fl.field.gh===gh?fl.field.cv:Object.assign(document.createElement("canvas"),{width:gw,height:gh});
   const x=cv.getContext("2d"),img=x.createImageData(gw,gh),u=new Float32Array(gw*gh),v=new Float32Array(gw*gh),sp=new Float32Array(gw*gh);
   for(let yy=0;yy<gh;yy++)for(let xx=0;xx<gw;xx++){
     const ll=map.containerPointToLatLng([xx*FS+FS/2,yy*FS+FS/2]),o=yy*gw+xx;
-    const val=fieldValue(ll.lat,ll.lng,ti);let c=ramp(mapMode,val);
+    const val=fieldValue(ll.lat,ll.lng,ti,snowTot);let c=ramp(mapMode,val);
     if(mapMode==="temp"&&val!=null&&Math.abs(val-32)<.7)c=[255,255,255,.95]; // freezing line
     img.data[o*4]=c[0];img.data[o*4+1]=c[1];img.data[o*4+2]=c[2];img.data[o*4+3]=c[3]*255;
     if(mapMode==="wind"){const uu=gAt(ll.lat,ll.lng,p=>-Math.sin(p.h.wind_direction_10m[ti]*Math.PI/180)*p.h.wind_speed_10m[ti]),vv=gAt(ll.lat,ll.lng,p=>-Math.cos(p.h.wind_direction_10m[ti]*Math.PI/180)*p.h.wind_speed_10m[ti]);u[o]=uu;v[o]=vv;sp[o]=val}
@@ -1101,7 +1103,7 @@ function setPlay(on){clearInterval(playT);playT=null;const b=$("playBtn");
 $("playBtn").addEventListener("click",()=>setPlay(!playT));setPlay(false);
 $("hourSlider").addEventListener("input",e=>{setPlay(false);hourOff=+e.target.value;updateMap()});
 document.querySelectorAll(".tab[data-m]").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tab[data-m]").forEach(t=>t.setAttribute("aria-selected",t===b));mapMode=b.dataset.m;
-  if(mapMode==="snow"&&hourOff<24){hourOff=24;$("hourSlider").value=24}renderLegend();updateMap()}));
+  if(mapMode==="snow"&&hourOff===0){hourOff=24;$("hourSlider").value=24}renderLegend();updateMap();drawField()}));
 
 /* ================= clock, loop, boot ================= */
 function tickLive(){const d=new Date();$("liveClock").innerHTML=d.toLocaleTimeString("en-US",{timeZone:TZ,hour:"numeric",minute:"2-digit"}).replace(/\s?(AM|PM)/i,"<small>$1 PT</small>");
