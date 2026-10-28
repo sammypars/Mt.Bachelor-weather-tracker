@@ -8,12 +8,15 @@
 //   data/willamette.json  Willamette Pass snow report, lifts, trails and webcam ids (scraped from willamettepass.ski)
 //   data/lifts.geojson    Lift lines from OpenStreetMap (fetched once, then cached)
 //   data/lifts-willamette.geojson  Same, for Willamette Pass
+//   data/sunpeaks.json    Sun Peaks snow report, lifts, trails, resort forecast and on-mountain readings (sunpeaksresort.com)
+//   data/lifts-sunpeaks.geojson    Same lift lines, for Sun Peaks
 
 import fs from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { getDocument } from "pdfjs-dist/legacy/build/pdf.mjs";
 import { itemsFromTextContent, parsePowdr } from "./powdr.mjs";
+import { parseWeather, parseLifts, pacificToday, slug } from "./sunpeaks.mjs";
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const DATA = path.join(ROOT, "data");
@@ -305,10 +308,85 @@ async function willamette() {
   });
 }
 
+// ---------- Sun Peaks ----------
+// Two server-rendered Drupal pages, parsed in scripts/sunpeaks.mjs into the same shape as
+// mtbachelor.json. The resort page only shows current readings, so each run appends them to
+// the previous file's station rows to build a 24-hour trend.
+async function sunPeaks() {
+  const BASE = "https://www.sunpeaksresort.com/ski-ride/weather-conditions-cams/";
+  const settle = async (p) => { try { return await p; } catch (e) { console.warn("  sun peaks part failed:", e.message); return null; } };
+  const [wxHtml, liftHtml] = await Promise.all([settle(get(BASE + "weather-snow-report", "text")), settle(get(BASE + "lifts-trail-status", "text"))]);
+  if (!wxHtml && !liftHtml) throw new Error("both Sun Peaks pages failed");
+  const today = pacificToday();
+  const wx = wxHtml ? parseWeather(wxHtml, today) : null;
+  const lt = liftHtml ? parseLifts(liftHtml) : null;
+  if (wx && !wx.temps.length && !wx.winds.length && lt && !lt.lifts.length) throw new Error("Sun Peaks pages have no readings or lifts (layout change?)");
+
+  let prev = null;
+  try { prev = JSON.parse(await fs.readFile(path.join(DATA, "sunpeaks.json"), "utf8")); } catch {}
+
+  // Stations: merge temperature and wind readings that share a location name
+  const t = now();
+  const readings = {};
+  const names = {};
+  for (const r of wx?.temps || []) { const k = slug(r.name); names[k] = r.name; readings[k] = { ...(readings[k] || {}), temp_f: r.temp_f }; }
+  for (const r of wx?.winds || []) { const k = slug(r.name); names[k] = r.name; readings[k] = { ...(readings[k] || {}), wind_avg_mph: r.avg_mph, wind_dir: r.dir_deg, wind_max_mph: null }; }
+  const cutoff = Date.now() - 24 * 36e5;
+  const stations = {};
+  for (const [k, r] of Object.entries(readings)) {
+    const old = (prev?.stations?.[k] || []).filter((x) => new Date(x.t).getTime() > cutoff && Date.now() - new Date(x.t).getTime() > 20 * 6e4);
+    stations[k] = [...old, { t, ...r }];
+  }
+
+  // Resort forecast: daytime tiles carry the high, the following night tile the low
+  const forecast = [];
+  for (const d of wx?.forecast || []) {
+    if (!d.date) continue;
+    let f = forecast.find((x) => x.date === d.date);
+    if (!f) { f = { date: d.date, temperature_high: null, temperature_low: null, description_short: "", precipitation_high: null }; forecast.push(f); }
+    if (d.night) { f.temperature_low = d.low_f; if (!f.description_short) f.description_short = d.description; }
+    else { f.temperature_high = d.high_f; f.temperature_low = f.temperature_low ?? d.low_f; f.description_short = d.description; }
+  }
+
+  const s = wx?.snow;
+  const reportText = [lt?.ops, wx?.today ? "Today: " + wx.today : null].filter(Boolean).join("\n\n");
+  const trailRows = lt?.trails || prev?.trail_rows || [];
+  await save("sunpeaks.json", {
+    fetched_at: t,
+    source: BASE + "weather-snow-report",
+    current: { today: wx?.today || null },
+    forecast: forecast.length ? forecast : [],
+    discussion: wx?.discussion || null,
+    snow_report: {
+      date: s?.date || null,
+      date_text: s?.updated_text || null,
+      unit: "in",
+      overnight: s?.new ?? null,
+      new_amount: s?.new ?? null,
+      base_depth: s?.base_alpine ?? null,
+      base_mid: s?.base_mid ?? null,
+      computed: { "24_hour": s?.h24 ?? null, "48_hour": s?.h48 ?? null, "7_day": s?.d7 ?? null, month: null, total: s?.season ?? null },
+      report_text: reportText || "No report posted.",
+    },
+    alerts: [],
+    lifts: lt?.lifts || prev?.lifts || [],
+    trails: {
+      total: trailRows.length,
+      winter_total: trailRows.length,
+      winter_open: trailRows.filter((x) => x.open).length,
+      groomed: trailRows.filter((x) => x.groomed).length,
+      open_names: trailRows.filter((x) => x.open).map((x) => x.name),
+    },
+    station_names: names,
+    stations,
+  });
+}
+
 // ---------- Lift lines from OpenStreetMap (one-time per resort) ----------
 async function liftLines() {
   await liftLinesFor("lifts.geojson", "43.95,-121.73,44.02,-121.63");
   await liftLinesFor("lifts-willamette.geojson", "43.585,-122.055,43.625,-122.0");
+  await liftLinesFor("lifts-sunpeaks.geojson", "50.85,-119.99,50.95,-119.80");
 }
 async function liftLinesFor(file, bbox) {
   if (await exists(file)) return;
@@ -329,7 +407,7 @@ async function liftLinesFor(file, bbox) {
   }
 }
 
-const jobs = { mtBachelor, willamette, powdr, avalanche, liftLines };
+const jobs = { mtBachelor, willamette, sunPeaks, powdr, avalanche, liftLines };
 let failures = 0;
 for (const [name, fn] of Object.entries(jobs)) {
   try {

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Mt. Bachelor Weather</title>
-<meta name="description" content="Ski weather for Mt. Bachelor and Willamette Pass: summit and base forecasts, new snow, wind, NOAA forecasts and alerts, the daily Powdr Forecasts report, an interactive snow, wind and radar map, resort webcams and ODOT road cams.">
+<meta name="description" content="Ski weather for Mt. Bachelor, Willamette Pass and Sun Peaks: summit and base forecasts, new snow, wind, NOAA and Environment Canada forecasts and alerts, the daily Powdr Forecasts report, an interactive snow, wind and radar map, resort webcams and ODOT and DriveBC road cams.">
 <link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
@@ -47,7 +47,7 @@ html,body{margin:0}
 html{scroll-behavior:smooth;scroll-padding-top:64px}
 body{background:var(--bg);color:var(--ink);font:15px/1.5 var(--body)}
 a{color:var(--accent)}
-.wrap{max-width:1180px;margin:0 auto;padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px;display:grid;gap:20px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:max(16px,env(safe-area-inset-left,0px)) max(16px,env(safe-area-inset-right,0px));padding-block:20px 48px;display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
 h1,h2,h3{margin:0;text-wrap:balance}
 .label{font:500 11px/1.2 var(--body);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .num{font-family:var(--display);font-variant-numeric:tabular-nums}
@@ -74,15 +74,15 @@ h1,h2,h3{margin:0;text-wrap:balance}
 .brand span{font:500 12px/1.3 var(--body);color:var(--muted)}
 
 /* Mountain switch */
-.resort-switch{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px;padding:6px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}
+.resort-switch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;padding:6px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}
 .resort-switch button{appearance:none;border:0;border-radius:12px;background:transparent;color:var(--ink);cursor:pointer;padding:14px 18px;display:grid;gap:5px;text-align:left;min-width:0;transition:background .2s,color .2s}
-.resort-switch button b{font:700 clamp(24px,4.4vw,40px)/1 var(--display);letter-spacing:.02em;text-transform:uppercase}
+.resort-switch button b{font:700 clamp(24px,3.6vw,40px)/1 var(--display);letter-spacing:.02em;text-transform:uppercase;overflow-wrap:anywhere}
 .resort-switch button span{font:500 13px/1.3 var(--body);color:var(--muted)}
 .resort-switch button:hover{background:var(--bg)}
 .resort-switch button[aria-checked="true"]{background:var(--ink);color:var(--bg)}
 .resort-switch button[aria-checked="true"] span{color:color-mix(in srgb,var(--bg) 72%,transparent)}
 .resort-switch button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-@media (max-width:520px){.resort-switch button{padding:12px}.resort-switch button span{font-size:12px}}
+@media (max-width:640px){.resort-switch button{padding:10px 8px}.resort-switch button b{font-size:clamp(15px,4.4vw,22px);letter-spacing:.01em}.resort-switch button span{font-size:11px}}
 .switching .wrap>section{opacity:.45;transition:opacity .2s}
 
 /* Hero */
@@ -113,7 +113,7 @@ h1,h2,h3{margin:0;text-wrap:balance}
 .qnav-links::-webkit-scrollbar{display:none}
 /* compact mountain switch, slides in once the big switch scrolls away */
 .mini-switch{flex:none;display:flex;gap:2px;padding:3px;border-radius:999px;background:var(--surface);border:1px solid var(--line);max-width:0;opacity:0;overflow:hidden;margin-right:-8px;transition:max-width .25s,opacity .2s,margin .25s;visibility:hidden}
-.qnav.stuck .mini-switch{max-width:260px;opacity:1;margin-right:0;visibility:visible}
+.qnav.stuck .mini-switch{max-width:360px;opacity:1;margin-right:0;visibility:visible}
 .mini-switch button{appearance:none;border:0;background:transparent;color:var(--muted);font:600 15px/1 var(--display);letter-spacing:.05em;text-transform:uppercase;padding:7px 12px;border-radius:999px;cursor:pointer;white-space:nowrap}
 .mini-switch button[aria-checked="true"]{background:var(--ink);color:var(--bg)}
 .mini-switch button:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -292,11 +292,12 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
 <body>
 <div class="wrap">
 
-  <header class="brand"><img src="icons/favicon.svg" alt="" width="40" height="40"><div><b>Ski Weather</b><span>Mt. Bachelor and Willamette Pass</span></div></header>
+  <header class="brand"><img src="icons/favicon.svg" alt="" width="40" height="40"><div><b>Ski Weather</b><span>Mt. Bachelor, Willamette Pass and Sun Peaks</span></div></header>
 
   <div class="resort-switch" role="radiogroup" aria-label="Choose a mountain" id="resortSwitch">
     <button type="button" role="radio" data-r="bachelor" aria-checked="true"><b>Mt. Bachelor</b><span>Summit 9,065 ft &middot; Bend</span></button>
     <button type="button" role="radio" data-r="willamette" aria-checked="false"><b>Willamette Pass</b><span>Summit 6,683 ft &middot; Hwy 58</span></button>
+    <button type="button" role="radio" data-r="sunpeaks" aria-checked="false"><b>Sun Peaks</b><span>Top 6,824 ft &middot; BC, Canada</span></button>
   </div>
 
   <section class="sky" aria-label="Current conditions">
@@ -322,6 +323,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
     <div class="mini-switch" role="radiogroup" aria-label="Choose a mountain" id="miniSwitch">
       <button type="button" role="radio" data-r="bachelor" aria-checked="true">Bachelor</button>
       <button type="button" role="radio" data-r="willamette" aria-checked="false">Willamette</button>
+      <button type="button" role="radio" data-r="sunpeaks" aria-checked="false">Sun Peaks</button>
     </div>
     <div class="qnav-links">
     <a href="#glance">At a glance</a>
@@ -329,7 +331,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
     <a href="#powdr" id="navPowdr">Powdr report</a>
     <a href="#hourly">Hourly</a>
     <a href="#mapSec">Map</a>
-    <a href="#noaa">NOAA forecast</a>
+    <a href="#noaa" id="navNoaa">NOAA forecast</a>
     <a href="#stationsSec" id="navStations">Stations</a>
     <a href="#cams">Webcams</a>
     </div>
@@ -469,7 +471,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
       <h2 id="noaaH">NOAA forecast</h2>
       <div class="tabs" role="tablist" aria-label="NOAA view">
         <button class="tab" role="tab" data-n="periods" aria-selected="true">Forecast</button>
-        <button class="tab" role="tab" data-n="afd" aria-selected="false">Forecaster discussion</button>
+        <button class="tab" role="tab" data-n="afd" aria-selected="false" id="afdTab">Forecaster discussion</button>
       </div>
     </div>
     <div id="noaaPeriods" class="periods"><p class="note">Loading the National Weather Service forecast</p></div>
@@ -478,7 +480,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
   </section>
 
   <section class="card" id="stationsSec" aria-labelledby="stH">
-    <div class="head"><h2 id="stH">On-mountain weather stations</h2><span class="src">Mt. Bachelor, last 24 hours</span></div>
+    <div class="head"><h2 id="stH">On-mountain weather stations</h2><span class="src" id="stSrc">Mt. Bachelor, last 24 hours</span></div>
     <div class="stations" id="stations"><p class="note">Loading station data</p></div>
   </section>
 
@@ -528,8 +530,27 @@ const RESORTS={
       ["ORE58 at Salt Creek Tunnel WB_pid3021.JPG","OR 58 at Salt Creek Tunnel, westbound"],["ORE58 at Salt Creek Tunnel EB_pid3025.JPG","OR 58 at Salt Creek Tunnel, eastbound"],
       ["ORE58 at Crestview E_pid4183.jpg","OR 58 in Oakridge"],["US97 at Crescent North_pid2119.JPG","US 97 at Crescent, east side"]],
     links:[["Willamette Pass conditions","https://www.willamettepass.ski/weather-conditions-webcams/"],["NWS Portland","https://www.weather.gov/pqr/"],["Avalanche.org map","https://avalanche.org/"]],
-    collected:"Willamette Pass resort data is"}
+    collected:"Willamette Pass resort data is"},
+  /* Sun Peaks is in British Columbia, so the National Weather Service, NEXRAD and TripCheck don't
+     cover it. Environment Canada (forecast, warnings, radar), Avalanche Canada and DriveBC fill
+     those slots, all loaded live in the browser. Resort data comes from the hourly collector. */
+  sunpeaks:{key:"sunpeaks",name:"Sun Peaks",place:"Sun Peaks, British Columbia",country:"CA",
+    summit:[50.9006,-119.9205],view:[50.889,-119.903],zoom:13,grid:[50.892,-119.905],
+    elev:{base:{ft:4117,m:1255,name:"Village"},mid:{ft:6086,m:1855,name:"Mid-mountain"},summit:{ft:6824,m:2080,name:"Top of the World"}},prof:[3200,7600],
+    eccc:{city:"bc-45",cityName:"Kamloops",note:"Kamloops city forecast. Kamloops sits in the valley about 45 km southwest and 2,900 ft below the village, so expect the mountain to run colder and snowier."},
+    data:"sunpeaks.json",liftsFile:"lifts-sunpeaks.geojson",powdr:false,avy:"avcan",stations:true,
+    landmarks:[[[50.9006,-119.9205],"Top of the World 6,824 ft",true,"top"],[[50.9166,-119.9406],"Mt. Tod 6,991 ft",false,"right"],[[50.8845,-119.8835],"Village 4,117 ft",false,"right"],[[50.8613,-119.9008],"Mt. Morrisey",false,"right"]],
+    imgCams:[["view%20of%20mt%20todd.jpg","Mt. Tod from Mt. Morrisey"],["ele_view_of_morrisey.jpg","Elevation chair, looking at Morrisey"],["ele_view_of_OSV.jpg","Elevation chair, looking at OSV"],
+      ["Village%20Day%20Lodge%20Slopeside.jpg","Village Day Lodge slopeside"],["Village%20Clock%20Tower.jpg","Village clock tower"],["Valley.jpg","Valley"]],
+    roadTitle:"Road cams on the way up (DriveBC)",roadSrc:"DriveBC",
+    roadCams:[["605","Hwy 5 in Kamloops, looking north toward Sun Peaks Rd"],["608","Hwy 5 at Halston Ave, Kamloops, looking south"],["1059","Hwy 1 at Peterson Creek, Kamloops, looking east"],["239","Hwy 1 at Peterson Creek, Kamloops, looking west"],["338","Hwy 5 south of Barriere, for the drive from the north"]],
+    stnLoc:{"top-of-the-world":[50.9006,-119.9205],"mid-mountain":[50.8993,-119.9087],"top-of-morrisey":[50.8676,-119.8848],"valley":[50.8846,-119.8873],"sunburst-express-tower-18":[50.8937,-119.9011],"morrisey-express-tower-10":[50.8736,-119.8796]},
+    links:[["Sun Peaks weather and snow report","https://www.sunpeaksresort.com/ski-ride/weather-conditions-cams/weather-snow-report"],["Sun Peaks lift and trail status","https://www.sunpeaksresort.com/ski-ride/weather-conditions-cams/lifts-trail-status"],["Environment Canada, Kamloops","https://weather.gc.ca/en/location/index.html?coords=50.68,-120.35"],["Avalanche Canada","https://avalanche.ca/"],["DriveBC","https://www.drivebc.ca/"]],
+    collected:"Sun Peaks resort data is"}
 };
+const ECCC="https://api.weather.gc.ca/collections";
+const isCA=()=>R.country==="CA";
+const wxName=()=>isCA()?"Environment Canada":"National Weather Service";
 const CAM_NAMES={"epa":"Top of Eagle Peak Accelerator","base area":"Base area"};
 let R,SUMMIT,ELEV,GRID;
 const isOpen=s=>/^open/i.test(s||"");
@@ -578,7 +599,7 @@ async function getPoint(){
   return {base,mid,summit};
 }
 const G={lat0:43.925,dlat:0.02,nlat:7,lon0:-121.785,dlon:0.03,nlon:7,data:null};
-function pickResort(k){R=RESORTS[k]||RESORTS.bachelor;SUMMIT=R.summit;ELEV=R.elev;GRID=R.nws.grid;G.lat0=R.grid[0]-3*G.dlat;G.lon0=R.grid[1]-3*G.dlon}
+function pickResort(k){R=RESORTS[k]||RESORTS.bachelor;SUMMIT=R.summit;ELEV=R.elev;GRID=R.nws?.grid;G.lat0=R.grid[0]-3*G.dlat;G.lon0=R.grid[1]-3*G.dlon}
 async function getGrid(){
   const la=[],lo=[];for(let i=0;i<G.nlat;i++)for(let j=0;j<G.nlon;j++){la.push((G.lat0+i*G.dlat).toFixed(4));lo.push((G.lon0+j*G.dlon).toFixed(4))}
   const u=`https://api.open-meteo.com/v1/forecast?latitude=${la.join(",")}&longitude=${lo.join(",")}&hourly=temperature_2m,precipitation,snowfall,wind_speed_10m,wind_direction_10m,wind_gusts_10m&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=${encodeURIComponent(TZ)}&forecast_days=4`;
@@ -595,6 +616,48 @@ async function getNWS(){
   let afd=null;
   if(afdList.status==="fulfilled"){const id=afdList.value["@graph"]?.[0]?.id;if(id){try{afd=await getJSON(`${NWS}/products/${id}`,opt)}catch(e){}}}
   return {fc:fc.value||null,fcErr:fc.reason?.message,grid:grid.value||null,alerts:alerts.status==="fulfilled"?alerts.value.features:null,alertErr:alerts.reason?.message,afd};
+}
+/* Environment Canada city forecast and warnings, reshaped like the NWS responses above so the
+   alert, outlook and forecast renderers work unchanged. Temperatures convert to °F; the written
+   forecasts stay in Environment Canada's own metric wording. */
+const cF=c=>c==null||isNaN(c)?null:Math.round(c*9/5+32);
+async function getECCC(){
+  const [city,alerts]=await Promise.allSettled([
+    getJSON(`${ECCC}/citypageweather-realtime/items?f=json&identifier=${R.eccc.city}`),
+    getJSON(`${ECCC}/weather-alerts/items?f=json&limit=50&bbox=${SUMMIT[1]-.03},${SUMMIT[0]-.02},${SUMMIT[1]+.03},${SUMMIT[0]+.02}`)]);
+  let fc=null,snowLevelFt=null;
+  const p=city.value?.features?.[0]?.properties;
+  if(p){
+    const today=dayKey(Date.now()),WD=["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
+    // ECCC names periods by weekday ("Wednesday", "Wednesday night"); give each one a date on or after today
+    const dateFor=name=>{const w=WD.indexOf(String(name).toLowerCase().split(" ")[0]);for(let k=0;k<8;k++){const d=dayKey(Date.now()+k*864e5);if(new Date(d+"T12:00:00Z").getUTCDay()===w)return d}return today};
+    const periods=(p.forecastGroup?.forecasts||[]).map(f=>{
+      const v=f.period?.value?.en||"",night=/night/i.test(v)||/night/i.test(f.period?.textForecastName?.en||"");
+      const t=(f.temperatures?.temperature||[])[0],key=dateFor(v);
+      return {name:f.period?.textForecastName?.en||v,isDaytime:!night,temperature:cF(t?.value?.en),
+        shortForecast:f.abbreviatedForecast?.textSummary?.en||"",detailedForecast:f.textSummary?.en||"",
+        startTime:new Date(omTime(`${key}T${night?"20":"12"}:00`)).toISOString()}});
+    fc={properties:{periods,updated:p.lastUpdated}};
+    const sl=(p.forecastGroup?.forecasts||[]).map(f=>f.snowLevel?.textSummary?.en).find(Boolean);
+    const m=sl&&sl.match(/([\d,]+)\s*metres/i);if(m)snowLevelFt=+m[1].replace(/,/g,"")*3.28084;
+  }
+  // The same warning is issued for several overlapping polygons; keep one of each
+  let list=null;
+  if(alerts.status==="fulfilled"){const seen=new Set();list=[];
+    for(const f of alerts.value.features||[]){const a=f.properties;const k=a.alert_name_en+"|"+a.alert_text_en;if(seen.has(k))continue;seen.add(k);
+      list.push({properties:{event:titleCase(a.alert_name_en||"Weather alert"),severity:a.alert_type==="warning"?"Severe":"Moderate",
+        onset:a.validity_datetime||a.publication_datetime,ends:a.event_end_datetime||a.expiration_datetime,headline:a.feature_name_en||"",description:a.alert_text_en||""}})}}
+  return {fc,fcErr:city.reason?.message,grid:null,snowLevelFt,alerts:list,alertErr:alerts.reason?.message,afd:null};
+}
+/* Avalanche Canada point forecast, reshaped like data/avalanche.json */
+async function getAvCan(){
+  const j=await getJSON(`https://api.avalanche.ca/forecasts/en/products/point?lat=${SUMMIT[0]}&long=${SUMMIT[1]}`);
+  const rep=j.report||{},day=(rep.dangerRatings||[])[0];
+  const rt=day?.ratings?.alp?.rating||day?.ratings?.alp||null;
+  const val=(rt?.value||"").toLowerCase(),lvl={low:1,moderate:2,considerable:3,high:4,extreme:5}[val]||0;
+  const COL={1:"#4DB848",2:"#F2C200",3:"#F7941E",4:"#D7262F",5:"#231F20"};
+  return {zones:[{name:rep.title,danger:val,danger_level:lvl,color:COL[lvl],link:j.url||"https://avalanche.ca/",off_season:!lvl,
+    note:lvl?"Alpine rating":"No daily rating yet",validUntil:rep.validUntil}]};
 }
 async function getLocal(name){const t=Math.floor(Date.now()/3e5);return getJSON(`data/${name}?t=${t}`)}
 
@@ -671,7 +734,7 @@ function renderGlance(){
 }
 function renderProfile(){
   const P=state.pt,i=state.i0;if(!P)return;
-  const fl=P.summit.hourly.fl_ft[i],snowLvl=state.nws?nwsSnowLevelNow(state.nws.grid):null;
+  const fl=P.summit.hourly.fl_ft[i],snowLvl=state.nws?(state.nws.grid?nwsSnowLevelNow(state.nws.grid):state.nws.snowLevelFt):null;
   const [lo,hi]=R.prof,top=ELEV.summit.ft,vert=top-ELEV.base.ft;
   const W=300,H=190,yFt=ft=>H-12-(ft-lo)/(hi-lo)*(H-26);
   const pk=yFt(top),base=yFt(ELEV.base.ft-vert*.25);
@@ -688,7 +751,7 @@ function renderProfile(){
   if(flY!=null){svg+=`<line x1="4" x2="${W-24}" y1="${flY}" y2="${flY}" stroke="var(--cold)" stroke-width="2" stroke-dasharray="6 4"/><text x="${W-4}" y="${flY+3}" text-anchor="end" font-family="var(--body)" font-size="9" font-weight="600" fill="var(--cold)">32&#176;</text>`}
   $("profile").innerHTML=svg;
   const B=ELEV.base.ft;setPill("flPill",fl==null?"--":fl<B?"Snow to base":fl<top?"Snow up top":"Above summit",fl<B?"snow":fl<top?"":"warn");
-  $("profNote").innerHTML=`<b style="color:var(--cold)">Freezing level ${fl==null?"--":(Math.round(fl/100)*100).toLocaleString()+" ft"}</b> (dashed line)${snowLvl?`, NOAA snow level ${(Math.round(snowLvl/100)*100).toLocaleString()} ft`:""}. Temperatures from Open-Meteo for this hour.`;
+  $("profNote").innerHTML=`<b style="color:var(--cold)">Freezing level ${fl==null?"--":(Math.round(fl/100)*100).toLocaleString()+" ft"}</b> (dashed line)${snowLvl?`, ${isCA()?"Environment Canada":"NOAA"} snow level ${(Math.round(snowLvl/100)*100).toLocaleString()} ft`:""}. Temperatures from Open-Meteo for this hour.`;
 }
 
 /* ================= Mt. Bachelor report and status ================= */
@@ -716,8 +779,9 @@ function renderAvy(){
   if(!R.avy){$("avy").innerHTML=`No center zone<br><small style="font:500 12px var(--body)"><a href="https://avalanche.org/" target="_blank" rel="noopener">avalanche.org</a></small>`;return}
   const a=state.avy;const z=a?.zones?.[0];
   if(!z){$("avy").textContent="--";return}
-  if(z.off_season||z.danger_level<=0||z.danger_level==null){$("avy").innerHTML=`No rating<br><small style="font:500 12px var(--body)">${esc(z.off_season?"Off season":"Not issued")}</small>`;return}
-  $("avy").innerHTML=`<span style="color:${esc(z.color||"inherit")}">${esc((z.danger||"").replace(/^\w/,c=>c.toUpperCase()))}</span><br><small style="font:500 12px var(--body)"><a href="${esc(z.link||"https://www.coavalanche.org/")}" target="_blank" rel="noopener">COAC forecast</a></small>`;
+  const who=R.avy==="avcan"?"Avalanche Canada":"COAC";
+  if(z.off_season||z.danger_level<=0||z.danger_level==null){$("avy").innerHTML=`No rating<br><small style="font:500 12px var(--body)">${R.avy==="avcan"?`<a href="${esc(z.link)}" target="_blank" rel="noopener">${esc(z.note||"Not issued")}, ${who}</a>`:esc(z.off_season?"Off season":"Not issued")}</small>`;return}
+  $("avy").innerHTML=`<span style="color:${esc(z.color||"inherit")}">${esc((z.danger||"").replace(/^\w/,c=>c.toUpperCase()))}</span><br><small style="font:500 12px var(--body)"><a href="${esc(z.link||"https://www.coavalanche.org/")}" target="_blank" rel="noopener">${who} forecast${z.note?", "+esc(z.note.toLowerCase()):""}</a></small>`;
 }
 
 /* ================= alerts ================= */
@@ -726,10 +790,10 @@ function renderAlerts(){
   const list=nws?.alerts||[];
   for(const a of list){const p=a.properties;const sev=/Extreme|Severe/.test(p.severity);
     const t=`${fmt(p.onset||p.effective,{weekday:"short",hour:"numeric",minute:"2-digit"})} to ${fmt(p.ends||p.expires,{weekday:"short",hour:"numeric",minute:"2-digit"})}`;
-    html+=`<details class="alert${sev?" severe":""}"><summary><h3>${esc(p.event)}</h3><span class="when">${esc(t)} &middot; National Weather Service</span></summary><p>${esc(p.headline||"")}\n\n${esc(p.description||"")}${p.instruction?"\n\n"+esc(p.instruction):""}</p></details>`}
+    html+=`<details class="alert${sev?" severe":""}"><summary><h3>${esc(p.event)}</h3><span class="when">${esc(t)} &middot; ${wxName()}</span></summary><p>${esc(p.headline||"")}\n\n${esc(p.description||"")}${p.instruction?"\n\n"+esc(p.instruction):""}</p></details>`}
   for(const a of state.mtb?.alerts||[])html+=`<details class="alert"><summary><h3>${esc(a.title||R.name+" alert")}</h3><span class="when">${esc(R.name)}</span></summary><p>${esc(a.body)}</p></details>`;
-  if(!html){html=nws&&nws.alerts?`<div class="alert none"><summary><h3>No active weather warnings</h3><span class="when">National Weather Service, ${esc(R.name)} summit</span></summary></div>`
-    :`<div class="alert none"><h3>Warnings unavailable</h3><p class="err">${esc(nws?.alertErr||"Could not reach weather.gov")}. Check weather.gov/${R.nws.office.toLowerCase()} directly.</p></div>`}
+  if(!html){html=nws&&nws.alerts?`<div class="alert none"><summary><h3>No active weather warnings</h3><span class="when">${wxName()}, ${esc(R.name)}</span></summary></div>`
+    :`<div class="alert none"><h3>Warnings unavailable</h3><p class="err">${esc(nws?.alertErr||(isCA()?"Could not reach weather.gc.ca":"Could not reach weather.gov"))}. Check ${isCA()?"weather.gc.ca":"weather.gov/"+R.nws.office.toLowerCase()} directly.</p></div>`}
   box.innerHTML=html;
 }
 
@@ -752,10 +816,11 @@ function renderOutlook(){
     const dt=new Date(key+"T12:00:00");const name=key===today?"Today":dt.toLocaleDateString("en-US",{weekday:"long"});
     const [kind,lab]=codeInfo(D.weather_code[k]);
     const rows=[];const highs=[];
-    const add=(src,hi,lo,txt)=>{if(hi!=null&&!isNaN(hi))highs.push(hi);rows.push(`<div class="srow"><span class="src">${src}</span><div><span class="hl"><span class="hi">${r0(hi)}</span> / <span class="lo">${r0(lo)}</span></span><div class="d">${esc(txt||"")}</div></div></div>`)};
+    // valley forecasts (Kamloops for Sun Peaks) are shown but left out of the agreement check
+    const add=(src,hi,lo,txt,valley)=>{if(!valley&&hi!=null&&!isNaN(hi))highs.push(hi);rows.push(`<div class="srow"><span class="src">${src}</span><div><span class="hl"><span class="hi">${r0(hi)}</span> / <span class="lo">${r0(lo)}</span></span><div class="d">${esc(txt||"")}</div></div></div>`)};
     // NOAA: day period + following night
     const dayP=nwsP.find(p=>p.isDaytime&&dayKey(p.startTime)===key),nightP=nwsP.find(p=>!p.isDaytime&&dayKey(p.startTime)===key);
-    if(dayP||nightP){const sn=nwsSnow[key];add("NOAA",dayP?.temperature,nightP?.temperature,(dayP||nightP).shortForecast+(sn>=.1?`, ${in1(sn)}" snow`:""))}
+    if(dayP||nightP){const sn=nwsSnow[key];add(isCA()?R.eccc.cityName:"NOAA",dayP?.temperature,nightP?.temperature,(dayP||nightP).shortForecast+(sn>=.1?`, ${in1(sn)}" snow`:""),isCA())}
     const mb=mtbF.find(f=>f.date===key);if(mb)add("Resort",mb.temperature_high,mb.temperature_low,`${mb.description_short}${mb.precipitation_high?", "+mb.precipitation_high+"% precip":""}`);
     if(pwDays[key])add("Powdr",pwDays[key].hi,pwDays[key].lo,pwDays[key].txt);
     add("Model",D.temperature_2m_max[k],D.temperature_2m_min[k],`${lab}, gusts ${r0(Ds.wind_gusts_10m_max[k])} up top`);
@@ -856,23 +921,27 @@ function renderStrip(){
 function renderNoaa(){
   const n=state.nws,box=$("noaaPeriods");
   const per=n?.fc?.properties?.periods;
-  if(!per){box.innerHTML=`<p class="err">${esc(n?.fcErr||"NOAA forecast unavailable")}. Try Refresh, or open the <a href="https://forecast.weather.gov/MapClick.php?lat=${SUMMIT[0]}&lon=${SUMMIT[1]}" target="_blank" rel="noopener">NOAA point forecast</a>.</p>`}
-  else box.innerHTML=per.slice(0,14).map((p,k)=>`<details class="period"${k<2?" open":""}><summary><b>${esc(p.name)}</b><span class="t" style="color:${p.isDaytime?"var(--temp)":"var(--cold)"}">${p.isDaytime?"High":"Low"} ${p.temperature}&deg;</span><span class="s">${icon(textKind(p.shortForecast),p.isDaytime).replace("<svg",'<svg style="width:22px;height:22px;vertical-align:middle;margin-right:6px"')}${esc(p.shortForecast)}</span></summary><p>${esc(p.detailedForecast)}</p></details>`).join("");
-  $("afd").textContent=n?.afd?.productText?n.afd.productText.trim():"The forecaster discussion is not available right now.";
+  const fcLink=isCA()?`<a href="https://weather.gc.ca/en/location/index.html?coords=${SUMMIT[0].toFixed(2)},${SUMMIT[1].toFixed(2)}" target="_blank" rel="noopener">Environment Canada forecast</a>`:`<a href="https://forecast.weather.gov/MapClick.php?lat=${SUMMIT[0]}&lon=${SUMMIT[1]}" target="_blank" rel="noopener">NOAA point forecast</a>`;
+  if(!per){box.innerHTML=`<p class="err">${esc(n?.fcErr||(isCA()?"Environment Canada":"NOAA")+" forecast unavailable")}. Try Refresh, or open the ${fcLink}.</p>`}
+  else box.innerHTML=per.slice(0,14).map((p,k)=>`<details class="period"${k<2?" open":""}><summary><b>${esc(p.name)}</b><span class="t" style="color:${p.isDaytime?"var(--temp)":"var(--cold)"}">${p.isDaytime?"High":"Low"} ${p.temperature??"--"}&deg;</span><span class="s">${icon(textKind(p.shortForecast),p.isDaytime).replace("<svg",'<svg style="width:22px;height:22px;vertical-align:middle;margin-right:6px"')}${esc(p.shortForecast)}</span></summary><p>${esc(p.detailedForecast)}</p></details>`).join("");
+  // Sun Peaks: the resort's own forecaster writes a synopsis and extended outlook in winter
+  const disc=isCA()?state.mtb?.discussion:n?.afd?.productText;
+  $("afd").textContent=disc?disc.trim():isCA()?"The Sun Peaks forecaster's synopsis is posted on the resort's weather page during the ski season. It will show here once it is.":"The forecaster discussion is not available right now.";
 }
 document.querySelectorAll(".tab[data-n]").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tab[data-n]").forEach(t=>t.setAttribute("aria-selected",t===b));$("noaaPeriods").hidden=b.dataset.n!=="periods";$("noaaAfd").hidden=b.dataset.n!=="afd"}));
 
 /* ================= stations ================= */
 const STN={sunrise:"Sunrise",cloudChaser:"Cloudchaser",pine:"Pine Marten",northwest:"Northwest",snowplot:"Snow plot"};
+const stnName=k=>STN[k]||state.mtb?.station_names?.[k]||k;
 function stationLatest(rows){const r=(rows||[]).filter(x=>x.temp_f!=null||x.wind_avg_mph!=null);return r[r.length-1]||null}
 function renderStations(){
   const m=state.mtb,box=$("stations");if(!m?.stations){box.innerHTML='<p class="note">Station data will appear after the first data update.</p>';return}
   const keys=Object.keys(m.stations).sort((a,b)=>(stationLatest(m.stations[b])?.t||"").localeCompare(stationLatest(m.stations[a])?.t||""));
   box.innerHTML=keys.map(k=>{const rows=m.stations[k],l=stationLatest(rows);if(!l)return "";const stale=(Date.now()-new Date(l.t))/36e5>12;
     const windy=l.wind_avg_mph>0||l.wind_max_mph>0;
-    return `<div class="station"><div class="head"><h3>${esc(STN[k]||k)}</h3><span class="pill${stale?" warn":""}">${stale?"Offline":fmt(l.t,{hour:"numeric",minute:"2-digit"})}</span></div>
+    return `<div class="station"><div class="head"><h3>${esc(stnName(k))}</h3><span class="pill${stale?" warn":""}">${stale?"Offline":fmt(l.t,{hour:"numeric",minute:"2-digit"})}</span></div>
       ${l.temp_f!=null?`<div class="row"><span>Temperature</span><b>${r0(l.temp_f)}&deg;F</b></div>`:""}
-      ${windy?`<div class="row"><span>Wind</span><b>${r0(l.wind_avg_mph)} mph ${compassName(l.wind_dir||0)}</b></div><div class="row"><span>Peak gust</span><b>${r0(l.wind_max_mph)} mph</b></div>`:""}
+      ${windy?`<div class="row"><span>Wind</span><b>${r0(l.wind_avg_mph)} mph ${compassName(l.wind_dir||0)}</b></div>${l.wind_max_mph!=null?`<div class="row"><span>Peak gust</span><b>${r0(l.wind_max_mph)} mph</b></div>`:""}`:""}
       ${l.rh!=null?`<div class="row"><span>Humidity</span><b>${r0(l.rh)}%</b></div>`:""}
       ${stale?`<div class="row"><span>Last report</span><b>${esc(ago(l.t))}</b></div>`:`<canvas data-stn="${esc(k)}" aria-hidden="true"></canvas><span class="note">${windy?"Wind":"Temperature"}, last 24 hours</span>`}</div>`}).join("");
   box.querySelectorAll("canvas[data-stn]").forEach(cv=>{const rows=m.stations[cv.dataset.stn];const windy=rows.some(r=>r.wind_avg_mph>0);
@@ -889,7 +958,10 @@ function camList(){
   // Willamette Pass streams its cams on YouTube; the list comes from the resort page when the collector has it
   const yt=state.mtb?.webcams?.length?state.mtb.webcams:(R.ytCams||[]);
   if(R.ytCams)for(const c of yt)out.push({src:`https://i.ytimg.com/vi/${c.id}/hqdefault_live.jpg?t=${t}`,big:`https://i.ytimg.com/vi/${c.id}/maxresdefault_live.jpg?t=${t}`,yt:c.id,name:CAM_NAMES[(c.name||"").toLowerCase()]||c.name,source:"Live stream",group:"mtn"});
-  for(const [f,n] of R.roadCams)out.push({src:TC+encodeURIComponent(f)+`?rand=${t}`,name:n,source:"ODOT TripCheck",group:"road"});
+  // Sun Peaks posts plain JPGs that refresh every few minutes
+  for(const [f,n] of R.imgCams||[])out.push({src:`https://www.sunpeaksresort.com/sites/default/files/spr_website_data/webcams/${f}?timestamp=${t}`,name:n,source:R.name,group:"mtn"});
+  for(const [f,n] of R.roadCams)out.push(R.roadSrc==="DriveBC"?{src:`https://www.drivebc.ca/images/${encodeURIComponent(f)}.jpg?t=${t}`,name:n,source:"DriveBC",group:"road"}
+    :{src:TC+encodeURIComponent(f)+`?rand=${t}`,name:n,source:"ODOT TripCheck",group:"road"});
   return out;
 }
 function renderCams(){
@@ -955,15 +1027,12 @@ function initMap(){
   const street=L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png",{maxZoom:16,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'});
   topo.addTo(map);
   const fp=map.createPane("field");fp.style.zIndex=450;fp.style.pointerEvents="none";const fc=$("fieldLayer");fc.hidden=false;fp.appendChild(fc);
-  // NOAA NEXRAD radar via Iowa Environmental Mesonet: current frame plus the last 50 minutes
-  const frames=["-m50m","-m45m","-m40m","-m35m","-m30m","-m25m","-m20m","-m15m","-m10m","-m05m",""];
-  radar.layers=frames.map(f=>L.tileLayer(`https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-900913${f}/{z}/{x}/{y}.png`,{opacity:0,maxNativeZoom:11,maxZoom:16,attribution:"Radar: NOAA NEXRAD via IEM"}));
-  radar.label=frames.map(f=>f?+f.slice(2,4):0);
-  const radarGroup=L.layerGroup(radar.layers);
+  // Radar frames are built for the current mountain when the layer is turned on (see ensureRadar)
+  const radarGroup=radar.group=L.layerGroup();
   liftLayer=L.layerGroup().addTo(map);stnLayer=L.layerGroup().addTo(map);
   const places=L.layerGroup().addTo(map);
   state.places=places;drawPlaces();
-  L.control.layers({"Terrain":topo,"Satellite":imagery,"Street":street},{"NOAA radar, last hour":radarGroup,"Lifts":liftLayer,"Weather stations":stnLayer,"Landmarks":places},{position:"topleft",collapsed:matchMedia("(max-width:640px)").matches}).addTo(map);
+  L.control.layers({"Terrain":topo,"Satellite":imagery,"Street":street},{"Radar, last hour":radarGroup,"Lifts":liftLayer,"Weather stations":stnLayer,"Landmarks":places},{position:"topleft",collapsed:matchMedia("(max-width:640px)").matches}).addTo(map);
   map.on("overlayadd",e=>{if(e.layer===radarGroup)startRadar()});map.on("overlayremove",e=>{if(e.layer===radarGroup)stopRadar()});
   map.on("baselayerchange",e=>{fl.sat=e.name==="Satellite";fl.ctx&&fl.ctx.clearRect(0,0,fl.W,fl.H)});
   const badge=L.control({position:"topright"});badge.onAdd=()=>{const d=L.DomUtil.create("div","map-badge");d.id="mapBadge";return d};badge.addTo(map);
@@ -978,7 +1047,29 @@ function drawPlaces(){
   for(const [ll,label,peak,dir] of R.landmarks){const off=dir==="top"?[0,-6]:dir==="left"?[-6,0]:[6,0];
     L.circleMarker(ll,{radius:peak?6:4,color:css("--ink"),weight:2,fillColor:css(peak?"--ink":"--surface"),fillOpacity:1}).addTo(pl).bindTooltip(label,{permanent:true,direction:dir,offset:off,className:"lm"+(peak?" peak":"")})}
 }
-function startRadar(){radar.on=true;stopRadarTimer();const show=k=>{radar.layers.forEach((l,j)=>l.setOpacity(j===k?.75:0));const lab=$("radarTime");lab.hidden=false;
+/* NOAA NEXRAD (via Iowa Environmental Mesonet) for the Oregon mountains; it ends at the border, so
+   Sun Peaks uses Environment Canada's 1 km radar composite from GeoMet, 6-minute frames. */
+async function ensureRadar(){
+  if(radar.key===R.key&&radar.layers.length)return;
+  radar.group.clearLayers();radar.layers=[];radar.label=[];const key=R.key;
+  if(!isCA()){
+    const frames=["-m50m","-m45m","-m40m","-m35m","-m30m","-m25m","-m20m","-m15m","-m10m","-m05m",""];
+    radar.layers=frames.map(f=>L.tileLayer(`https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-900913${f}/{z}/{x}/{y}.png`,{opacity:0,maxNativeZoom:11,maxZoom:16,attribution:"Radar: NOAA NEXRAD via IEM"}));
+    radar.label=frames.map(f=>f?+f.slice(2,4):0);
+  }else{
+    const GM="https://geo.weather.gc.ca/geomet";
+    let end=Date.now()-12*6e4;
+    try{const x=await fetch(`${GM}?service=WMS&version=1.3.0&request=GetCapabilities&layer=RADAR_1KM_RRAI`).then(r=>r.text());
+      const m=x.match(/<Dimension name="time"[^>]*>[^/<]+\/([^/<]+)\//);if(m)end=new Date(m[1]).getTime()}catch(e){}
+    if(R.key!==key)return;
+    const times=Array.from({length:10},(_,k)=>end-(9-k)*6*6e4);
+    radar.layers=times.map(t=>L.tileLayer.wms(GM,{layers:"RADAR_1KM_RRAI",styles:"",format:"image/png",transparent:true,version:"1.3.0",TIME:new Date(t).toISOString().replace(/\.\d+Z$/,"Z"),opacity:0,maxZoom:16,attribution:"Radar: Environment and Climate Change Canada"}));
+    radar.label=times.map(t=>Math.max(0,Math.round((Date.now()-t)/6e4)));
+  }
+  radar.layers.forEach(l=>radar.group.addLayer(l));radar.key=key;
+}
+function resetRadar(){const was=radar.on;stopRadar();radar.key=null;if(radar.group)radar.group.clearLayers();radar.layers=[];if(was)startRadar()}
+async function startRadar(){radar.on=true;stopRadarTimer();await ensureRadar();if(!radar.on||!radar.layers.length)return;const show=k=>{radar.layers.forEach((l,j)=>l.setOpacity(j===k?.75:0));const lab=$("radarTime");lab.hidden=false;
   const mins=radar.label[k];lab.textContent=mins?`Radar ${mins} min ago`:"Radar now";};radar.idx=radar.layers.length-1;show(radar.idx);
   if(!reduce)radar.timer=setInterval(()=>{radar.idx=(radar.idx+1)%radar.layers.length;show(radar.idx)},radar.idx===radar.layers.length-1?700:450);}
 function stopRadarTimer(){clearInterval(radar.timer);radar.timer=null}
@@ -1047,12 +1138,12 @@ function drawField(){
 const LEG={
   wind:["Wind speed, mph",RAMPS.wind,["5","10","20","30","45","60","80+"],"Streaks follow the forecast wind near the surface, sped up 40 times so the motion is visible at mountain scale. Ridges and the summit usually run windier than the valleys."],
   snow:["New snow from now to the selected hour, inches",RAMPS.snow,["0.1","1","3","6","12","18","30+"],"Drag the slider forward to watch snow totals build. Color is the total new snow expected from now until the selected hour."],
-  precip:["Precipitation rate, inches per hour",RAMPS.precip,["0.01","0.05","0.1","0.25","0.5","1+"],"Forecast liquid precipitation for the selected hour. Turn on NOAA radar in the layer menu to see what is falling right now."],
+  precip:["Precipitation rate, inches per hour",RAMPS.precip,["0.01","0.05","0.1","0.25","0.5","1+"],"Forecast liquid precipitation for the selected hour. Turn on radar in the layer menu to see what is falling right now."],
   temp:["Temperature, °F",RAMPS.temp,["0","10","20","30","45","55","65","80"],"The white line is 32°F, roughly where snow turns to rain. Colors are blended between forecast points about 1.5 miles apart."]};
 function rampCss(stops){const lo=stops[0][0],hi=stops[stops.length-1][0];return "linear-gradient(90deg,"+stops.slice(1).map(([v,c])=>`rgba(${c[0]|0},${c[1]|0},${c[2]|0},${Math.max(.6,c[3])}) ${Math.round((Math.log(v+1)-Math.log(lo+1))/(Math.log(hi+1)-Math.log(lo+1))*100)}%`).join(",")+")"}
 function renderLegend(){const [t,stops,ticks,note]=LEG[mapMode];
   $("mapLegend").innerHTML=`<div class="label" style="margin-bottom:6px">${esc(t)}</div><div class="ramp" style="background:${mapMode==="temp"?"linear-gradient(90deg,rgb(110,60,180),rgb(60,90,220),rgb(70,150,235),rgb(150,210,245),#fff,rgb(150,220,170),rgb(120,200,90),rgb(245,215,70),rgb(245,150,50),rgb(220,60,40))":rampCss(stops)}"></div><div class="rampticks">${ticks.map(x=>`<span>${x}</span>`).join("")}</div>`;
-  $("mapNote").textContent=note+" Forecast data from Open-Meteo."+(R.stations?" Station circles show the latest real readings from Mt. Bachelor's own weather stations.":"");}
+  $("mapNote").textContent=note+" Forecast data from Open-Meteo."+(R.stations?` Station circles show the latest real readings from ${R.name}${/s$/.test(R.name)?"'":"'s"} own weather stations.`:"");}
 function updateMap(){
   const P=state.pt;if(!P)return;const s=P.summit.hourly,i=Math.min(s.time.length-1,state.i0+hourOff),t=s.time[i];
   const lab=hourOff===0?"Now":new Date(t+":00").toLocaleString("en-US",{weekday:"short",hour:"numeric"});
@@ -1082,6 +1173,7 @@ function renderLifts(){
   }
 }
 function stationLoc(key){
+  if(R.stnLoc)return R.stnLoc[key]||null;
   const L2=state.liftGeo,find=re=>L2?.features.find(f=>re.test(f.properties.name||""))?.geometry.coordinates;
   if(key==="pine")return PINE_LODGE;if(key==="cloudChaser"){const c=find(/cloud\s*chaser/i);return c?[c[c.length-1][1],c[c.length-1][0]]:CLOUDCHASER}
   if(key==="sunrise"){const c=find(/sunrise/i);return c?[c[0][1],c[0][0]]:null}if(key==="northwest"){const c=find(/northwest/i);return c?[c[c.length-1][1],c[c.length-1][0]]:null}
@@ -1093,7 +1185,7 @@ function renderStnMarkers(){
     const dir=l.wind_dir||0,windy=l.wind_avg_mph>0;
     const html=`<div class="stn${stale?" stale":""}">${windy?`<svg viewBox="0 0 46 46"><g transform="rotate(${(dir+180)%360} 23 23)"><path d="M23 -3 L28 7 L23 4 L18 7 Z" fill="var(--wind)"/></g></svg>`:""}<span style="display:grid;line-height:1;text-align:center">${windy?r0(l.wind_avg_mph)+'<small style="font:500 8px var(--body);color:var(--muted)">mph</small>':r0(l.temp_f)+"°"}</span></div>`;
     L.marker(ll,{icon:L.divIcon({className:"stn-icon",html,iconSize:[46,46],iconAnchor:[23,23]})}).addTo(stnLayer)
-      .bindPopup(`<b>${esc(STN[k]||k)} station</b><br>${l.temp_f!=null?r0(l.temp_f)+"°F<br>":""}${windy?`Wind ${r0(l.wind_avg_mph)} mph from ${compassName(dir)}, gust ${r0(l.wind_max_mph)}<br>`:""}<span style="color:var(--muted)">${stale?"Offline, last report "+esc(ago(l.t)):"Reported "+fmt(l.t,{hour:"numeric",minute:"2-digit"})+" PT"}. Location approximate.</span>`)}
+      .bindPopup(`<b>${esc(stnName(k))} station</b><br>${l.temp_f!=null?r0(l.temp_f)+"°F<br>":""}${windy?`Wind ${r0(l.wind_avg_mph)} mph from ${compassName(dir)}${l.wind_max_mph!=null?", gust "+r0(l.wind_max_mph):""}<br>`:""}<span style="color:var(--muted)">${stale?"Offline, last report "+esc(ago(l.t)):"Reported "+fmt(l.t,{hour:"numeric",minute:"2-digit"})+" PT"}. Location approximate.</span>`)}
 }
 let playT=null;
 function setPlay(on){clearInterval(playT);playT=null;const b=$("playBtn");
@@ -1119,7 +1211,8 @@ async function load(){
   const tok=++loadTok,key=R.key;
   $("updated").textContent="Updating";
   const none=Promise.resolve(null);
-  const [pt,nws,mtb,pow,avy,lifts]=await Promise.allSettled([getPoint(),getNWS(),getLocal(R.data),R.powdr?getLocal("powdr.json"):none,R.avy?getLocal("avalanche.json"):none,getLocal(R.liftsFile)]);
+  const [pt,nws,mtb,pow,avy,lifts]=await Promise.allSettled([getPoint(),isCA()?getECCC():getNWS(),getLocal(R.data),R.powdr?getLocal("powdr.json"):none,
+    R.avy==="avcan"?getAvCan():R.avy?getLocal("avalanche.json"):none,getLocal(R.liftsFile)]);
   if(tok!==loadTok)return; // the person switched mountains while this was loading
   document.body.classList.remove("switching");
   if(pt.status==="fulfilled")state.pt=pt.value;else{state.pt=null;$("nowCond").textContent="Forecast unavailable. Check your connection and press Refresh."}
@@ -1135,10 +1228,16 @@ function applyResortChrome(){
   document.querySelectorAll("#resortSwitch button,#miniSwitch button").forEach(b=>b.setAttribute("aria-checked",b.dataset.r===R.key));
   $("powdr").hidden=!R.powdr;$("navPowdr").hidden=!R.powdr;
   $("stationsSec").hidden=!R.stations;$("navStations").hidden=!R.stations;
-  $("noaaNote").textContent=`National Weather Service, ${R.nws.officeName} office, ${R.noaaNote}.`;
-  $("footLinks").innerHTML=[...R.links,["NOAA point forecast",`https://forecast.weather.gov/MapClick.php?lat=${SUMMIT[0]}&lon=${SUMMIT[1]}`],["Open-Meteo","https://open-meteo.com"],["IEM NEXRAD radar","https://mesonet.agron.iastate.edu/"],["ODOT TripCheck","https://tripcheck.com"]]
-    .map(([t,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join("");
-  $("footNote").textContent=`Times are Pacific. ${R.collected} collected every hour by a GitHub Action in this repository; NOAA, Open-Meteo, radar and road cams load live in your browser. Not an official forecast. Always check conditions before heading up.`;
+  const ca=isCA();
+  $("noaaH").textContent=ca?"Environment Canada forecast":"NOAA forecast";$("navNoaa").textContent=ca?"EC forecast":"NOAA forecast";
+  $("afdTab").textContent=ca?"Resort synopsis":"Forecaster discussion";
+  $("noaaNote").textContent=ca?`Environment and Climate Change Canada, ${R.eccc.note}`:`National Weather Service, ${R.nws.officeName} office, ${R.noaaNote}.`;
+  $("noaaPeriods").innerHTML=`<p class="note">Loading the ${ca?"Environment Canada":"National Weather Service"} forecast</p>`;
+  $("stSrc").textContent=`${R.name}, last 24 hours`;
+  const extra=ca?[["Open-Meteo","https://open-meteo.com"],["ECCC GeoMet radar","https://eccc-msc.github.io/open-data/msc-geomet/readme_en/"]]
+    :[["NOAA point forecast",`https://forecast.weather.gov/MapClick.php?lat=${SUMMIT[0]}&lon=${SUMMIT[1]}`],["Open-Meteo","https://open-meteo.com"],["IEM NEXRAD radar","https://mesonet.agron.iastate.edu/"],["ODOT TripCheck","https://tripcheck.com"]];
+  $("footLinks").innerHTML=[...R.links,...extra].map(([t,u])=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a>`).join("");
+  $("footNote").textContent=`Times are Pacific. ${R.collected} collected every hour by a GitHub Action in this repository; ${ca?"Environment Canada, Avalanche Canada":"NOAA"}, Open-Meteo, radar and road cams load live in your browser. Not an official forecast. Always check conditions before heading up.`;
 }
 function setResort(key,first){
   if(!RESORTS[key])key="bachelor";if(!first&&R&&R.key===key)return;
@@ -1148,7 +1247,7 @@ function setResort(key,first){
   applyResortChrome();
   if(first)return;
   powTab=0;state.wvAdded=false;G.data=null;G.time=null;fl.dirty=true;
-  if(map){map.setView(R.view,R.zoom);drawPlaces();liftLayer.clearLayers();stnLayer.clearLayers()}
+  if(map){map.setView(R.view,R.zoom);drawPlaces();liftLayer.clearLayers();stnLayer.clearLayers();resetRadar()}
   const c=cache[key];
   if(c&&Date.now()-c.at<10*60*1000){
     loadTok++;document.body.classList.remove("switching");
@@ -1162,21 +1261,24 @@ function setResort(key,first){
   }
 }
 document.querySelectorAll("#resortSwitch button,#miniSwitch button").forEach(b=>b.addEventListener("click",()=>setResort(b.dataset.r)));
-$("miniSwitch").addEventListener("keydown",e=>{if(!/^Arrow(Left|Right)$/.test(e.key))return;e.preventDefault();const next=R.key==="bachelor"?"willamette":"bachelor";setResort(next);$("miniSwitch").querySelector(`[data-r="${next}"]`).focus()});
-// show the compact switch in the sticky bar once the big one is out of view
-// keyboard: 1 for Mt. Bachelor, 2 for Willamette Pass (ignored while typing or with modifier keys)
+// arrow keys step through the mountains in switch order
+const ORDER=Object.keys(RESORTS);
+const step=(d)=>ORDER[(ORDER.indexOf(R.key)+d+ORDER.length)%ORDER.length];
+$("miniSwitch").addEventListener("keydown",e=>{if(!/^Arrow(Left|Right)$/.test(e.key))return;e.preventDefault();const next=step(e.key==="ArrowLeft"?-1:1);setResort(next);$("miniSwitch").querySelector(`[data-r="${next}"]`).focus()});
+// keyboard: 1 Mt. Bachelor, 2 Willamette Pass, 3 Sun Peaks (ignored while typing or with modifier keys)
 document.addEventListener("keydown",e=>{
   if(e.metaKey||e.ctrlKey||e.altKey||e.repeat)return;
   const t=e.target;if(t&&(t.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)))return;
-  const k={"1":"bachelor","2":"willamette"}[e.key];if(!k)return;
+  const k=ORDER[+e.key-1];if(!/^[1-9]$/.test(e.key)||!k)return;
   e.preventDefault();setResort(k);
 });
-document.querySelectorAll("#resortSwitch button,#miniSwitch button").forEach(b=>b.title=`${b.dataset.r==="bachelor"?"Mt. Bachelor":"Willamette Pass"} (press ${b.dataset.r==="bachelor"?1:2})`);
+document.querySelectorAll("#resortSwitch button,#miniSwitch button").forEach(b=>b.title=`${RESORTS[b.dataset.r].name} (press ${ORDER.indexOf(b.dataset.r)+1})`);
+// show the compact switch in the sticky bar once the big one is out of view
 if("IntersectionObserver" in window)new IntersectionObserver(([e])=>$("qnav").classList.toggle("stuck",!e.isIntersecting),{rootMargin:"-56px 0px 0px 0px"}).observe($("resortSwitch"));
 else $("qnav").classList.add("stuck");
-$("resortSwitch").addEventListener("keydown",e=>{if(!/^Arrow(Left|Right|Up|Down)$/.test(e.key))return;e.preventDefault();const next=R.key==="bachelor"?"willamette":"bachelor";setResort(next);$("resortSwitch").querySelector(`[data-r="${next}"]`).focus()});
+$("resortSwitch").addEventListener("keydown",e=>{if(!/^Arrow(Left|Right|Up|Down)$/.test(e.key))return;e.preventDefault();const next=step(/Left|Up/.test(e.key)?-1:1);setResort(next);$("resortSwitch").querySelector(`[data-r="${next}"]`).focus()});
 $("refresh").addEventListener("click",()=>{load();renderCams()});
-(function(){let k=null;try{k=new URL(location.href).searchParams.get("mtn")||(/willamette/i.test(location.hash)?"willamette":null)}catch(e){}
+(function(){let k=null;try{k=new URL(location.href).searchParams.get("mtn")||(/willamette/i.test(location.hash)?"willamette":/sun-?peaks/i.test(location.hash)?"sunpeaks":null)}catch(e){}
   if(!k){try{k=localStorage.getItem("mtn")}catch(e){}}setResort(k||"bachelor",true)})();
 initSky();addEventListener("resize",()=>{initSky();drawChart()});
 renderCams();setInterval(renderCams,5*60*1000);
