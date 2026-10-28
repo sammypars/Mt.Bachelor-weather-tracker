@@ -16,6 +16,36 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="theme-color" content="#EDF1F4" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0D151B" media="(prefers-color-scheme: dark)">
+<script>
+/* Device detection, before first paint so the right layout shows immediately.
+   data-device: phone | tablet | desktop (touch screen size, platform hints, user agent)
+   data-input:  touch | mouse (primary pointer)
+   .compact:    the phone layout. On for phones and for any window narrower than 640px, unless the
+                person picked a layout from the footer (stored as "layout": phone | desktop). */
+(function(){
+  var d=document.documentElement,n=navigator,ua=n.userAgent||"";
+  function detect(){
+    var coarse=matchMedia("(pointer:coarse)").matches,noHover=matchMedia("(hover:none)").matches;
+    var touch=(n.maxTouchPoints||0)>0||"ontouchstart" in window;
+    var short=Math.min(screen.width,screen.height);
+    var hint=n.userAgentData&&typeof n.userAgentData.mobile==="boolean"?n.userAgentData.mobile:null;
+    var uaPhone=/iPhone|iPod|Android.*Mobile|Mobile.*Firefox|Windows Phone|BlackBerry|Opera Mini/i.test(ua);
+    // iPads report a Mac user agent; the touch points give them away
+    var uaTablet=/iPad|Tablet|Android(?!.*Mobile)|Silk|Kindle/i.test(ua)||(/Macintosh/.test(ua)&&(n.maxTouchPoints||0)>1);
+    var device=hint===true||uaPhone||(coarse&&touch&&short<600)?"phone":uaTablet||(coarse&&touch)?"tablet":"desktop";
+    return {device:device,input:coarse||noHover?"touch":"mouse"};
+  }
+  function apply(){
+    var r=detect(),pick=null;try{pick=localStorage.getItem("layout")}catch(e){}
+    d.dataset.device=r.device;d.dataset.input=r.input;
+    var compact=pick==="phone"?true:pick==="desktop"?false:(r.device==="phone"||innerWidth<=640);
+    d.classList.toggle("compact",compact);d.dataset.layout=pick||"auto";
+    window.DEVICE={device:r.device,input:r.input,compact:compact,touch:r.input==="touch"};
+  }
+  apply();window.applyDevice=apply;
+  var t;addEventListener("resize",function(){clearTimeout(t);t=setTimeout(function(){var was=window.DEVICE.compact;apply();if(was!==window.DEVICE.compact)dispatchEvent(new Event("layoutchange"))},150)});
+})();
+</script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -287,6 +317,123 @@ dialog.lightbox button{appearance:none;border:1px solid rgba(255,255,255,.5);bac
 footer{font-size:12px;color:var(--muted);display:grid;gap:8px}
 footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+
+/* ================= touch and phone layout ================= */
+/* Touch screens: no hover-only affordances, no double-tap zoom delay, bigger targets */
+button,a,summary,[role=tab],input[type=range]{touch-action:manipulation}
+[data-input="touch"] .tab,[data-input="touch"] .qnav a,[data-input="touch"] .btn,[data-input="touch"] .map-btn,[data-input="touch"] .play{min-height:40px}
+[data-input="touch"] .tab{padding:9px 14px}
+[data-input="touch"] .mini-switch button{min-height:38px}
+[data-input="touch"] .leaflet-control-zoom a{width:40px!important;height:40px!important;line-height:40px!important;font-size:20px!important}
+[data-input="touch"] #hourSlider{height:36px}
+[data-input="touch"] footer .links{gap:4px 18px}
+[data-input="touch"] footer .links a{display:inline-block;padding:8px 0}
+[data-input="touch"] details>summary.label{padding:10px 0}
+@media (hover:none){.qnav a:hover{border-color:var(--line);color:var(--ink)}.resort-switch button:hover{background:transparent}.btn:hover{background:rgba(255,255,255,.14)}}
+.kbd-hint{display:none}
+[data-device="desktop"]:not(.compact) .kbd-hint{display:inline}
+
+/* Swipe rows: cards sit side by side and snap, with a hint of the next one at the edge */
+.swipe-dots{display:none}
+.compact .swipe{display:grid!important;grid-auto-flow:column;grid-template-columns:none!important;grid-auto-columns:86%;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;overscroll-behavior-x:contain;
+  margin-inline:-16px;padding:0 16px 4px;scroll-padding-inline:16px;scrollbar-width:none}
+.compact .swipe::-webkit-scrollbar{display:none}
+.compact .swipe>*{scroll-snap-align:start;min-width:0}
+.compact .swipe-dots{display:flex;justify-content:center;gap:6px;margin-top:-6px}
+.swipe-dots i{width:7px;height:7px;border-radius:50%;background:var(--line);transition:background .2s,width .2s}
+.swipe-dots i.on{background:var(--accent);width:18px;border-radius:4px}
+
+.compact .wrap{gap:14px;padding-block:12px 32px}
+.compact .card{padding:14px;gap:12px;border-radius:12px}
+.compact .card h2{font-size:20px}
+.compact .brand{margin-bottom:-4px}
+.compact .brand img{width:32px;height:32px}
+.compact .brand b{font-size:19px}
+
+/* Hero: shorter, with the clock beside the date instead of stacked under the temperature */
+.compact .sky,.compact .sky-inner{min-height:0}
+.compact .sky-inner{grid-template-columns:1fr;padding:16px 16px 14px;gap:12px}
+.compact .bigtemp{font-size:84px}
+.compact .cond{font-size:22px}
+.compact .sky-right{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;justify-items:start;text-align:left}
+.compact .live-clock{font-size:26px}
+.compact .live-day{font-size:13px;flex:1;min-width:120px}
+.compact .hero-pills{order:5;width:100%;justify-content:flex-start}
+.compact #refresh{order:3}
+.compact #updated{order:4;width:100%}
+.compact .sky-meta{gap:4px 14px;font-size:13px}
+
+/* Sticky bar: section links on top; the mountain switch moves to a bar at the bottom, in thumb reach */
+.compact .mini-switch{position:fixed;left:0;right:0;bottom:0;z-index:1001;max-width:none;margin:0;border-radius:0;border:0;border-top:1px solid var(--line);
+  padding:6px max(10px,env(safe-area-inset-right,0px)) calc(6px + env(safe-area-inset-bottom,0px)) max(10px,env(safe-area-inset-left,0px));
+  background:color-mix(in srgb,var(--surface) 92%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transform:translateY(110%);opacity:1;visibility:visible;transition:transform .25s;gap:6px}
+.compact .qnav.stuck .mini-switch{transform:none;max-width:none;margin:0}
+.compact .mini-switch button{flex:1;min-height:44px;font-size:16px;padding:8px 4px}
+.compact.bar-on body{padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+.compact .qnav a{padding:8px 13px;font-size:14px}
+.compact .qnav{backdrop-filter:none;-webkit-backdrop-filter:none;background:color-mix(in srgb,var(--bg) 96%,transparent)}
+
+/* Panels and status */
+.compact .reading .val{font-size:46px}
+.compact .big-stat{padding:10px}
+.compact .big-stat b{font-size:28px}
+.compact .status-grid{gap:8px}
+
+/* 7-day outlook: one day nearly full width, swipe for the next */
+.compact .days{grid-auto-columns:82%;margin-inline:-14px;padding:0 14px 6px;scroll-padding-inline:14px;scroll-snap-type:x mandatory}
+
+/* Powdr table: fewer columns until asked, first column stays put */
+.compact table{min-width:0}
+.compact table.slim .opt{display:none}
+.compact th,.compact td{padding:7px 8px}
+.col-toggle{display:none}
+.compact .col-toggle{display:inline-flex}
+.linkbtn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--accent);font:500 13px var(--body);padding:8px 14px;border-radius:999px;cursor:pointer;justify-self:start}
+
+/* Hourly chart */
+.compact #chart{height:230px}
+.compact .chart-box{touch-action:pan-y}
+.compact .tip{font-size:11.5px}
+
+/* Map: shorter, and one finger scrolls the page (two fingers move the map) */
+.compact .map-box{height:min(64vh,440px)}
+.compact .map-badge{max-width:190px;padding:7px 9px;font-size:12px;gap:8px}
+.compact .map-badge svg{width:32px;height:32px}
+.compact .map-badge b{font-size:19px}
+.map-hint{position:absolute;inset:0;z-index:900;display:grid;place-items:center;background:rgba(5,12,18,.45);color:#fff;font:600 15px var(--body);text-align:center;padding:20px;pointer-events:none;opacity:0;transition:opacity .25s}
+.map-hint.on{opacity:1}
+.compact .ctl-row{gap:8px}
+
+/* NOAA and Environment Canada periods */
+.compact .period{padding:10px 12px}
+.compact .periods .period.more{display:none}
+.compact .periods.all .period.more{display:block}
+.compact .afd{max-height:360px;font-size:12px}
+
+/* Stations two up */
+.compact .stations{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.compact .station{padding:10px}
+.compact .station h3{font-size:15px}
+.compact .station .row{font-size:12px}
+
+/* Webcams: a swipe row per group instead of a long column */
+.compact .cams{grid-template-columns:none}
+.compact .cams{grid-auto-columns:78%}
+.compact .cam span{font-size:12.5px}
+
+/* Lightbox: full screen with big controls and swipe between cameras */
+dialog.lightbox p{align-items:center;gap:10px}
+.lb-nav{display:inline-flex;gap:8px}
+.compact dialog.lightbox{max-width:100vw;width:100vw;max-height:100dvh;margin:auto 0}
+.compact dialog.lightbox img,.compact dialog.lightbox iframe{border-radius:0;width:100vw}
+.compact dialog.lightbox p{padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));font-size:13px;flex-wrap:wrap}
+.compact dialog.lightbox button{min-height:40px;padding:8px 16px;font-size:14px}
+
+.layout-pick{display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center}
+.layout-pick button{appearance:none;border:1px solid var(--line);background:transparent;color:var(--muted);font:500 12px var(--body);padding:6px 12px;border-radius:999px;cursor:pointer}
+.layout-pick button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+[data-input="touch"] .layout-pick button{min-height:36px}
 </style>
 </head>
 <body>
@@ -339,7 +486,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
 
   <section class="alerts" id="alerts" aria-label="Warnings and alerts"></section>
 
-  <section class="panels" id="glance" aria-label="At a glance">
+  <section class="panels swipe" id="glance" aria-label="At a glance">
     <article class="card" aria-labelledby="snowH">
       <div class="head"><h2 id="snowH">New snow</h2><span class="pill snow" id="snowPill">--</span></div>
       <div class="reading"><div><span class="val num" id="snow24">--</span><span class="unit">in next 24h</span><div class="note">Summit forecast</div></div></div>
@@ -396,6 +543,8 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
     </article>
   </section>
 
+  <div class="swipe-dots" id="glanceDots" aria-hidden="true"></div>
+
   <section class="card" aria-labelledby="mtnH">
     <div class="head"><h2 id="mtnH">Mountain status</h2><span class="src" id="mtnAge">Mt. Bachelor</span></div>
     <div class="status-grid">
@@ -444,7 +593,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
       <h2 id="mapH">Mountain map</h2>
       <span class="pill" id="mapPill">--</span>
     </div>
-    <div class="map-box"><div id="map"></div></div>
+    <div class="map-box"><div id="map"></div><div class="map-hint" id="mapHint" aria-hidden="true">Use two fingers to move the map</div></div>
     <canvas id="fieldLayer" aria-hidden="true" hidden></canvas>
     <div class="map-controls">
       <div>
@@ -475,6 +624,7 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
       </div>
     </div>
     <div id="noaaPeriods" class="periods"><p class="note">Loading the National Weather Service forecast</p></div>
+    <button type="button" class="linkbtn" id="noaaMore" hidden>Show the full forecast</button>
     <div id="noaaAfd" hidden><pre class="afd" id="afd">Loading</pre></div>
     <p class="note" id="noaaNote">National Weather Service, Pendleton office, forecast point at the summit of Mt. Bachelor.</p>
   </section>
@@ -492,10 +642,13 @@ footer .links{display:flex;flex-wrap:wrap;gap:6px 18px}
   <footer>
     <div class="links" id="footLinks"></div>
     <div id="footNote"></div>
+    <div class="layout-pick" role="group" aria-label="Page layout"><span id="layoutNow"></span>
+      <button type="button" data-lay="auto">Automatic</button><button type="button" data-lay="phone">Phone layout</button><button type="button" data-lay="desktop">Desktop layout</button></div>
+    <div class="kbd-hint">Keyboard: 1, 2 and 3 switch mountains; arrow keys step through them when the switch has focus.</div>
   </footer>
 </div>
 
-<dialog class="lightbox" id="lightbox"><img id="lbImg" alt=""><iframe id="lbFrame" title="Live webcam" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen hidden></iframe><p><span id="lbCap"></span><button type="button" id="lbClose">Close</button></p></dialog>
+<dialog class="lightbox" id="lightbox"><img id="lbImg" alt=""><iframe id="lbFrame" title="Live webcam" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen hidden></iframe><p><span id="lbCap"></span><span class="lb-nav"><button type="button" id="lbPrev" aria-label="Previous camera">Prev</button><button type="button" id="lbNext" aria-label="Next camera">Next</button><button type="button" id="lbClose">Close</button></span></p></dialog>
 
 <script>
 /* ================= constants ================= */
@@ -834,7 +987,7 @@ function renderOutlook(){
 }
 
 /* ================= Powdr report ================= */
-let powTab=0;
+let powTab=0,powAll=false;
 function renderPowdr(){
   const p=state.powdr,body=$("powBody");
   if(!p){body.innerHTML=`<p class="note">The daily Powdr report has not been collected yet. It is picked up automatically within the hour. You can always read it at <a href="http://powdrforecasts.weebly.com/mt-bachelor.html" target="_blank" rel="noopener">powdrforecasts.weebly.com</a>.</p>`;setPill("powPill","Pending","warn");return}
@@ -850,9 +1003,13 @@ function renderPowdr(){
     const d=days[powTab],up=(p.upper?.days||[])[powTab]||{rows:[]};
     const maxW=Math.max(10,...d.rows.map(r=>r.wind_gust_mph||r.wind_sus_mph||0),...up.rows.map(r=>r.wind_gust_mph||r.wind_sus_mph||0));
     const wcell=(r)=>r?`<span class="bar" style="width:${Math.round((r.wind_sus_mph||0)/maxW*40)}px"></span>${esc(r.wind_dir||"")} ${r.wind_sus_mph??"--"}${r.wind_gust_mph?" G"+r.wind_gust_mph:""}`:"--";
-    html+=`<div class="tbl-wrap"><table><thead><tr><th>${esc(d.date||"")}</th><th>Temp</th><th>Wet bulb</th><th>RH</th><th>Precip</th><th>Chance</th><th>T-storm</th><th>Wind ${esc((d.elevation_ft||6300).toLocaleString())} ft</th><th>Wind 7,800 ft</th><th>Lifted idx</th><th style="text-align:left">Sky</th></tr></thead><tbody>`;
-    d.rows.forEach((r,k)=>{const u=up.rows[k];html+=`<tr><td>${esc(r.time)}</td><td style="color:${r.temp_f<=32?"var(--cold)":"var(--temp)"}">${r.temp_f??"--"}&deg;</td><td>${r.wet_bulb_f??"--"}&deg;</td><td>${r.rh_pct??"--"}%</td><td>${esc(r.precip_amount||"-")}</td><td>${esc(r.precip_chance||"-")}</td><td>${esc(r.tstorm_risk||"-")}</td><td>${wcell(r)}</td><td>${wcell(u)}</td><td>${r.lifted_index??"--"}</td><td class="sky-c">${esc(expandSky(r.sky))}</td></tr>`});
+    // On phones the less-used columns (class "opt") hide until "Show all columns" is tapped
+    const cmp=DEVICE.compact,slim=cmp&&!powAll;
+    if(cmp)html+=`<div class="label">${esc(d.date||"")}</div>`;
+    html+=`<div class="tbl-wrap"><table class="${slim?"slim":""}"><thead><tr><th>${cmp?"Time":esc(d.date||"")}</th><th>Temp</th><th class="opt">Wet bulb</th><th class="opt">RH</th><th>Precip</th><th>Chance</th><th class="opt">T-storm</th><th>Wind ${esc((d.elevation_ft||6300).toLocaleString())} ft</th><th class="opt">Wind 7,800 ft</th><th class="opt">Lifted idx</th><th style="text-align:left">Sky</th></tr></thead><tbody>`;
+    d.rows.forEach((r,k)=>{const u=up.rows[k];html+=`<tr><td>${esc(cmp?r.time.replace(":00 ","").toLowerCase():r.time)}</td><td style="color:${r.temp_f<=32?"var(--cold)":"var(--temp)"}">${r.temp_f??"--"}&deg;</td><td class="opt">${r.wet_bulb_f??"--"}&deg;</td><td class="opt">${r.rh_pct??"--"}%</td><td>${esc(r.precip_amount||"-")}</td><td>${esc(r.precip_chance||"-")}</td><td class="opt">${esc(r.tstorm_risk||"-")}</td><td>${wcell(r)}</td><td class="opt">${wcell(u)}</td><td class="opt">${r.lifted_index??"--"}</td><td class="sky-c">${esc(expandSky(r.sky))}</td></tr>`});
     html+=`</tbody></table></div>`;
+    html+=`<button type="button" class="linkbtn col-toggle" id="powCols">${powAll?"Show fewer columns":"Show all columns: wet bulb, humidity, upper wind, stability"}</button>`;
     html+=`<div class="stats" style="grid-template-columns:repeat(2,minmax(0,1fr))"><div><span class="label">24-hour liquid</span><b>${esc(d.liquid_total||"None listed")}</b></div><div><span class="label">24-hour snow</span><b>${esc(d.snow_total||"None listed")}</b></div></div>`;
     html+=`<p class="note">Wet bulb near or below 32&deg; means snowmaking temps and dry snow. Lifted index above 6 is very stable air, below 0 means thunderstorms are possible.</p>`;
   }else{
@@ -860,6 +1017,7 @@ function renderPowdr(){
   }
   if(p.discussion)html+=`<figure style="margin:0;display:grid;gap:6px"><span class="label">Forecaster discussion</span><blockquote class="quote">${esc(p.discussion)}</blockquote></figure>`;
   body.innerHTML=html;
+  const pc=$("powCols");if(pc)pc.onclick=()=>{powAll=!powAll;renderPowdr()};
 }
 const MONTHS=["january","february","march","april","may","june","july","august","september","october","november","december"];
 function powdrKey(str){const m=(str||"").match(/([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})/);if(!m)return null;const mo=MONTHS.indexOf(m[1].toLowerCase());if(mo<0)return null;return `${m[3]}-${String(mo+1).padStart(2,"0")}-${m[2].padStart(2,"0")}`}
@@ -891,8 +1049,10 @@ function drawChart(){
   for(let v=lo;v<=hi+1e-9;v+=step){x.beginPath();x.moveTo(L,Y(v));x.lineTo(W-R,Y(v));x.stroke();x.textAlign="right";x.fillText((chartMode==="snow"?v.toFixed(v<1?1:0):Math.round(v))+(chartMode==="temp"?"°":""),L-6,Y(v)+4)}
   if(right){x.textAlign="left";for(const v of [0,50,100])x.fillText(v+"%",W-R+6,YR(v)+4)}
   x.textAlign="center";
+  // narrow charts drop the "noon" marks and center each weekday under its day
+  const roomy=pw/N>5.5;
   for(let k=0;k<N;k++){const hh=+times[k].slice(11,13);if(hh===0){x.strokeStyle=css("--muted");x.globalAlpha=.4;x.beginPath();x.moveTo(X(k),T);x.lineTo(X(k),T+ph);x.stroke();x.globalAlpha=1;
-      x.fillText(new Date(times[k]+":00").toLocaleDateString("en-US",{weekday:"short"}),X(k)+18,H-8)}else if(hh===12)x.fillText("noon",X(k),H-8)}
+      x.fillText(new Date(times[k]+":00").toLocaleDateString("en-US",{weekday:"short"}),roomy?X(k)+18:Math.min(W-R-14,X(k+12)),H-8)}else if(hh===12&&roomy)x.fillText("noon",X(k),H-8)}
   if(chartMode==="temp"){x.strokeStyle=css("--cold");x.setLineDash([3,4]);x.beginPath();x.moveTo(L,Y(32));x.lineTo(W-R,Y(32));x.stroke();x.setLineDash([]);x.fillStyle=css("--cold");x.textAlign="left";x.fillText("32°",W-R-26,Y(32)-4)}
   if(bars){const bw=Math.max(2,pw/N-2);x.fillStyle=bars[1];bars[0].forEach((v,k)=>{if(v>0)x.fillRect(X(k)-bw/2,Y(v),bw,Y(lo)-Y(v))})}
   for(const [name,arr,col,dash,ax] of series){x.strokeStyle=col;x.lineWidth=dash?1.6:2.4;x.setLineDash(dash?[5,4]:[]);x.beginPath();
@@ -901,13 +1061,23 @@ function drawChart(){
   chartPts={X,N,L,pw,times,series,bars,unit};
   $("chartLegend").innerHTML=[...(bars?[[`Summit snowfall, in/hr`,bars[1],false]]:[]),...series.map(z=>[z[0],z[2],z[3]])].map(([n,c,d])=>`<span><i class="${d?"dash":""}" style="background:${c};color:${c}"></i>${esc(n)}</span>`).join("");
 }
-$("chart").addEventListener("mousemove",e=>{if(!chartPts)return;const r=e.currentTarget.getBoundingClientRect(),px=e.clientX-r.left;
+// Mouse hover and touch drag both scrub the tooltip. On touch, a mostly sideways drag scrubs and
+// a vertical one still scrolls the page (touch-action: pan-y on the chart box).
+function chartTip(e){if(!chartPts)return;const r=$("chart").getBoundingClientRect(),px=e.clientX-r.left;
   const k=Math.max(0,Math.min(chartPts.N-1,Math.round((px-chartPts.L)/chartPts.pw*(chartPts.N-1))));const t=chartPts.times[k];
   const lines=[new Date(t+":00").toLocaleString("en-US",{weekday:"short",hour:"numeric"})];
   if(chartPts.bars)lines.push(`Snow ${in1(chartPts.bars[0][k])}"`);
   for(const [n,a,,,ax] of chartPts.series)lines.push(`${n} ${r0(a[k])}${ax==="r"?"%":chartPts.unit==="°F"?"°":chartPts.unit}`);
-  const tip=$("tip");tip.hidden=false;tip.innerHTML=lines.map(esc).join("<br>");tip.style.left=chartPts.X(k)+"px";tip.style.top=(e.clientY-r.top)+"px"});
-$("chart").addEventListener("mouseleave",()=>$("tip").hidden=true);
+  const tip=$("tip");tip.hidden=false;tip.innerHTML=lines.map(esc).join("<br>");
+  // keep the tip inside the card on narrow screens, and above the finger on touch
+  const tw=tip.offsetWidth||140,cx=Math.max(tw/2+2,Math.min(r.width-tw/2-2,chartPts.X(k)));
+  tip.style.left=cx+"px";tip.style.top=(e.pointerType==="touch"?Math.max(20,e.clientY-r.top-40):e.clientY-r.top)+"px"}
+let tipT=null;
+$("chart").addEventListener("pointermove",chartTip);
+$("chart").addEventListener("pointerdown",e=>{clearTimeout(tipT);chartTip(e)});
+$("chart").addEventListener("pointerleave",e=>{if(e.pointerType==="mouse")$("tip").hidden=true});
+$("chart").addEventListener("pointerup",e=>{if(e.pointerType!=="mouse"){clearTimeout(tipT);tipT=setTimeout(()=>$("tip").hidden=true,2500)}});
+$("chart").addEventListener("pointercancel",()=>{tipT=setTimeout(()=>$("tip").hidden=true,1200)});
 document.querySelectorAll(".tab[data-k]").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tab[data-k]").forEach(t=>t.setAttribute("aria-selected",t===b));chartMode=b.dataset.k;drawChart()}));
 function renderStrip(){
   const P=state.pt;if(!P)return;const s=P.summit.hourly,i0=state.i0;let html="";
@@ -923,12 +1093,16 @@ function renderNoaa(){
   const per=n?.fc?.properties?.periods;
   const fcLink=isCA()?`<a href="https://weather.gc.ca/en/location/index.html?coords=${SUMMIT[0].toFixed(2)},${SUMMIT[1].toFixed(2)}" target="_blank" rel="noopener">Environment Canada forecast</a>`:`<a href="https://forecast.weather.gov/MapClick.php?lat=${SUMMIT[0]}&lon=${SUMMIT[1]}" target="_blank" rel="noopener">NOAA point forecast</a>`;
   if(!per){box.innerHTML=`<p class="err">${esc(n?.fcErr||(isCA()?"Environment Canada":"NOAA")+" forecast unavailable")}. Try Refresh, or open the ${fcLink}.</p>`}
-  else box.innerHTML=per.slice(0,14).map((p,k)=>`<details class="period"${k<2?" open":""}><summary><b>${esc(p.name)}</b><span class="t" style="color:${p.isDaytime?"var(--temp)":"var(--cold)"}">${p.isDaytime?"High":"Low"} ${p.temperature??"--"}&deg;</span><span class="s">${icon(textKind(p.shortForecast),p.isDaytime).replace("<svg",'<svg style="width:22px;height:22px;vertical-align:middle;margin-right:6px"')}${esc(p.shortForecast)}</span></summary><p>${esc(p.detailedForecast)}</p></details>`).join("");
+  else box.innerHTML=per.slice(0,14).map((p,k)=>`<details class="period${k>=6?" more":""}"${k<(DEVICE.compact?1:2)?" open":""}><summary><b>${esc(p.name)}</b><span class="t" style="color:${p.isDaytime?"var(--temp)":"var(--cold)"}">${p.isDaytime?"High":"Low"} ${p.temperature??"--"}&deg;</span><span class="s">${icon(textKind(p.shortForecast),p.isDaytime).replace("<svg",'<svg style="width:22px;height:22px;vertical-align:middle;margin-right:6px"')}${esc(p.shortForecast)}</span></summary><p>${esc(p.detailedForecast)}</p></details>`).join("");
+  box.classList.toggle("all",noaaAll);
+  $("noaaMore").hidden=!(DEVICE.compact&&per&&per.length>6&&!noaaAll&&!box.hidden);
   // Sun Peaks: the resort's own forecaster writes a synopsis and extended outlook in winter
   const disc=isCA()?state.mtb?.discussion:n?.afd?.productText;
   $("afd").textContent=disc?disc.trim():isCA()?"The Sun Peaks forecaster's synopsis is posted on the resort's weather page during the ski season. It will show here once it is.":"The forecaster discussion is not available right now.";
 }
-document.querySelectorAll(".tab[data-n]").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tab[data-n]").forEach(t=>t.setAttribute("aria-selected",t===b));$("noaaPeriods").hidden=b.dataset.n!=="periods";$("noaaAfd").hidden=b.dataset.n!=="afd"}));
+let noaaAll=false;
+$("noaaMore").addEventListener("click",()=>{noaaAll=true;$("noaaPeriods").classList.add("all");$("noaaMore").hidden=true});
+document.querySelectorAll(".tab[data-n]").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".tab[data-n]").forEach(t=>t.setAttribute("aria-selected",t===b));$("noaaPeriods").hidden=b.dataset.n!=="periods";$("noaaAfd").hidden=b.dataset.n!=="afd";renderNoaa()}));
 
 /* ================= stations ================= */
 const STN={sunrise:"Sunrise",cloudChaser:"Cloudchaser",pine:"Pine Marten",northwest:"Northwest",snowplot:"Snow plot"};
@@ -967,23 +1141,32 @@ function camList(){
 function renderCams(){
   const list=camList();state.cams=list;
   const grp=(g,title)=>{const items=list.map((c,k)=>[c,k]).filter(([c])=>c.group===g);if(!items.length)return "";
-    return `<div class="cam-group"><div class="label">${esc(title)}</div><div class="cams">${items.map(([c,k])=>`<button class="cam" type="button" data-k="${k}"><img loading="lazy" src="${esc(c.src)}" alt="${esc(c.name)} webcam"><span>${esc(c.name)}<em>${esc(c.source)}</em></span></button>`).join("")}</div></div>`};
+    return `<div class="cam-group"><div class="label">${esc(title)} <span style="letter-spacing:0;text-transform:none">${DEVICE.compact&&items.length>1?"&middot; "+items.length+", swipe for more":""}</span></div><div class="cams swipe">${items.map(([c,k])=>`<button class="cam" type="button" data-k="${k}"><img loading="lazy" src="${esc(c.src)}" alt="${esc(c.name)} webcam"><span>${esc(c.name)}<em>${esc(c.source)}</em></span></button>`).join("")}</div></div>`};
   $("camGrid").innerHTML=grp("mtn","On the mountain")+grp("road",R.roadTitle);
   $("camGrid").querySelectorAll(".cam").forEach(b=>b.onclick=()=>openCam(state.cams[+b.dataset.k]));
   $("camNote").textContent=R.ytCams?"Mountain cams are live streams, tap one to watch. Road cams refresh every 5 minutes.":"Refreshes every 5 minutes. Tap a camera to enlarge.";
 }
+let camIdx=-1;
 function openCam(c){
-  if(!c)return;const img=$("lbImg"),fr=$("lbFrame");
+  if(!c)return;camIdx=state.cams.indexOf(c);const img=$("lbImg"),fr=$("lbFrame");
   if(c.yt){img.hidden=true;img.removeAttribute("src");fr.hidden=false;fr.src=`https://www.youtube-nocookie.com/embed/${encodeURIComponent(c.yt)}?autoplay=1&mute=1&rel=0`}
   else{fr.hidden=true;fr.src="about:blank";img.hidden=false;img.src=c.big||c.src;img.alt=c.name}
-  $("lbCap").textContent=c.name+" · "+c.source;$("lightbox").showModal();
+  $("lbCap").textContent=c.name+" · "+c.source;if(!$("lightbox").open)$("lightbox").showModal();
 }
+// step through cameras: buttons, arrow keys, or a sideways swipe on the picture
+const camStep=d=>{const n=state.cams?.length||0;if(!n||camIdx<0)return;openCam(state.cams[(camIdx+d+n)%n])};
+$("lbPrev").onclick=()=>camStep(-1);$("lbNext").onclick=()=>camStep(1);
+$("lightbox").addEventListener("keydown",e=>{if(e.key==="ArrowRight"){e.preventDefault();camStep(1)}else if(e.key==="ArrowLeft"){e.preventDefault();camStep(-1)}});
+let swX=null,swY=null;
+$("lbImg").addEventListener("touchstart",e=>{swX=e.touches[0].clientX;swY=e.touches[0].clientY},{passive:true});
+$("lbImg").addEventListener("touchend",e=>{if(swX==null)return;const dx=e.changedTouches[0].clientX-swX,dy=e.changedTouches[0].clientY-swY;swX=null;
+  if(Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)*1.5)camStep(dx<0?1:-1)},{passive:true});
 $("lightbox").addEventListener("close",()=>{$("lbFrame").src="about:blank"});
 $("lbClose").onclick=()=>$("lightbox").close();$("lightbox").addEventListener("click",e=>{if(e.target===$("lightbox"))$("lightbox").close()});
 
 /* ================= hero canvas: the mountain, sky, clouds and snowfall ================= */
 const sky=$("sky");let sx,SW,SH,flakes=[],clouds=[];
-function initSky(){[sx,SW,SH]=fit(sky);flakes=Array.from({length:260},()=>({x:Math.random()*SW,y:Math.random()*SH,r:.8+Math.random()*2.2,s:.5+Math.random()}));
+function initSky(){[sx,SW,SH]=fit(sky);flakes=Array.from({length:DEVICE.compact?150:260},()=>({x:Math.random()*SW,y:Math.random()*SH,r:.8+Math.random()*2.2,s:.5+Math.random()}));
   clouds=Array.from({length:6},(_,k)=>({x:Math.random()*SW,y:20+Math.random()*SH*.35,w:120+Math.random()*180,s:.15+Math.random()*.35}))}
 function drawSky(t){
   if(!sx)return;const sc=state.scene||{kind:"partly",day:true,snowRate:0,wind:5,dir:270,cloud:40};
@@ -1039,8 +1222,19 @@ function initMap(){
   const rt=L.control({position:"bottomleft"});rt.onAdd=()=>{const d=L.DomUtil.create("div","radar-time");d.id="radarTime";d.hidden=true;return d};rt.addTo(map);
   const re=L.control({position:"bottomright"});re.onAdd=()=>{const b=L.DomUtil.create("button","map-btn");b.type="button";b.textContent="Recenter";L.DomEvent.disableClickPropagation(b);b.onclick=()=>map.setView(R.view,R.zoom);return b};re.addTo(map);
   map.on("move zoom",()=>{fl.dirty=true});
+  if(DEVICE.touch)twoFingerMap();
   new ResizeObserver(()=>{map.invalidateSize();initField()}).observe($("map"));
   initField();
+}
+/* On touch screens one finger scrolls the page past the map and two fingers pan or zoom it, so the
+   map never traps someone scrolling down the page. A hint shows when one finger tries to pan. */
+function twoFingerMap(){
+  const el=map.getContainer(),hint=$("mapHint");let hintT=null,y0=null;
+  map.dragging.disable();
+  el.addEventListener("touchstart",e=>{if(e.touches.length>=2){map.dragging.enable();hint.classList.remove("on")}else y0=e.touches[0].clientY},{capture:true,passive:true});
+  el.addEventListener("touchmove",e=>{if(e.touches.length===1&&!map.dragging.enabled()&&y0!=null&&Math.abs(e.touches[0].clientY-y0)>8){
+    hint.classList.add("on");clearTimeout(hintT);hintT=setTimeout(()=>hint.classList.remove("on"),1300)}},{capture:true,passive:true});
+  el.addEventListener("touchend",e=>{if(e.touches.length===0){map.dragging.disable();y0=null}},{capture:true,passive:true});
 }
 function drawPlaces(){
   const pl=state.places;if(!pl)return;pl.clearLayers();state.wvAdded=false;
@@ -1074,7 +1268,7 @@ async function startRadar(){radar.on=true;stopRadarTimer();await ensureRadar();i
   if(!reduce)radar.timer=setInterval(()=>{radar.idx=(radar.idx+1)%radar.layers.length;show(radar.idx)},radar.idx===radar.layers.length-1?700:450);}
 function stopRadarTimer(){clearInterval(radar.timer);radar.timer=null}
 function stopRadar(){radar.on=false;stopRadarTimer();const lab=$("radarTime");if(lab)lab.hidden=true}
-function initField(){const cv=$("fieldLayer"),sz=map.getSize();cv.style.width=sz.x+"px";cv.style.height=sz.y+"px";const [c,W,H]=fit(cv);Object.assign(fl,{ctx:c,W,H,dirty:true});fl.parts=Array.from({length:Math.round(W*H/900)},newP)}
+function initField(){const cv=$("fieldLayer"),sz=map.getSize();cv.style.width=sz.x+"px";cv.style.height=sz.y+"px";const [c,W,H]=fit(cv);Object.assign(fl,{ctx:c,W,H,dirty:true});fl.parts=Array.from({length:Math.round(W*H/(DEVICE.compact?1500:900))},newP)}
 function newP(){const max=1.5+Math.random()*2.5;return {x:Math.random()*(fl.W||1),y:Math.random()*(fl.H||1),age:Math.random()*max,max,s:.75+Math.random()*.5}}
 function gAt(lat,lon,fn){ // bilinear interpolation on the forecast grid
   if(!G.data)return null;const fi=Math.max(0,Math.min(G.nlat-1.001,(lat-G.lat0)/G.dlat)),fj=Math.max(0,Math.min(G.nlon-1.001,(lon-G.lon0)/G.dlon));
@@ -1201,7 +1395,9 @@ document.querySelectorAll(".tab[data-m]").forEach(b=>b.addEventListener("click",
 function tickLive(){const d=new Date();$("liveClock").innerHTML=d.toLocaleTimeString("en-US",{timeZone:TZ,hour:"numeric",minute:"2-digit"}).replace(/\s?(AM|PM)/i,"<small>$1 PT</small>");
   $("liveDay").textContent=d.toLocaleDateString("en-US",{timeZone:TZ,weekday:"long",month:"long",day:"numeric"})}
 tickLive();setInterval(tickLive,15000);
-function loop(t){drawSky(t);drawField();requestAnimationFrame(loop)}
+const onScreen={sky:true,map:true};
+if("IntersectionObserver" in window){const io=new IntersectionObserver(es=>es.forEach(e=>{onScreen[e.target.id==="sky"?"sky":"map"]=e.isIntersecting}),{rootMargin:"100px"});io.observe($("sky"));io.observe($("mapSec"))}
+function loop(t){if(!document.hidden){if(onScreen.sky)drawSky(t);if(onScreen.map)drawField()}requestAnimationFrame(loop)}
 
 /* ================= loading and switching mountains ================= */
 const cache={};let loadTok=0;
@@ -1217,7 +1413,7 @@ async function load(){
   document.body.classList.remove("switching");
   if(pt.status==="fulfilled")state.pt=pt.value;else{state.pt=null;$("nowCond").textContent="Forecast unavailable. Check your connection and press Refresh."}
   state.nws=nws.value||null;state.mtb=mtb.value||null;state.powdr=pow.value||null;state.avy=avy.value||null;state.liftGeo=lifts.value||null;
-  renderAll();
+  renderAll();state.loadedAt=Date.now();
   $("updated").textContent="Updated "+new Date().toLocaleTimeString("en-US",{timeZone:TZ,hour:"numeric",minute:"2-digit"})+" PT";
   cache[key]={at:Date.now(),pt:state.pt,nws:state.nws,mtb:state.mtb,powdr:state.powdr,avy:state.avy,liftGeo:state.liftGeo,grid:null};
   getGrid().then(()=>{if(tok!==loadTok)return;fl.dirty=true;cache[key].grid={data:G.data,time:G.time}}).catch(e=>{if(tok===loadTok)$("mapNote").textContent="Map forecast layer unavailable right now. "+e.message});
@@ -1272,15 +1468,37 @@ document.addEventListener("keydown",e=>{
   const k=ORDER[+e.key-1];if(!/^[1-9]$/.test(e.key)||!k)return;
   e.preventDefault();setResort(k);
 });
-document.querySelectorAll("#resortSwitch button,#miniSwitch button").forEach(b=>b.title=`${RESORTS[b.dataset.r].name} (press ${ORDER.indexOf(b.dataset.r)+1})`);
+if(DEVICE.device==="desktop")document.querySelectorAll("#resortSwitch button,#miniSwitch button").forEach(b=>b.title=`${RESORTS[b.dataset.r].name} (press ${ORDER.indexOf(b.dataset.r)+1})`);
 // show the compact switch in the sticky bar once the big one is out of view
-if("IntersectionObserver" in window)new IntersectionObserver(([e])=>$("qnav").classList.toggle("stuck",!e.isIntersecting),{rootMargin:"-56px 0px 0px 0px"}).observe($("resortSwitch"));
+if("IntersectionObserver" in window)new IntersectionObserver(([e])=>{$("qnav").classList.toggle("stuck",!e.isIntersecting);document.documentElement.classList.toggle("bar-on",!e.isIntersecting)},{rootMargin:"-56px 0px 0px 0px"}).observe($("resortSwitch"));
 else $("qnav").classList.add("stuck");
 $("resortSwitch").addEventListener("keydown",e=>{if(!/^Arrow(Left|Right|Up|Down)$/.test(e.key))return;e.preventDefault();const next=step(/Left|Up/.test(e.key)?-1:1);setResort(next);$("resortSwitch").querySelector(`[data-r="${next}"]`).focus()});
 $("refresh").addEventListener("click",()=>{load();renderCams()});
 (function(){let k=null;try{k=new URL(location.href).searchParams.get("mtn")||(/willamette/i.test(location.hash)?"willamette":/sun-?peaks/i.test(location.hash)?"sunpeaks":null)}catch(e){}
   if(!k){try{k=localStorage.getItem("mtn")}catch(e){}}setResort(k||"bachelor",true)})();
-initSky();addEventListener("resize",()=>{initSky();drawChart()});
+/* Dots under a swipe row, one per card, following the scroll position */
+function swipeDots(row,dots){
+  const draw=()=>{const kids=[...row.children];if(!DEVICE.compact||kids.length<2){dots.innerHTML="";return}
+    const w=kids[0].getBoundingClientRect().width+10,k=Math.round(row.scrollLeft/w);
+    dots.innerHTML=kids.map((_,i)=>`<i class="${i===Math.min(k,kids.length-1)?"on":""}"></i>`).join("")};
+  row.addEventListener("scroll",()=>requestAnimationFrame(draw),{passive:true});draw();return draw;
+}
+const glanceDots=swipeDots($("glance"),$("glanceDots"));
+/* Phones keep tabs open for days: catch up when the page comes back after 10 minutes away */
+document.addEventListener("visibilitychange",()=>{if(document.visibilityState==="visible"&&Date.now()-(state.loadedAt||0)>10*6e4){load();renderCams()}});
+/* Footer layout picker, for when automatic detection guesses wrong */
+function renderLayoutPick(){
+  const D=window.DEVICE,lay=document.documentElement.dataset.layout;
+  $("layoutNow").textContent=`Showing the ${D.compact?"phone":"desktop"} layout${lay==="auto"?` (detected a ${D.device}${D.touch?" with a touch screen":""})`:""}.`;
+  document.querySelectorAll(".layout-pick button").forEach(b=>b.setAttribute("aria-pressed",b.dataset.lay===lay));
+}
+document.querySelectorAll(".layout-pick button").forEach(b=>b.addEventListener("click",()=>{
+  try{b.dataset.lay==="auto"?localStorage.removeItem("layout"):localStorage.setItem("layout",b.dataset.lay)}catch(e){}
+  const was=DEVICE.compact;applyDevice();if(was!==DEVICE.compact)dispatchEvent(new Event("layoutchange"));renderLayoutPick()}));
+renderLayoutPick();
+// switching between phone and desktop layouts (rotation, resizing, the picker) redraws what depends on it
+addEventListener("layoutchange",()=>{renderPowdr();renderNoaa();renderCams();glanceDots();initSky();drawChart();if(map){map.invalidateSize();initField()}renderLayoutPick()});
+initSky();addEventListener("resize",()=>{initSky();drawChart();glanceDots()});
 renderCams();setInterval(renderCams,5*60*1000);
 initMap();load();requestAnimationFrame(loop);
 setInterval(load,15*60*1000);
