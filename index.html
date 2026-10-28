@@ -339,6 +339,7 @@ button,a,summary,[role=tab],input[type=range]{touch-action:manipulation}
   margin-inline:-16px;padding:0 16px 4px;scroll-padding-inline:16px;scrollbar-width:none}
 .compact .swipe::-webkit-scrollbar{display:none}
 .compact .swipe>*{scroll-snap-align:start;min-width:0}
+.compact .card .swipe{margin-inline:-14px;padding-inline:14px;scroll-padding-inline:14px}
 .compact .swipe-dots{display:flex;justify-content:center;gap:6px;margin-top:-6px}
 .swipe-dots i{width:7px;height:7px;border-radius:50%;background:var(--line);transition:background .2s,width .2s}
 .swipe-dots i.on{background:var(--accent);width:18px;border-radius:4px}
@@ -386,7 +387,9 @@ button,a,summary,[role=tab],input[type=range]{touch-action:manipulation}
 /* Powdr table: fewer columns until asked, first column stays put */
 .compact table{min-width:0}
 .compact table.slim .opt{display:none}
-.compact th,.compact td{padding:7px 8px}
+.compact th,.compact td{padding:7px 6px}
+.compact td .bar{display:none}
+.compact td.sky-c{white-space:normal;min-width:84px;font-size:12px}
 .col-toggle{display:none}
 .compact .col-toggle{display:inline-flex}
 .linkbtn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--accent);font:500 13px var(--body);padding:8px 14px;border-radius:999px;cursor:pointer;justify-self:start}
@@ -1006,10 +1009,10 @@ function renderPowdr(){
     // On phones the less-used columns (class "opt") hide until "Show all columns" is tapped
     const cmp=DEVICE.compact,slim=cmp&&!powAll;
     if(cmp)html+=`<div class="label">${esc(d.date||"")}</div>`;
-    html+=`<div class="tbl-wrap"><table class="${slim?"slim":""}"><thead><tr><th>${cmp?"Time":esc(d.date||"")}</th><th>Temp</th><th class="opt">Wet bulb</th><th class="opt">RH</th><th>Precip</th><th>Chance</th><th class="opt">T-storm</th><th>Wind ${esc((d.elevation_ft||6300).toLocaleString())} ft</th><th class="opt">Wind 7,800 ft</th><th class="opt">Lifted idx</th><th style="text-align:left">Sky</th></tr></thead><tbody>`;
+    html+=`<div class="tbl-wrap"><table class="${slim?"slim":""}"><thead><tr><th>${cmp?"Time":esc(d.date||"")}</th><th>Temp</th><th class="opt">Wet bulb</th><th class="opt">RH</th><th>Precip</th><th>Chance</th><th class="opt">T-storm</th><th>${cmp?"Wind":"Wind "+esc((d.elevation_ft||6300).toLocaleString())+" ft"}</th><th class="opt">Wind 7,800 ft</th><th class="opt">Lifted idx</th><th style="text-align:left">Sky</th></tr></thead><tbody>`;
     d.rows.forEach((r,k)=>{const u=up.rows[k];html+=`<tr><td>${esc(cmp?r.time.replace(":00 ","").toLowerCase():r.time)}</td><td style="color:${r.temp_f<=32?"var(--cold)":"var(--temp)"}">${r.temp_f??"--"}&deg;</td><td class="opt">${r.wet_bulb_f??"--"}&deg;</td><td class="opt">${r.rh_pct??"--"}%</td><td>${esc(r.precip_amount||"-")}</td><td>${esc(r.precip_chance||"-")}</td><td class="opt">${esc(r.tstorm_risk||"-")}</td><td>${wcell(r)}</td><td class="opt">${wcell(u)}</td><td class="opt">${r.lifted_index??"--"}</td><td class="sky-c">${esc(expandSky(r.sky))}</td></tr>`});
     html+=`</tbody></table></div>`;
-    html+=`<button type="button" class="linkbtn col-toggle" id="powCols">${powAll?"Show fewer columns":"Show all columns: wet bulb, humidity, upper wind, stability"}</button>`;
+    html+=`<button type="button" class="linkbtn col-toggle" id="powCols">${powAll?"Show fewer columns":"Show all columns"}</button>`;
     html+=`<div class="stats" style="grid-template-columns:repeat(2,minmax(0,1fr))"><div><span class="label">24-hour liquid</span><b>${esc(d.liquid_total||"None listed")}</b></div><div><span class="label">24-hour snow</span><b>${esc(d.snow_total||"None listed")}</b></div></div>`;
     html+=`<p class="note">Wet bulb near or below 32&deg; means snowmaking temps and dry snow. Lifted index above 6 is very stable air, below 0 means thunderstorms are possible.</p>`;
   }else{
