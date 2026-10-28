@@ -1,0 +1,161 @@
+{
+ "fetched_at": "2026-10-28T14:26:08.320Z",
+ "source": "https://www.sunpeaksresort.com/ski-ride/weather-conditions-cams/weather-snow-report",
+ "current": {
+  "today": null
+ },
+ "forecast": [],
+ "discussion": null,
+ "snow_report": {
+  "date": null,
+  "date_text": null,
+  "unit": "in",
+  "overnight": null,
+  "new_amount": null,
+  "base_depth": null,
+  "base_mid": null,
+  "computed": {
+   "24_hour": null,
+   "48_hour": null,
+   "7_day": null,
+   "month": null,
+   "total": null
+  },
+  "report_text": "Operations Update (April 6, 2026): Alpine Area Closed\n\nThank you for joining us during the 2025–26 winter season! Please be advised that alpine skiing and snowboarding are now closed for the season. Summer lift operations for mountain biking and hiking can be found here.\n\nNot permitted: Snowmobiling, ski touring, and other activities, whether on foot or by motorized vehicle, are not permitted within the Sun Peaks Resort CRA (Controlled Recreation Area) at this time. This is for your safety and the safety of our staff, as teams continue to work in these areas in preparation for summer operations.\n\nThank you for your cooperation.\n\nMarc White, Director of Risk Management & Safety Programs"
+ },
+ "alerts": [],
+ "lifts": [
+  {
+   "name": "Burfield",
+   "status": "closed",
+   "season": "winter",
+   "hours": "9:30am to 4:00pm"
+  },
+  {
+   "name": "Crystal",
+   "status": "closed",
+   "season": "winter",
+   "hours": "9:30am to 4:00pm"
+  },
+  {
+   "name": "Elevation",
+   "status": "closed",
+   "season": "winter",
+   "hours": "9:30am to 4:00pm"
+  },
+  {
+   "name": "Learning Zone Carpet",
+   "status": "closed",
+   "season": "winter",
+   "hours": "9:00am to 4:00pm"
+  },
+  {
+   "name": "Morrisey Express",
+   "status": "closed",
+   "season": "winter",
+   "hours": "9:00am to 4:00pm"
+  },
+  {
+   "name": "Morrisey Platter",
+   "status": "closed",
+   "season": "winter",
+   "hours": "8:45am to 4:00pm"
+  },
+  {
+   "name": "Orient",
+   "status": "closed",
+   "season": "winter",
+   "hours": "8:45am to 4:00pm"
+  },
+  {
+   "name": "Sunburst Express",
+   "status": "closed",
+   "season": "winter",
+   "hours": "9:30am to 4:00pm"
+  },
+  {
+   "name": "Sundance Express",
+   "status": "closed",
+   "season": "winter",
+   "hours": "9:00am to 4:15pm"
+  },
+  {
+   "name": "Village Carpet",
+   "status": "closed",
+   "season": "winter",
+   "hours": "9:00am to 7:00pm"
+  },
+  {
+   "name": "Village Platter",
+   "status": "closed",
+   "season": "winter",
+   "hours": "8:15am to 7:00pm"
+  },
+  {
+   "name": "West Bowl Express",
+   "status": "closed",
+   "season": "winter",
+   "hours": "10:00am to 3:45pm"
+  }
+ ],
+ "trails": {
+  "total": 157,
+  "winter_total": 157,
+  "winter_open": 0,
+  "groomed": 0,
+  "open_names": []
+ },
+ "station_names": {
+  "top-of-the-world": "Top of the World",
+  "mid-mountain": "Mid-mountain",
+  "top-of-morrisey": "Top of Morrisey",
+  "valley": "Valley",
+  "sunburst-express-tower-18": "Sunburst Express, Tower 18",
+  "morrisey-express-tower-10": "Morrisey Express, Tower 10"
+ },
+ "stations": {
+  "top-of-the-world": [
+   {
+    "t": "2026-10-28T14:26:08.320Z",
+    "temp_f": 23,
+    "wind_avg_mph": 5,
+    "wind_dir": 135,
+    "wind_max_mph": null
+   }
+  ],
+  "mid-mountain": [
+   {
+    "t": "2026-10-28T14:26:08.320Z",
+    "temp_f": 27
+   }
+  ],
+  "top-of-morrisey": [
+   {
+    "t": "2026-10-28T14:26:08.320Z",
+    "temp_f": 25
+   }
+  ],
+  "valley": [
+   {
+    "t": "2026-10-28T14:26:08.320Z",
+    "temp_f": 32
+   }
+  ],
+  "sunburst-express-tower-18": [
+   {
+    "t": "2026-10-28T14:26:08.320Z",
+    "wind_avg_mph": 3,
+    "wind_dir": 135,
+    "wind_max_mph": null
+   }
+  ],
+  "morrisey-express-tower-10": [
+   {
+    "t": "2026-10-28T14:26:08.320Z",
+    "wind_avg_mph": 0,
+    "wind_dir": 67.5,
+    "wind_max_mph": null
+   }
+  ]
+ }
+}
