@@ -13,7 +13,7 @@ Live site: https://sammypars.github.io/Mt.Bachelor-weather-tracker/
 - **Next 72 hours**: chart of temperature at three elevations, summit snowfall with precip chance, or wind and gusts, plus an hour-by-hour strip.
 - **Mountain map**: terrain, satellite or street base maps with animated wind, a new-snow accumulation layer, precipitation and temperature (with the 32 degree line), a 72-hour time slider with playback, live NOAA NEXRAD radar loop, lift lines and real station readings.
 - **NOAA forecast**: NWS Pendleton point forecast for the summit and the Area Forecast Discussion.
-- **Weather stations and webcams**: Mt. Bachelor's on-mountain stations with 24-hour trends, nine resort webcams, and ODOT TripCheck road cams on Century Drive, US 97 (Bend and Lava Butte) and US 20 at Santiam Pass.
+- **Weather stations and webcams**: Mt. Bachelor's on-mountain stations with 24-hour trends, ten resort webcams (including the snow stake), and ODOT TripCheck road cams on Century Drive, US 97 (Bend and Lava Butte) and US 20 at Santiam Pass.
 
 ### Willamette Pass
 
