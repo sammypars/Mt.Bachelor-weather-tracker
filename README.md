@@ -56,6 +56,20 @@ The collector is `scripts/collect.mjs` and the Powdr PDF parser is `scripts/powd
 
 If the Powdr PDF layout changes, the parser test is `node scripts/test/run-fixture.mjs`, which reads a captured copy of the October 18, 2026 layout.
 
+## Phones and desktops
+
+A small script at the top of the page works out what kind of device is visiting before anything draws: phone, tablet or desktop (from screen size, touch support, the browser's mobile hint and its user agent), and whether the main input is touch or a mouse. Phones, and any window narrower than 640 px, get the phone layout:
+
+- The at-a-glance cards, 7-day outlook and webcams become swipe rows instead of long columns, with dots under the cards.
+- The mountain switch moves to a bar at the bottom of the screen once you scroll, within thumb reach.
+- One finger scrolls the page past the map; two fingers move and zoom it.
+- Touch or drag the hourly chart to read values.
+- The Powdr table shows its main columns, with a button for the rest; the forecast shows six periods, with a button for the full list.
+- Webcams open full screen; swipe or use Prev and Next to step through them.
+- Fewer animated snowflakes and wind particles, and animations pause when they are off screen or the tab is hidden.
+
+Touch screens of any size get larger tap targets. Desktops keep the full layout and the keyboard shortcuts. If the guess is wrong, the footer has Automatic, Phone layout and Desktop layout buttons, remembered per browser. Any device refreshes the data when you come back to the tab after 10 minutes away.
+
 ## Logo and home screen
 
 The logo source is `icons/logo.svg`. `icons/` also holds the favicon, the 180 px `apple-touch-icon.png` Safari uses when you add the site to your home screen, Android/Chrome icons and `manifest.webmanifest`, so the saved app is named "Ski Weather" and opens full screen.
