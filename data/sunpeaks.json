@@ -1,5 +1,5 @@
 {
- "fetched_at": "2026-10-29T01:50:04.411Z",
+ "fetched_at": "2026-10-29T08:34:00.360Z",
  "source": "https://www.sunpeaksresort.com/ski-ride/weather-conditions-cams/weather-snow-report",
  "current": {
   "today": null
@@ -142,6 +142,13 @@
     "wind_avg_mph": 8,
     "wind_dir": 292.5,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-10-29T08:34:00.360Z",
+    "temp_f": 16,
+    "wind_avg_mph": 4,
+    "wind_dir": 270,
+    "wind_max_mph": null
    }
   ],
   "mid-mountain": [
@@ -160,6 +167,10 @@
    {
     "t": "2026-10-29T01:50:04.411Z",
     "temp_f": 21
+   },
+   {
+    "t": "2026-10-29T08:34:00.360Z",
+    "temp_f": 19
    }
   ],
   "top-of-morrisey": [
@@ -178,6 +189,10 @@
    {
     "t": "2026-10-29T01:50:04.411Z",
     "temp_f": 21
+   },
+   {
+    "t": "2026-10-29T08:34:00.360Z",
+    "temp_f": 16
    }
   ],
   "valley": [
@@ -196,6 +211,10 @@
    {
     "t": "2026-10-29T01:50:04.411Z",
     "temp_f": 28
+   },
+   {
+    "t": "2026-10-29T08:34:00.360Z",
+    "temp_f": 25
    }
   ],
   "sunburst-express-tower-18": [
@@ -222,6 +241,12 @@
     "wind_avg_mph": 5,
     "wind_dir": 292.5,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-10-29T08:34:00.360Z",
+    "wind_avg_mph": 1,
+    "wind_dir": 337.5,
+    "wind_max_mph": null
    }
   ],
   "morrisey-express-tower-10": [
@@ -247,6 +272,12 @@
     "t": "2026-10-29T01:50:04.411Z",
     "wind_avg_mph": 0,
     "wind_dir": 135,
+    "wind_max_mph": null
+   },
+   {
+    "t": "2026-10-29T08:34:00.360Z",
+    "wind_avg_mph": 0,
+    "wind_dir": 112.5,
     "wind_max_mph": null
    }
   ]
