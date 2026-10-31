@@ -1,9 +1,9 @@
 {
- "fetched_at": "2026-10-30T23:51:18.417Z",
+ "fetched_at": "2026-10-31T05:49:39.328Z",
  "source": "https://www.mtbachelor.com/the-mountain/mountain-report/",
  "current": {
-  "temperature": 33,
-  "weather_icon": "dor-cloudy"
+  "temperature": 31,
+  "weather_icon": "dor-mostlysunny"
  },
  "forecast": [
   {
@@ -14,7 +14,7 @@
    "weather_icon": "dor-rain",
    "id": 1793386800,
    "day": "Friday",
-   "temperature_high": 39,
+   "temperature_high": 35,
    "temperature_low": 21,
    "precipitation_high": 68,
    "precipitation_low": 68,
@@ -29,27 +29,27 @@
    "weather_icon": "dor-snow",
    "id": 1793473200,
    "day": "Saturday",
-   "temperature_high": 36,
-   "temperature_low": 20,
+   "temperature_high": 35,
+   "temperature_low": 19,
    "precipitation_high": 79,
    "precipitation_low": 79,
-   "wind_speed": 7,
+   "wind_speed": 8,
    "wind_direction": "S"
   },
   {
    "date": "2026-11-01",
-   "description_long": "overcast clouds",
-   "description_short": "overcast clouds",
+   "description_long": "scattered clouds",
+   "description_short": "scattered clouds",
    "details": "Clouds",
-   "weather_icon": "dor-mostlycloudy",
+   "weather_icon": "dor-cloudy",
    "id": 1793559600,
    "day": "Sunday",
-   "temperature_high": 37,
-   "temperature_low": 23,
-   "precipitation_high": 82,
-   "precipitation_low": 82,
-   "wind_speed": 5,
-   "wind_direction": "NNE"
+   "temperature_high": 40,
+   "temperature_low": 22,
+   "precipitation_high": 74,
+   "precipitation_low": 74,
+   "wind_speed": 3,
+   "wind_direction": "NNW"
   },
   {
    "date": "2026-11-02",
@@ -61,69 +61,69 @@
    "day": "Monday",
    "temperature_high": 45,
    "temperature_low": 28,
-   "precipitation_high": 62,
-   "precipitation_low": 62,
+   "precipitation_high": 58,
+   "precipitation_low": 58,
+   "wind_speed": 4,
+   "wind_direction": "SSE"
+  },
+  {
+   "date": "2026-11-03",
+   "description_long": "clear sky",
+   "description_short": "clear sky",
+   "details": "Clear",
+   "weather_icon": "dor-sunny",
+   "id": 1793732400,
+   "day": "Tuesday",
+   "temperature_high": 52,
+   "temperature_low": 36,
+   "precipitation_high": 47,
+   "precipitation_low": 47,
    "wind_speed": 4,
    "wind_direction": "SE"
   },
   {
-   "date": "2026-11-03",
-   "description_long": "broken clouds",
-   "description_short": "broken clouds",
+   "date": "2026-11-04",
+   "description_long": "overcast clouds",
+   "description_short": "overcast clouds",
    "details": "Clouds",
    "weather_icon": "dor-mostlycloudy",
-   "id": 1793732400,
-   "day": "Tuesday",
-   "temperature_high": 44,
-   "temperature_low": 29,
-   "precipitation_high": 63,
-   "precipitation_low": 63,
-   "wind_speed": 5,
-   "wind_direction": "NW"
-  },
-  {
-   "date": "2026-11-04",
-   "description_long": "few clouds",
-   "description_short": "few clouds",
-   "details": "Clouds",
-   "weather_icon": "dor-mostlysunny",
    "id": 1793818800,
    "day": "Wednesday",
-   "temperature_high": 46,
-   "temperature_low": 32,
-   "precipitation_high": 60,
-   "precipitation_low": 60,
-   "wind_speed": 3,
-   "wind_direction": "N"
+   "temperature_high": 49,
+   "temperature_low": 33,
+   "precipitation_high": 57,
+   "precipitation_low": 57,
+   "wind_speed": 4,
+   "wind_direction": "E"
   },
   {
    "date": "2026-11-05",
+   "description_long": "overcast clouds",
+   "description_short": "overcast clouds",
+   "details": "Clouds",
+   "weather_icon": "dor-mostlycloudy",
+   "id": 1793905200,
+   "day": "Thursday",
+   "temperature_high": 43,
+   "temperature_low": 32,
+   "precipitation_high": 81,
+   "precipitation_low": 81,
+   "wind_speed": 6,
+   "wind_direction": "WNW"
+  },
+  {
+   "date": "2026-11-06",
    "description_long": "rain and snow",
    "description_short": "rain and snow",
    "details": "Snow",
    "weather_icon": "dor-snow",
-   "id": 1793905200,
-   "day": "Thursday",
-   "temperature_high": 50,
-   "temperature_low": 29,
-   "precipitation_high": 50,
-   "precipitation_low": 50,
-   "wind_speed": 10,
-   "wind_direction": "SW"
-  },
-  {
-   "date": "2026-11-06",
-   "description_long": "snow",
-   "description_short": "snow",
-   "details": "Snow",
-   "weather_icon": "dor-snow",
    "id": 1793991600,
    "day": "Friday",
-   "temperature_high": 30,
-   "temperature_low": 19,
-   "precipitation_high": 84,
-   "precipitation_low": 84,
-   "wind_speed": 9,
+   "temperature_high": 38,
+   "temperature_low": 27,
+   "precipitation_high": 85,
+   "precipitation_low": 85,
+   "wind_speed": 16,
    "wind_direction": "W"
   }
  ],
@@ -301,60 +301,6 @@
  "stations": {
   "snowplot": [
    {
-    "t": "2026-10-29T17:00:00.000Z",
-    "temp_f": 32.84,
-    "depth": 145,
-    "rh": null,
-    "wind_avg_mph": 0,
-    "wind_dir": 0,
-    "wind_max_mph": 0
-   },
-   {
-    "t": "2026-10-29T18:00:00.000Z",
-    "temp_f": 30.98,
-    "depth": 145,
-    "rh": null,
-    "wind_avg_mph": 0,
-    "wind_dir": 0,
-    "wind_max_mph": 0
-   },
-   {
-    "t": "2026-10-29T19:00:00.000Z",
-    "temp_f": 29.6,
-    "depth": 143.1,
-    "rh": null,
-    "wind_avg_mph": 0,
-    "wind_dir": 0,
-    "wind_max_mph": 0
-   },
-   {
-    "t": "2026-10-29T20:00:00.000Z",
-    "temp_f": 28.85,
-    "depth": 7.183,
-    "rh": null,
-    "wind_avg_mph": 0,
-    "wind_dir": 0,
-    "wind_max_mph": 0
-   },
-   {
-    "t": "2026-10-29T21:00:00.000Z",
-    "temp_f": 28.36,
-    "depth": 6.895,
-    "rh": null,
-    "wind_avg_mph": 0,
-    "wind_dir": 0,
-    "wind_max_mph": 0
-   },
-   {
-    "t": "2026-10-29T22:00:00.000Z",
-    "temp_f": 27.86,
-    "depth": 7.095,
-    "rh": null,
-    "wind_avg_mph": 0,
-    "wind_dir": 0,
-    "wind_max_mph": 0
-   },
-   {
     "t": "2026-10-29T23:00:00.000Z",
     "temp_f": 26.68,
     "depth": 143.3,
@@ -515,63 +461,63 @@
     "wind_avg_mph": 0,
     "wind_dir": 0,
     "wind_max_mph": 0
+   },
+   {
+    "t": "2026-10-30T17:00:00.000Z",
+    "temp_f": 32.13,
+    "depth": 145,
+    "rh": null,
+    "wind_avg_mph": 0,
+    "wind_dir": 0,
+    "wind_max_mph": 0
+   },
+   {
+    "t": "2026-10-30T18:00:00.000Z",
+    "temp_f": 30.94,
+    "depth": 145,
+    "rh": null,
+    "wind_avg_mph": 0,
+    "wind_dir": 0,
+    "wind_max_mph": 0
+   },
+   {
+    "t": "2026-10-30T19:00:00.000Z",
+    "temp_f": 29.98,
+    "depth": 145.1,
+    "rh": null,
+    "wind_avg_mph": 0,
+    "wind_dir": 0,
+    "wind_max_mph": 0
+   },
+   {
+    "t": "2026-10-30T20:00:00.000Z",
+    "temp_f": 31.03,
+    "depth": 145.1,
+    "rh": null,
+    "wind_avg_mph": 0,
+    "wind_dir": 0,
+    "wind_max_mph": 0
+   },
+   {
+    "t": "2026-10-30T21:00:00.000Z",
+    "temp_f": 31.3,
+    "depth": 145.1,
+    "rh": null,
+    "wind_avg_mph": 0,
+    "wind_dir": 0,
+    "wind_max_mph": 0
+   },
+   {
+    "t": "2026-10-30T22:00:00.000Z",
+    "temp_f": 30.87,
+    "depth": 145,
+    "rh": null,
+    "wind_avg_mph": 0,
+    "wind_dir": 0,
+    "wind_max_mph": 0
    }
   ],
   "sunrise": [
-   {
-    "t": "2026-10-29T17:00:00.000Z",
-    "temp_f": 29.02,
-    "depth": null,
-    "rh": null,
-    "wind_avg_mph": 5.608,
-    "wind_dir": 242.9,
-    "wind_max_mph": 15.21
-   },
-   {
-    "t": "2026-10-29T18:00:00.000Z",
-    "temp_f": 29.37,
-    "depth": null,
-    "rh": null,
-    "wind_avg_mph": 5.948,
-    "wind_dir": 225.6,
-    "wind_max_mph": 17.45
-   },
-   {
-    "t": "2026-10-29T19:00:00.000Z",
-    "temp_f": 30.11,
-    "depth": null,
-    "rh": null,
-    "wind_avg_mph": 9.44,
-    "wind_dir": 215.4,
-    "wind_max_mph": 19.69
-   },
-   {
-    "t": "2026-10-29T20:00:00.000Z",
-    "temp_f": 29.73,
-    "depth": null,
-    "rh": null,
-    "wind_avg_mph": 6.251,
-    "wind_dir": 188.9,
-    "wind_max_mph": 15.66
-   },
-   {
-    "t": "2026-10-29T21:00:00.000Z",
-    "temp_f": 28.77,
-    "depth": null,
-    "rh": null,
-    "wind_avg_mph": 2.831,
-    "wind_dir": 138.4,
-    "wind_max_mph": 11.19
-   },
-   {
-    "t": "2026-10-29T22:00:00.000Z",
-    "temp_f": 28.83,
-    "depth": null,
-    "rh": null,
-    "wind_avg_mph": 2.811,
-    "wind_dir": 142.6,
-    "wind_max_mph": 10.51
-   },
    {
     "t": "2026-10-29T23:00:00.000Z",
     "temp_f": 29.04,
@@ -733,63 +679,63 @@
     "wind_avg_mph": 3.942,
     "wind_dir": 231.3,
     "wind_max_mph": 14.32
+   },
+   {
+    "t": "2026-10-30T17:00:00.000Z",
+    "temp_f": 28.48,
+    "depth": null,
+    "rh": null,
+    "wind_avg_mph": 4.127,
+    "wind_dir": 160,
+    "wind_max_mph": 14.32
+   },
+   {
+    "t": "2026-10-30T18:00:00.000Z",
+    "temp_f": 27.59,
+    "depth": null,
+    "rh": null,
+    "wind_avg_mph": 4.663,
+    "wind_dir": 154.7,
+    "wind_max_mph": 18.12
+   },
+   {
+    "t": "2026-10-30T19:00:00.000Z",
+    "temp_f": 27.03,
+    "depth": null,
+    "rh": null,
+    "wind_avg_mph": 5.37,
+    "wind_dir": 212.4,
+    "wind_max_mph": 13.87
+   },
+   {
+    "t": "2026-10-30T20:00:00.000Z",
+    "temp_f": 26.98,
+    "depth": null,
+    "rh": null,
+    "wind_avg_mph": 6.695,
+    "wind_dir": 205.6,
+    "wind_max_mph": 18.57
+   },
+   {
+    "t": "2026-10-30T21:00:00.000Z",
+    "temp_f": 27.55,
+    "depth": null,
+    "rh": null,
+    "wind_avg_mph": 6.132,
+    "wind_dir": 218.3,
+    "wind_max_mph": 17.67
+   },
+   {
+    "t": "2026-10-30T22:00:00.000Z",
+    "temp_f": 27.73,
+    "depth": null,
+    "rh": null,
+    "wind_avg_mph": 5.151,
+    "wind_dir": 214.8,
+    "wind_max_mph": 16.55
    }
   ],
   "pine": [
-   {
-    "t": "2026-10-29T17:00:00.000Z",
-    "temp_f": 27.95,
-    "depth": null,
-    "rh": 100,
-    "wind_avg_mph": 1.221,
-    "wind_dir": 294.3,
-    "wind_max_mph": 8.84
-   },
-   {
-    "t": "2026-10-29T18:00:00.000Z",
-    "temp_f": 26.11,
-    "depth": null,
-    "rh": 100,
-    "wind_avg_mph": 5.253,
-    "wind_dir": 256.1,
-    "wind_max_mph": 18.84
-   },
-   {
-    "t": "2026-10-29T19:00:00.000Z",
-    "temp_f": 24.93,
-    "depth": null,
-    "rh": 99.8,
-    "wind_avg_mph": 12.51,
-    "wind_dir": 195.7,
-    "wind_max_mph": 22.1
-   },
-   {
-    "t": "2026-10-29T20:00:00.000Z",
-    "temp_f": 25.63,
-    "depth": null,
-    "rh": 100,
-    "wind_avg_mph": 8.55,
-    "wind_dir": 216.6,
-    "wind_max_mph": 19.63
-   },
-   {
-    "t": "2026-10-29T21:00:00.000Z",
-    "temp_f": 26.5,
-    "depth": null,
-    "rh": 100,
-    "wind_avg_mph": 2.483,
-    "wind_dir": 191.6,
-    "wind_max_mph": 16.15
-   },
-   {
-    "t": "2026-10-29T22:00:00.000Z",
-    "temp_f": 26,
-    "depth": null,
-    "rh": 99.9,
-    "wind_avg_mph": 12.31,
-    "wind_dir": 168.7,
-    "wind_max_mph": 34.84
-   },
    {
     "t": "2026-10-29T23:00:00.000Z",
     "temp_f": 25.61,
@@ -951,63 +897,63 @@
     "wind_avg_mph": 12.06,
     "wind_dir": 283.9,
     "wind_max_mph": 23.57
+   },
+   {
+    "t": "2026-10-30T17:00:00.000Z",
+    "temp_f": 25.81,
+    "depth": null,
+    "rh": 96.9,
+    "wind_avg_mph": 8.82,
+    "wind_dir": 246.1,
+    "wind_max_mph": 18.24
+   },
+   {
+    "t": "2026-10-30T18:00:00.000Z",
+    "temp_f": 25.15,
+    "depth": null,
+    "rh": 99.4,
+    "wind_avg_mph": 7.681,
+    "wind_dir": 245.9,
+    "wind_max_mph": 21.27
+   },
+   {
+    "t": "2026-10-30T19:00:00.000Z",
+    "temp_f": 24.37,
+    "depth": null,
+    "rh": 91.2,
+    "wind_avg_mph": 9.76,
+    "wind_dir": 228.2,
+    "wind_max_mph": 21.34
+   },
+   {
+    "t": "2026-10-30T20:00:00.000Z",
+    "temp_f": 23.78,
+    "depth": null,
+    "rh": 88.4,
+    "wind_avg_mph": 13.45,
+    "wind_dir": 185.1,
+    "wind_max_mph": 27.28
+   },
+   {
+    "t": "2026-10-30T21:00:00.000Z",
+    "temp_f": 24.23,
+    "depth": null,
+    "rh": 92.6,
+    "wind_avg_mph": 11.75,
+    "wind_dir": 209.9,
+    "wind_max_mph": 24.67
+   },
+   {
+    "t": "2026-10-30T22:00:00.000Z",
+    "temp_f": 24.5,
+    "depth": null,
+    "rh": 91,
+    "wind_avg_mph": 8.98,
+    "wind_dir": 201.1,
+    "wind_max_mph": 18.42
    }
   ],
   "cloudChaser": [
-   {
-    "t": "2026-10-29T17:00:00.000Z",
-    "temp_f": 24.58,
-    "depth": null,
-    "rh": null,
-    "wind_avg_mph": 6.798,
-    "wind_dir": 210.5,
-    "wind_max_mph": 14.54
-   },
-   {
-    "t": "2026-10-29T18:00:00.000Z",
-    "temp_f": 25.16,
-    "depth": null,
-    "rh": null,
-    "wind_avg_mph": 6.182,
-    "wind_dir": 186.6,
-    "wind_max_mph": 16.78
-   },
-   {
-    "t": "2026-10-29T19:00:00.000Z",
-    "temp_f": 25.37,
-    "depth": null,
-    "rh": null,
-    "wind_avg_mph": 8.84,
-    "wind_dir": 172.3,
-    "wind_max_mph": 17
-   },
-   {
-    "t": "2026-10-29T20:00:00.000Z",
-    "temp_f": 25.95,
-    "depth": null,
-    "rh": null,
-    "wind_avg_mph": 6.549,
-    "wind_dir": 153.2,
-    "wind_max_mph": 17.22
-   },
-   {
-    "t": "2026-10-29T21:00:00.000Z",
-    "temp_f": 26.65,
-    "depth": null,
-    "rh": null,
-    "wind_avg_mph": 6.9,
-    "wind_dir": 119.5,
-    "wind_max_mph": 14.54
-   },
-   {
-    "t": "2026-10-29T22:00:00.000Z",
-    "temp_f": 26.89,
-    "depth": null,
-    "rh": null,
-    "wind_avg_mph": 7.14,
-    "wind_dir": 119.3,
-    "wind_max_mph": 14.54
-   },
    {
     "t": "2026-10-29T23:00:00.000Z",
     "temp_f": 26.36,
@@ -1169,6 +1115,60 @@
     "wind_avg_mph": 4.28,
     "wind_dir": 177.6,
     "wind_max_mph": 15.66
+   },
+   {
+    "t": "2026-10-30T17:00:00.000Z",
+    "temp_f": 25.33,
+    "depth": null,
+    "rh": null,
+    "wind_avg_mph": 5.239,
+    "wind_dir": 119.2,
+    "wind_max_mph": 14.76
+   },
+   {
+    "t": "2026-10-30T18:00:00.000Z",
+    "temp_f": 24.79,
+    "depth": null,
+    "rh": null,
+    "wind_avg_mph": 6.024,
+    "wind_dir": 121.9,
+    "wind_max_mph": 17
+   },
+   {
+    "t": "2026-10-30T19:00:00.000Z",
+    "temp_f": 23.78,
+    "depth": null,
+    "rh": null,
+    "wind_avg_mph": 4.474,
+    "wind_dir": 161.4,
+    "wind_max_mph": 16.33
+   },
+   {
+    "t": "2026-10-30T20:00:00.000Z",
+    "temp_f": 23.19,
+    "depth": null,
+    "rh": null,
+    "wind_avg_mph": 5.051,
+    "wind_dir": 127.4,
+    "wind_max_mph": 17.22
+   },
+   {
+    "t": "2026-10-30T21:00:00.000Z",
+    "temp_f": 23.55,
+    "depth": null,
+    "rh": null,
+    "wind_avg_mph": 4.816,
+    "wind_dir": 152.6,
+    "wind_max_mph": 21.92
+   },
+   {
+    "t": "2026-10-30T22:00:00.000Z",
+    "temp_f": 23.88,
+    "depth": null,
+    "rh": null,
+    "wind_avg_mph": 4.994,
+    "wind_dir": 164.6,
+    "wind_max_mph": 14.99
    }
   ],
   "northwest": [
