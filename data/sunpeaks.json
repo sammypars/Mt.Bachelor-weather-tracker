@@ -1,5 +1,5 @@
 {
- "fetched_at": "2026-10-31T21:39:31.046Z",
+ "fetched_at": "2026-11-01T01:14:38.505Z",
  "source": "https://www.sunpeaksresort.com/ski-ride/weather-conditions-cams/weather-snow-report",
  "current": {
   "today": null
@@ -116,13 +116,6 @@
  "stations": {
   "top-of-the-world": [
    {
-    "t": "2026-10-30T23:51:19.290Z",
-    "temp_f": 23,
-    "wind_avg_mph": 12,
-    "wind_dir": 67.5,
-    "wind_max_mph": null
-   },
-   {
     "t": "2026-10-31T05:49:41.044Z",
     "temp_f": 25,
     "wind_avg_mph": 11,
@@ -149,13 +142,16 @@
     "wind_avg_mph": 6,
     "wind_dir": 157.5,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-01T01:14:38.505Z",
+    "temp_f": 23,
+    "wind_avg_mph": 6,
+    "wind_dir": 112.5,
+    "wind_max_mph": null
    }
   ],
   "mid-mountain": [
-   {
-    "t": "2026-10-30T23:51:19.290Z",
-    "temp_f": 27
-   },
    {
     "t": "2026-10-31T05:49:41.044Z",
     "temp_f": 27
@@ -171,13 +167,13 @@
    {
     "t": "2026-10-31T21:39:31.046Z",
     "temp_f": 28
+   },
+   {
+    "t": "2026-11-01T01:14:38.505Z",
+    "temp_f": 25
    }
   ],
   "top-of-morrisey": [
-   {
-    "t": "2026-10-30T23:51:19.290Z",
-    "temp_f": 28
-   },
    {
     "t": "2026-10-31T05:49:41.044Z",
     "temp_f": 25
@@ -193,13 +189,13 @@
    {
     "t": "2026-10-31T21:39:31.046Z",
     "temp_f": 37
+   },
+   {
+    "t": "2026-11-01T01:14:38.505Z",
+    "temp_f": 25
    }
   ],
   "valley": [
-   {
-    "t": "2026-10-30T23:51:19.290Z",
-    "temp_f": 32
-   },
    {
     "t": "2026-10-31T05:49:41.044Z",
     "temp_f": 32
@@ -215,15 +211,13 @@
    {
     "t": "2026-10-31T21:39:31.046Z",
     "temp_f": 36
+   },
+   {
+    "t": "2026-11-01T01:14:38.505Z",
+    "temp_f": 32
    }
   ],
   "sunburst-express-tower-18": [
-   {
-    "t": "2026-10-30T23:51:19.290Z",
-    "wind_avg_mph": 1,
-    "wind_dir": 337.5,
-    "wind_max_mph": null
-   },
    {
     "t": "2026-10-31T05:49:41.044Z",
     "wind_avg_mph": 2,
@@ -247,15 +241,15 @@
     "wind_avg_mph": 6,
     "wind_dir": 157.5,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-01T01:14:38.505Z",
+    "wind_avg_mph": 0,
+    "wind_dir": 22.5,
+    "wind_max_mph": null
    }
   ],
   "morrisey-express-tower-10": [
-   {
-    "t": "2026-10-30T23:51:19.290Z",
-    "wind_avg_mph": 2,
-    "wind_dir": 67.5,
-    "wind_max_mph": null
-   },
    {
     "t": "2026-10-31T05:49:41.044Z",
     "wind_avg_mph": 2,
@@ -278,6 +272,12 @@
     "t": "2026-10-31T21:39:31.046Z",
     "wind_avg_mph": 1,
     "wind_dir": 45,
+    "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-01T01:14:38.505Z",
+    "wind_avg_mph": 2,
+    "wind_dir": 112.5,
     "wind_max_mph": null
    }
   ]
