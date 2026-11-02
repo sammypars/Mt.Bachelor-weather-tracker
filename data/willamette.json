@@ -1,20 +1,20 @@
 {
- "fetched_at": "2026-11-02T16:09:31.931Z",
+ "fetched_at": "2026-11-02T23:35:30.071Z",
  "source": "https://www.willamettepass.ski/weather-conditions-webcams/",
  "status_text": "Willamette Pass is currently closed.",
  "current": {
-  "temp_f": 32,
-  "high_f": 47,
+  "temp_f": 49,
+  "high_f": 46,
   "low_f": 34,
   "wind": null,
-  "condition": "Increasing Clouds",
-  "updated": "November 2, 2026, 8:07 am",
+  "condition": "Cloudy",
+  "updated": "November 2, 2026, 3:34 pm",
   "provider": "NOAA"
  },
  "forecast": [],
  "snow_report": {
-  "date": "2026-04-24 13:06:00",
-  "date_text": "April 24, 2026 1:06 pm",
+  "date": "2026-11-02 14:03:00",
+  "date_text": "November 2, 2026 2:03 pm",
   "unit": "in",
   "overnight": null,
   "new_amount": 0,
@@ -24,10 +24,10 @@
    "48_hour": 0,
    "7_day": 0,
    "month": null,
-   "total": 47
+   "total": 4
   },
-  "report_text": "Willamette Pass is currently closed.\n\nOperations at Willamette Pass continue to remain paused due to warm weather. Check back often for the most up-to-date mountain info moving forward.",
-  "report_updated": null
+  "report_text": "Willamette Pass is currently closed.\n\nClouds are stacking up and so is the stoke! Willamette Pass is hiring for the 26/27 season. Get paid to play in the snow and ride all winter long!",
+  "report_updated": "November 2, 2026 2:03 pm"
  },
  "alerts": [],
  "lifts": [
