@@ -1,11 +1,11 @@
 {
- "fetched_at": "2026-11-06T18:00:46.882Z",
- "checked_at": "2026-11-07T10:18:25.314Z",
+ "fetched_at": "2026-11-07T16:51:46.180Z",
+ "checked_at": "2026-11-07T16:51:46.180Z",
  "source": "http://powdrforecasts.weebly.com/mt-bachelor.html",
- "pdf_url": "http://powdrforecasts.weebly.com/uploads/1/2/9/3/12933500/mtb110626.pdf",
- "issued": "2026-11-06",
+ "pdf_url": "http://powdrforecasts.weebly.com/uploads/1/2/9/3/12933500/mtb110726.pdf",
+ "issued": "2026-11-07",
  "images": [
-  "http://powdrforecasts.weebly.com/uploads/1/2/9/3/12933500/screen-shot-2026-11-06-at-4-23-53-am_orig.png"
+  "http://powdrforecasts.weebly.com/uploads/1/2/9/3/12933500/screen-shot-2026-11-07-at-5-42-13-am_orig.png"
  ],
  "forecaster": "JOE NICHOLLS",
  "base": {
@@ -14,18 +14,18 @@
    {
     "title": "Day-1 Forecast 6,300 FT",
     "elevation_ft": 6300,
-    "date": "Friday, November 6, 2026",
+    "date": "Saturday, November 7, 2026",
     "rows": [
      {
       "time": "6:00 AM",
-      "temp_f": 31,
+      "temp_f": 29,
       "wet_bulb_f": 85,
       "rh_pct": null,
       "tstorm_risk": null,
       "precip_amount": null,
       "precip_chance": null,
       "lifted_index": null,
-      "wind_dir": "5",
+      "wind_dir": "8",
       "wind_sus_mph": null,
       "wind_gust_mph": null,
       "sky": "Ptly cldy"
@@ -46,142 +46,7 @@
      },
      {
       "time": "12:00 PM",
-      "temp_f": 38,
-      "wet_bulb_f": 50,
-      "rh_pct": null,
-      "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
-      "lifted_index": null,
-      "wind_dir": "8",
-      "wind_sus_mph": null,
-      "wind_gust_mph": null,
-      "sky": "Ptly cldy"
-     },
-     {
-      "time": "3:00 PM",
-      "temp_f": 39,
-      "wet_bulb_f": 45,
-      "rh_pct": null,
-      "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
-      "lifted_index": null,
-      "wind_dir": "7",
-      "wind_sus_mph": null,
-      "wind_gust_mph": null,
-      "sky": "Ptly cldy"
-     },
-     {
-      "time": "6:00 PM",
-      "temp_f": 37,
-      "wet_bulb_f": 55,
-      "rh_pct": null,
-      "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
-      "lifted_index": null,
-      "wind_dir": "7",
-      "wind_sus_mph": null,
-      "wind_gust_mph": null,
-      "sky": "Ptly cldy"
-     },
-     {
-      "time": "9:00 PM",
-      "temp_f": 36,
-      "wet_bulb_f": 65,
-      "rh_pct": null,
-      "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
-      "lifted_index": null,
-      "wind_dir": "8",
-      "wind_sus_mph": null,
-      "wind_gust_mph": null,
-      "sky": "Ptly cldy"
-     },
-     {
-      "time": "12:00 AM",
-      "temp_f": 35,
-      "wet_bulb_f": 75,
-      "rh_pct": null,
-      "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
-      "lifted_index": null,
-      "wind_dir": "8",
-      "wind_sus_mph": null,
-      "wind_gust_mph": null,
-      "sky": "Ptly cldy"
-     },
-     {
-      "time": "3:00 AM",
-      "temp_f": 34,
-      "wet_bulb_f": 80,
-      "rh_pct": null,
-      "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
-      "lifted_index": null,
-      "wind_dir": "8",
-      "wind_sus_mph": null,
-      "wind_gust_mph": null,
-      "sky": "Ptly cldy"
-     },
-     {
-      "time": "6:00 AM",
-      "temp_f": 33,
-      "wet_bulb_f": 85,
-      "rh_pct": null,
-      "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
-      "lifted_index": null,
-      "wind_dir": "8",
-      "wind_sus_mph": null,
-      "wind_gust_mph": null,
-      "sky": "Ptly cldy"
-     }
-    ],
-    "liquid_total": null,
-    "snow_total": null
-   },
-   {
-    "title": "Day-2 Forecast 6,300 FT",
-    "elevation_ft": 6300,
-    "date": "Saturday, November 07, 2026",
-    "rows": [
-     {
-      "time": "6:00 AM",
-      "temp_f": 33,
-      "wet_bulb_f": 85,
-      "rh_pct": null,
-      "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
-      "lifted_index": null,
-      "wind_dir": "8",
-      "wind_sus_mph": null,
-      "wind_gust_mph": null,
-      "sky": "Ptly cldy"
-     },
-     {
-      "time": "9:00 AM",
-      "temp_f": 37,
-      "wet_bulb_f": 75,
-      "rh_pct": null,
-      "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
-      "lifted_index": null,
-      "wind_dir": "7",
-      "wind_sus_mph": null,
-      "wind_gust_mph": null,
-      "sky": "Ptly cldy"
-     },
-     {
-      "time": "12:00 PM",
-      "temp_f": 42,
+      "temp_f": 40,
       "wet_bulb_f": 50,
       "rh_pct": null,
       "tstorm_risk": null,
@@ -195,7 +60,7 @@
      },
      {
       "time": "3:00 PM",
-      "temp_f": 44,
+      "temp_f": 41,
       "wet_bulb_f": 45,
       "rh_pct": null,
       "tstorm_risk": null,
@@ -210,7 +75,7 @@
      {
       "time": "6:00 PM",
       "temp_f": 40,
-      "wet_bulb_f": 55,
+      "wet_bulb_f": 65,
       "rh_pct": null,
       "tstorm_risk": null,
       "precip_amount": null,
@@ -224,25 +89,25 @@
      {
       "time": "9:00 PM",
       "temp_f": 38,
-      "wet_bulb_f": 65,
+      "wet_bulb_f": 80,
       "rh_pct": null,
       "tstorm_risk": null,
-      "precip_amount": null,
-      "precip_chance": null,
+      "precip_amount": "Trace",
+      "precip_chance": "50% 8,000",
       "lifted_index": null,
       "wind_dir": "17",
       "wind_sus_mph": null,
       "wind_gust_mph": 30,
-      "sky": null
+      "sky": "Cloudy"
      },
      {
       "time": "12:00 AM",
-      "temp_f": 35,
-      "wet_bulb_f": 70,
+      "temp_f": 37,
+      "wet_bulb_f": 90,
       "rh_pct": null,
       "tstorm_risk": null,
-      "precip_amount": "Trace",
-      "precip_chance": "50% 7,500",
+      "precip_amount": "0.05\"",
+      "precip_chance": "60% 7,800",
       "lifted_index": null,
       "wind_dir": "17",
       "wind_sus_mph": null,
@@ -251,12 +116,12 @@
      },
      {
       "time": "3:00 AM",
-      "temp_f": 34,
-      "wet_bulb_f": 75,
+      "temp_f": 35,
+      "wet_bulb_f": 95,
       "rh_pct": null,
       "tstorm_risk": null,
-      "precip_amount": "0.03\"",
-      "precip_chance": "60% 7,200",
+      "precip_amount": "0.05\"",
+      "precip_chance": "60% 7,500",
       "lifted_index": null,
       "wind_dir": "17",
       "wind_sus_mph": null,
@@ -265,17 +130,152 @@
      },
      {
       "time": "6:00 AM",
-      "temp_f": 32,
-      "wet_bulb_f": 75,
+      "temp_f": 34,
+      "wet_bulb_f": 95,
       "rh_pct": null,
       "tstorm_risk": null,
       "precip_amount": "0.05\"",
-      "precip_chance": "60% 6,700",
+      "precip_chance": "60% 7,500",
       "lifted_index": null,
       "wind_dir": "17",
       "wind_sus_mph": null,
       "wind_gust_mph": 30,
       "sky": "Cloudy"
+     }
+    ],
+    "liquid_total": "0.15\"",
+    "snow_total": null
+   },
+   {
+    "title": "Day-2 Forecast 6,300 FT",
+    "elevation_ft": 6300,
+    "date": "Sunday, November 08, 2026",
+    "rows": [
+     {
+      "time": "6:00 AM",
+      "temp_f": 34,
+      "wet_bulb_f": 95,
+      "rh_pct": null,
+      "tstorm_risk": null,
+      "precip_amount": null,
+      "precip_chance": null,
+      "lifted_index": null,
+      "wind_dir": "17",
+      "wind_sus_mph": null,
+      "wind_gust_mph": 30,
+      "sky": "Cloudy"
+     },
+     {
+      "time": "9:00 AM",
+      "temp_f": 34,
+      "wet_bulb_f": 85,
+      "rh_pct": null,
+      "tstorm_risk": null,
+      "precip_amount": "0.05\"",
+      "precip_chance": "50% 7,500",
+      "lifted_index": null,
+      "wind_dir": "10",
+      "wind_sus_mph": null,
+      "wind_gust_mph": 20,
+      "sky": "Cloudy"
+     },
+     {
+      "time": "12:00 PM",
+      "temp_f": 33,
+      "wet_bulb_f": 55,
+      "rh_pct": null,
+      "tstorm_risk": null,
+      "precip_amount": null,
+      "precip_chance": null,
+      "lifted_index": null,
+      "wind_dir": "8",
+      "wind_sus_mph": null,
+      "wind_gust_mph": null,
+      "sky": null
+     },
+     {
+      "time": "3:00 PM",
+      "temp_f": 33,
+      "wet_bulb_f": 50,
+      "rh_pct": null,
+      "tstorm_risk": null,
+      "precip_amount": null,
+      "precip_chance": null,
+      "lifted_index": null,
+      "wind_dir": "7",
+      "wind_sus_mph": null,
+      "wind_gust_mph": null,
+      "sky": null
+     },
+     {
+      "time": "6:00 PM",
+      "temp_f": 30,
+      "wet_bulb_f": 55,
+      "rh_pct": null,
+      "tstorm_risk": null,
+      "precip_amount": null,
+      "precip_chance": null,
+      "lifted_index": null,
+      "wind_dir": "5",
+      "wind_sus_mph": null,
+      "wind_gust_mph": null,
+      "sky": null
+     },
+     {
+      "time": "9:00 PM",
+      "temp_f": 30,
+      "wet_bulb_f": 65,
+      "rh_pct": null,
+      "tstorm_risk": null,
+      "precip_amount": null,
+      "precip_chance": null,
+      "lifted_index": null,
+      "wind_dir": "5",
+      "wind_sus_mph": null,
+      "wind_gust_mph": null,
+      "sky": null
+     },
+     {
+      "time": "12:00 AM",
+      "temp_f": 30,
+      "wet_bulb_f": 70,
+      "rh_pct": null,
+      "tstorm_risk": null,
+      "precip_amount": null,
+      "precip_chance": null,
+      "lifted_index": null,
+      "wind_dir": "3",
+      "wind_sus_mph": null,
+      "wind_gust_mph": null,
+      "sky": null
+     },
+     {
+      "time": "3:00 AM",
+      "temp_f": 29,
+      "wet_bulb_f": 75,
+      "rh_pct": null,
+      "tstorm_risk": null,
+      "precip_amount": null,
+      "precip_chance": null,
+      "lifted_index": null,
+      "wind_dir": "3",
+      "wind_sus_mph": null,
+      "wind_gust_mph": null,
+      "sky": null
+     },
+     {
+      "time": "6:00 AM",
+      "temp_f": 29,
+      "wet_bulb_f": 75,
+      "rh_pct": null,
+      "tstorm_risk": null,
+      "precip_amount": null,
+      "precip_chance": null,
+      "lifted_index": null,
+      "wind_dir": "3",
+      "wind_sus_mph": null,
+      "wind_gust_mph": null,
+      "sky": null
      }
     ],
     "liquid_total": "<0.10\"",
@@ -293,66 +293,66 @@
     "rows": [
      {
       "time": "6:00 AM",
-      "wind_dir": "60",
+      "wind_dir": "35",
       "wind_sus_mph": null,
       "wind_gust_mph": null,
-      "sky": "W 10 Ptly cldy"
+      "sky": "SW 10 20 Ptly cldy"
      },
      {
       "time": "9:00 AM",
-      "wind_dir": "50",
-      "wind_sus_mph": null,
-      "wind_gust_mph": null,
-      "sky": "W 10 Ptly cldy"
-     },
-     {
-      "time": "12:00 PM",
-      "wind_dir": "45",
-      "wind_sus_mph": null,
-      "wind_gust_mph": null,
-      "sky": "W 12 Ptly cldy"
-     },
-     {
-      "time": "3:00 PM",
-      "wind_dir": "40",
-      "wind_sus_mph": null,
-      "wind_gust_mph": null,
-      "sky": "W 12 Ptly cldy"
-     },
-     {
-      "time": "6:00 PM",
-      "wind_dir": "40",
-      "wind_sus_mph": null,
-      "wind_gust_mph": null,
-      "sky": "W 15 25 Ptly cldy"
-     },
-     {
-      "time": "9:00 PM",
-      "wind_dir": "35",
+      "wind_dir": "30",
       "wind_sus_mph": null,
       "wind_gust_mph": null,
       "sky": "SW 15 25 Ptly cldy"
      },
      {
-      "time": "12:00 AM",
-      "wind_dir": "35",
+      "time": "12:00 PM",
+      "wind_dir": "30",
       "wind_sus_mph": null,
       "wind_gust_mph": null,
       "sky": "SW 17 30 Ptly cldy"
+     },
+     {
+      "time": "3:00 PM",
+      "wind_dir": "30",
+      "wind_sus_mph": null,
+      "wind_gust_mph": null,
+      "sky": "SW 20 35 Ptly cldy"
+     },
+     {
+      "time": "6:00 PM",
+      "wind_dir": "35",
+      "wind_sus_mph": null,
+      "wind_gust_mph": null,
+      "sky": "SW 30 50 Mstly cldy"
+     },
+     {
+      "time": "9:00 PM",
+      "wind_dir": "60 r-shwrs",
+      "wind_sus_mph": null,
+      "wind_gust_mph": 508000,
+      "sky": "SW 40 60 Mstly cldy"
+     },
+     {
+      "time": "12:00 AM",
+      "wind_dir": "90 r-shwrs",
+      "wind_sus_mph": 0.05,
+      "wind_gust_mph": 607800,
+      "sky": "SW 40 65 Cloudy"
      },
      {
       "time": "3:00 AM",
-      "wind_dir": "35",
-      "wind_sus_mph": null,
-      "wind_gust_mph": null,
-      "sky": "SW 17 30 Ptly cldy"
+      "wind_dir": "95 s-shwrs",
+      "wind_sus_mph": 0.05,
+      "wind_gust_mph": 607500,
+      "sky": "SW 40 65 Cloudy"
      },
      {
       "time": "6:00 AM",
-      "wind_dir": "35",
-      "wind_sus_mph": null,
-      "wind_gust_mph": null,
-      "sky": "SW 17 30 Ptly cldy"
+      "wind_dir": "95 s-shwrs",
+      "wind_sus_mph": 0.05,
+      "wind_gust_mph": 607500,
+      "sky": "SW 25 45 Cloudy"
      }
     ],
     "liquid_total": null,
@@ -365,70 +365,70 @@
     "rows": [
      {
       "time": "6:00 AM",
-      "wind_dir": "35",
+      "wind_dir": "95",
       "wind_sus_mph": null,
       "wind_gust_mph": null,
-      "sky": "SW 17 30 Ptly cldy"
+      "sky": "SW 25 45 Cloudy"
      },
      {
       "time": "9:00 AM",
-      "wind_dir": "30",
-      "wind_sus_mph": null,
-      "wind_gust_mph": null,
-      "sky": "SW 15 25 Ptly cldy"
+      "wind_dir": "90 s-shwrs",
+      "wind_sus_mph": 0.05,
+      "wind_gust_mph": 507500,
+      "sky": "SW 20 35 Cloudy"
      },
      {
       "time": "12:00 PM",
       "wind_dir": "30",
       "wind_sus_mph": null,
       "wind_gust_mph": null,
-      "sky": "SW 12 Ptly cldy"
+      "sky": "SW 20 35 Mstly cldy"
      },
      {
       "time": "3:00 PM",
       "wind_dir": "30",
       "wind_sus_mph": null,
       "wind_gust_mph": null,
-      "sky": "SW 17 30 Ptly cldy"
+      "sky": "SW 17 30 Mstly cldy"
      },
      {
       "time": "6:00 PM",
       "wind_dir": "35",
       "wind_sus_mph": null,
       "wind_gust_mph": null,
-      "sky": "SW 25 40 Mstly cldy"
+      "sky": "SW 17 30 Mstly cldy"
      },
      {
       "time": "9:00 PM",
       "wind_dir": "45",
       "wind_sus_mph": null,
       "wind_gust_mph": null,
-      "sky": "SW 30 50 Mstly cldy"
+      "sky": "SW 20 35 Mstly cldy"
      },
      {
       "time": "12:00 AM",
-      "wind_dir": "55 s-shwrs",
+      "wind_dir": "55",
       "wind_sus_mph": null,
-      "wind_gust_mph": 507500,
-      "sky": "SW 40 60 Cloudy"
+      "wind_gust_mph": null,
+      "sky": "SW 20 35 Mstly cldy"
      },
      {
       "time": "3:00 AM",
-      "wind_dir": "75 s-shwrs",
-      "wind_sus_mph": 0.03,
-      "wind_gust_mph": 607200,
-      "sky": "SW 40 65 Cloudy"
+      "wind_dir": "75",
+      "wind_sus_mph": null,
+      "wind_gust_mph": null,
+      "sky": "SW 20 35 Mstly cldy"
      },
      {
       "time": "6:00 AM",
-      "wind_dir": "95 s-shwrs",
+      "wind_dir": "95",
       "wind_sus_mph": null,
-      "wind_gust_mph": 606700,
-      "sky": "SW 40 65 Cloudy"
+      "wind_gust_mph": null,
+      "sky": "SW 20 35 Mstly cldy"
      }
     ],
-    "liquid_total": "<0.10\"",
-    "snow_total": "Tr-1\""
+    "liquid_total": null,
+    "snow_total": null
    }
   ]
  },
@@ -436,26 +436,26 @@
   "title": "Extended Outlook 6,300FT",
   "days": [
    {
-    "day": "Sun 11/08",
-    "min_temp_f": 35,
-    "max_temp_f": 39
-   },
-   {
     "day": "Mon 11/09",
     "min_temp_f": 32,
     "max_temp_f": 42
    },
    {
     "day": "Tue 11/10",
-    "min_temp_f": 36,
-    "max_temp_f": 45
+    "min_temp_f": 38,
+    "max_temp_f": 47
    },
    {
     "day": "Wed 11/11",
-    "min_temp_f": 36,
+    "min_temp_f": 38,
+    "max_temp_f": 50
+   },
+   {
+    "day": "Thu 11/12",
+    "min_temp_f": 37,
     "max_temp_f": 48
    }
   ]
  },
- "discussion": "50% 50% 50% 30% r-shwrs early r-shwrs pm r-shwrs r-shwrs <0.05\" <0.10\" <0.10\" <0.10\" None None None None 6,700 7,400 8,800 8,000"
+ "discussion": "50% 30% 0% 0% r-shwrs r-shwrs early None None 0.10\" <0.05\" 0.00 0.00 None None None None 8,000 8,800"
 }
