@@ -1,14 +1,14 @@
 {
- "fetched_at": "2026-11-10T09:55:38.160Z",
+ "fetched_at": "2026-11-10T17:53:51.560Z",
  "source": "https://www.willamettepass.ski/weather-conditions-webcams/",
  "status_text": "Willamette Pass is currently closed.",
  "current": {
   "temp_f": 44,
   "high_f": 54,
-  "low_f": 38,
+  "low_f": 37,
   "wind": null,
-  "condition": "Partly Cloudy",
-  "updated": "November 10, 2026, 1:52 am",
+  "condition": "Mostly Sunny",
+  "updated": "November 10, 2026, 9:52 am",
   "provider": "NOAA"
  },
  "forecast": [],
@@ -83,12 +83,12 @@
   "sections": [
    {
     "name": "Frontside",
-    "access": "The Magic Carpet (Conveyor), Sleepy Hollow, Midway, Twilight",
+    "access": "The Magic Carpet (Conveyor), Sleepy Hollow, Midway, Twilight, Eagle Peak Accelerator, Peak 2",
     "meta": "0/21 Trails Open • Hours: 9am-4pm"
    },
    {
     "name": "Backside",
-    "access": "",
+    "access": "Peak 2",
     "meta": "0/8 Trails Open • Hours: 9:30am-3:30pm"
    },
    {

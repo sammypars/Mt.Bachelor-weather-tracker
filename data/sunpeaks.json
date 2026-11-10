@@ -1,5 +1,5 @@
 {
- "fetched_at": "2026-11-10T09:55:40.262Z",
+ "fetched_at": "2026-11-10T17:53:51.675Z",
  "source": "https://www.sunpeaksresort.com/ski-ride/weather-conditions-cams/weather-snow-report",
  "current": {
   "today": null
@@ -135,6 +135,13 @@
     "wind_avg_mph": 14,
     "wind_dir": 180,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-10T17:53:51.675Z",
+    "temp_f": 27,
+    "wind_avg_mph": 11,
+    "wind_dir": 135,
+    "wind_max_mph": null
    }
   ],
   "mid-mountain": [
@@ -148,6 +155,10 @@
    },
    {
     "t": "2026-11-10T09:55:40.262Z",
+    "temp_f": 30
+   },
+   {
+    "t": "2026-11-10T17:53:51.675Z",
     "temp_f": 30
    }
   ],
@@ -163,6 +174,10 @@
    {
     "t": "2026-11-10T09:55:40.262Z",
     "temp_f": 28
+   },
+   {
+    "t": "2026-11-10T17:53:51.675Z",
+    "temp_f": 30
    }
   ],
   "valley": [
@@ -177,6 +192,10 @@
    {
     "t": "2026-11-10T09:55:40.262Z",
     "temp_f": 36
+   },
+   {
+    "t": "2026-11-10T17:53:51.675Z",
+    "temp_f": 37
    }
   ],
   "sunburst-express-tower-18": [
@@ -194,6 +213,12 @@
    },
    {
     "t": "2026-11-10T09:55:40.262Z",
+    "wind_avg_mph": 4,
+    "wind_dir": 157.5,
+    "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-10T17:53:51.675Z",
     "wind_avg_mph": 4,
     "wind_dir": 157.5,
     "wind_max_mph": null
@@ -216,6 +241,12 @@
     "t": "2026-11-10T09:55:40.262Z",
     "wind_avg_mph": 2,
     "wind_dir": 90,
+    "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-10T17:53:51.675Z",
+    "wind_avg_mph": 1,
+    "wind_dir": 337.5,
     "wind_max_mph": null
    }
   ]
