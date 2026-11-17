@@ -1,50 +1,50 @@
 {
- "fetched_at": "2026-11-17T14:29:41.301Z",
+ "fetched_at": "2026-11-17T22:55:20.807Z",
  "source": "https://www.sunpeaksresort.com/ski-ride/weather-conditions-cams/weather-snow-report",
  "current": {
-  "today": "Cloudy. Chance of a flurry."
+  "today": "Sunny with a few afternoon clouds."
  },
  "forecast": [
   {
-   "date": "2026-11-23",
-   "temperature_high": 37,
-   "temperature_low": 18,
-   "description_short": "Cloudy. Chance of a flurry.",
-   "precipitation_high": null
-  },
-  {
    "date": "2026-11-17",
-   "temperature_high": 36,
-   "temperature_low": 27,
-   "description_short": "Sunny with cloudy periods.",
+   "temperature_high": 27,
+   "temperature_low": 14,
+   "description_short": "Sunny with a few afternoon clouds.",
    "precipitation_high": null
   },
   {
    "date": "2026-11-18",
    "temperature_high": 25,
-   "temperature_low": 19,
-   "description_short": "Cloudy periods.",
+   "temperature_low": 14,
+   "description_short": "Sunny with possible patchy valley cloud in the morning.",
    "precipitation_high": null
   },
   {
    "date": "2026-11-19",
-   "temperature_high": 25,
-   "temperature_low": 19,
-   "description_short": "Sunny with cloudy periods.",
+   "temperature_high": 23,
+   "temperature_low": 12,
+   "description_short": "Partly cloudy.",
    "precipitation_high": null
   },
   {
    "date": "2026-11-20",
-   "temperature_high": 30,
-   "temperature_low": 23,
-   "description_short": "Cloudy, light wind.",
+   "temperature_high": 21,
+   "temperature_low": 14,
+   "description_short": "Mainly cloudy.",
+   "precipitation_high": null
+  },
+  {
+   "date": "2026-11-21",
+   "temperature_high": 21,
+   "temperature_low": 10,
+   "description_short": "Mainly cloudy. Slight chance of flurries.",
    "precipitation_high": null
   }
  ],
- "discussion": "SYNOPSIS\n\nA building ridge of high pressure will bring cool, dry conditions and lighter winds to the resort over the next couple of days. Snowfall will be limited to a chance of a few brief flurries Monday. Skies will clear Monday night, followed by mainly sunny conditions Tuesday as the ridge strengthens. Temperatures will continue to trend downward toward seasonal values, with freezing levels remaining below mid-mountain. Winds will be light.\n\nEXTENDED OUTLOOK\n\nCool, dry conditions will persist through to Friday as the ridge of high pressure remains over the BC southern interior. Mid-mountain temperatures will range from minus 4 to minus 7 °C range in the afternoons and minus 8 to minus 12 °C overnight, while village temperatures will range from near-zero highs to minus 8 °C lows by mid-week. Winds will be light, and the chance of snow will be very low throughout the period",
+ "discussion": "SYNOPSIS\n\nA building ridge of high pressure over southern BC will bring cool, dry and mainly sunny conditions to the resort over the next couple of days. Temperatures will trend slowly downward, remaining below freezing on the slopes, with freezing levels near or just below village level. Winds will remain light.\n\nEXTENDED OUTLOOK\n\nThursday to Saturday: Cool, dry conditions will persist through the outlook period as the ridge of high pressure remains over the BC interior. A weak upper flow from the Pacific will bring more in the way of cloud cover, but little chance of snow. Mid-mountain temperatures will be in the -4 to -7°C range in the afternoons and -8 to -13°C overnight, while village temperatures will likely range from zero to minus 2 in the afternoons and from -5 to minus 8 overnight. Winds will be light, and the chance of snow will be very low throughout the period.",
  "snow_report": {
-  "date": "2026-11-17 08:16:00",
-  "date_text": "November 17th at 8:16am",
+  "date": "2026-11-17 16:47:00",
+  "date_text": "November 17th at 4:47pm",
   "unit": "in",
   "overnight": 0,
   "new_amount": 0,
@@ -52,12 +52,12 @@
   "base_mid": 7.1,
   "computed": {
    "24_hour": 0,
-   "48_hour": 0.4,
+   "48_hour": 0,
    "7_day": 0.4,
    "month": null,
    "total": null
   },
-  "report_text": "Operations Update (April 6, 2026): Alpine Area Closed\n\nThank you for joining us during the 2025–26 winter season! Please be advised that alpine skiing and snowboarding are now closed for the season. Summer lift operations for mountain biking and hiking can be found here.\n\nNot permitted: Snowmobiling, ski touring, and other activities, whether on foot or by motorized vehicle, are not permitted within the Sun Peaks Resort CRA (Controlled Recreation Area) at this time. This is for your safety and the safety of our staff, as teams continue to work in these areas in preparation for summer operations.\n\nThank you for your cooperation.\n\nMarc White, Director of Risk Management & Safety Programs\n\nToday: Cloudy. Chance of a flurry."
+  "report_text": "Winter 2026-27 Operations Update\n\nPosted November 17, 2026\n\nOpening Day of the 2026-27 winter season has been rescheduled to Thursday, November 26, weather depending.\n\nLearn More\n\nToday: Sunny with a few afternoon clouds."
  },
  "alerts": [],
  "lifts": [
@@ -152,13 +152,6 @@
  "stations": {
   "top-of-the-world": [
    {
-    "t": "2026-11-16T22:10:11.627Z",
-    "temp_f": 25,
-    "wind_avg_mph": 14,
-    "wind_dir": 247.5,
-    "wind_max_mph": null
-   },
-   {
     "t": "2026-11-17T04:32:05.992Z",
     "temp_f": 21,
     "wind_avg_mph": 14,
@@ -171,13 +164,16 @@
     "wind_avg_mph": 14,
     "wind_dir": 247.5,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-17T22:55:20.807Z",
+    "temp_f": 21,
+    "wind_avg_mph": 1,
+    "wind_dir": 337.5,
+    "wind_max_mph": null
    }
   ],
   "mid-mountain": [
-   {
-    "t": "2026-11-16T22:10:11.627Z",
-    "temp_f": 28
-   },
    {
     "t": "2026-11-17T04:32:05.992Z",
     "temp_f": 25
@@ -185,13 +181,13 @@
    {
     "t": "2026-11-17T14:29:41.301Z",
     "temp_f": 21
+   },
+   {
+    "t": "2026-11-17T22:55:20.807Z",
+    "temp_f": 25
    }
   ],
   "top-of-morrisey": [
-   {
-    "t": "2026-11-16T22:10:11.627Z",
-    "temp_f": 32
-   },
    {
     "t": "2026-11-17T04:32:05.992Z",
     "temp_f": 25
@@ -199,13 +195,13 @@
    {
     "t": "2026-11-17T14:29:41.301Z",
     "temp_f": 19
+   },
+   {
+    "t": "2026-11-17T22:55:20.807Z",
+    "temp_f": 27
    }
   ],
   "valley": [
-   {
-    "t": "2026-11-16T22:10:11.627Z",
-    "temp_f": 39
-   },
    {
     "t": "2026-11-17T04:32:05.992Z",
     "temp_f": 30
@@ -213,15 +209,13 @@
    {
     "t": "2026-11-17T14:29:41.301Z",
     "temp_f": 25
+   },
+   {
+    "t": "2026-11-17T22:55:20.807Z",
+    "temp_f": 36
    }
   ],
   "sunburst-express-tower-18": [
-   {
-    "t": "2026-11-16T22:10:11.627Z",
-    "wind_avg_mph": 7,
-    "wind_dir": 157.5,
-    "wind_max_mph": null
-   },
    {
     "t": "2026-11-17T04:32:05.992Z",
     "wind_avg_mph": 2,
@@ -233,15 +227,15 @@
     "wind_avg_mph": 0,
     "wind_dir": 0,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-17T22:55:20.807Z",
+    "wind_avg_mph": 0,
+    "wind_dir": 180,
+    "wind_max_mph": null
    }
   ],
   "morrisey-express-tower-10": [
-   {
-    "t": "2026-11-16T22:10:11.627Z",
-    "wind_avg_mph": 1,
-    "wind_dir": 45,
-    "wind_max_mph": null
-   },
    {
     "t": "2026-11-17T04:32:05.992Z",
     "wind_avg_mph": 4,
@@ -252,6 +246,12 @@
     "t": "2026-11-17T14:29:41.301Z",
     "wind_avg_mph": 2,
     "wind_dir": 67.5,
+    "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-17T22:55:20.807Z",
+    "wind_avg_mph": 0,
+    "wind_dir": 90,
     "wind_max_mph": null
    }
   ]
