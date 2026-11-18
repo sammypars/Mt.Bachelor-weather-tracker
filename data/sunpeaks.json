@@ -1,5 +1,5 @@
 {
- "fetched_at": "2026-11-17T22:55:20.807Z",
+ "fetched_at": "2026-11-18T04:27:30.552Z",
  "source": "https://www.sunpeaksresort.com/ski-ride/weather-conditions-cams/weather-snow-report",
  "current": {
   "today": "Sunny with a few afternoon clouds."
@@ -43,8 +43,8 @@
  ],
  "discussion": "SYNOPSIS\n\nA building ridge of high pressure over southern BC will bring cool, dry and mainly sunny conditions to the resort over the next couple of days. Temperatures will trend slowly downward, remaining below freezing on the slopes, with freezing levels near or just below village level. Winds will remain light.\n\nEXTENDED OUTLOOK\n\nThursday to Saturday: Cool, dry conditions will persist through the outlook period as the ridge of high pressure remains over the BC interior. A weak upper flow from the Pacific will bring more in the way of cloud cover, but little chance of snow. Mid-mountain temperatures will be in the -4 to -7°C range in the afternoons and -8 to -13°C overnight, while village temperatures will likely range from zero to minus 2 in the afternoons and from -5 to minus 8 overnight. Winds will be light, and the chance of snow will be very low throughout the period.",
  "snow_report": {
-  "date": "2026-11-17 16:47:00",
-  "date_text": "November 17th at 4:47pm",
+  "date": "2026-11-17 22:16:00",
+  "date_text": "November 17th at 10:16pm",
   "unit": "in",
   "overnight": 0,
   "new_amount": 0,
@@ -171,6 +171,13 @@
     "wind_avg_mph": 1,
     "wind_dir": 337.5,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-18T04:27:30.552Z",
+    "temp_f": 18,
+    "wind_avg_mph": 7,
+    "wind_dir": 337.5,
+    "wind_max_mph": null
    }
   ],
   "mid-mountain": [
@@ -185,6 +192,10 @@
    {
     "t": "2026-11-17T22:55:20.807Z",
     "temp_f": 25
+   },
+   {
+    "t": "2026-11-18T04:27:30.552Z",
+    "temp_f": 23
    }
   ],
   "top-of-morrisey": [
@@ -199,6 +210,10 @@
    {
     "t": "2026-11-17T22:55:20.807Z",
     "temp_f": 27
+   },
+   {
+    "t": "2026-11-18T04:27:30.552Z",
+    "temp_f": 21
    }
   ],
   "valley": [
@@ -213,6 +228,10 @@
    {
     "t": "2026-11-17T22:55:20.807Z",
     "temp_f": 36
+   },
+   {
+    "t": "2026-11-18T04:27:30.552Z",
+    "temp_f": 27
    }
   ],
   "sunburst-express-tower-18": [
@@ -233,6 +252,12 @@
     "wind_avg_mph": 0,
     "wind_dir": 180,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-18T04:27:30.552Z",
+    "wind_avg_mph": 4,
+    "wind_dir": 337.5,
+    "wind_max_mph": null
    }
   ],
   "morrisey-express-tower-10": [
@@ -252,6 +277,12 @@
     "t": "2026-11-17T22:55:20.807Z",
     "wind_avg_mph": 0,
     "wind_dir": 90,
+    "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-18T04:27:30.552Z",
+    "wind_avg_mph": 1,
+    "wind_dir": 180,
     "wind_max_mph": null
    }
   ]
