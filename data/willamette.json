@@ -1,14 +1,14 @@
 {
- "fetched_at": "2026-11-19T22:11:00.270Z",
+ "fetched_at": "2026-11-20T03:22:53.839Z",
  "source": "https://www.willamettepass.ski/weather-conditions-webcams/",
  "status_text": "Willamette Pass is currently closed.",
  "current": {
-  "temp_f": 36,
-  "high_f": 34,
+  "temp_f": 26,
+  "high_f": 35,
   "low_f": 23,
   "wind": null,
-  "condition": "Slight Chance Snow",
-  "updated": "November 19, 2026, 2:10 pm",
+  "condition": "Mostly Cloudy",
+  "updated": "November 19, 2026, 7:22 pm",
   "provider": "NOAA"
  },
  "forecast": [],
