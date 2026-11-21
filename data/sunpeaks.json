@@ -1,12 +1,12 @@
 {
- "fetched_at": "2026-11-21T02:21:40.228Z",
+ "fetched_at": "2026-11-21T11:11:33.830Z",
  "source": "https://www.sunpeaksresort.com/ski-ride/weather-conditions-cams/weather-snow-report",
  "current": {
   "today": "Mainly cloudy"
  },
  "forecast": [
   {
-   "date": "2026-11-20",
+   "date": "2026-11-27",
    "temperature_high": 23,
    "temperature_low": 12,
    "description_short": "Mainly cloudy",
@@ -43,8 +43,8 @@
  ],
  "discussion": "SYNOPSIS\n\nA weak upper trough tracks through the resort this morning, but it should produce cloud cover and only very light, if any, snow. In its wake, a ridge rebuilds overnight. Clearing skies will promote the formation of patchy valley low cloud and fog Saturday morning, with sunny breaks expected in the afternoon. Winds should be light today but pick up from the east on Saturday. Freezing levels will be below village level during each afternoon. .\n\nEXTENDED OUTLOOK\n\nSunday to Tuesday: On Sunday, clouds increase as a Pacific system slowly approaches from the southwest. A trough extending east from the low trough lifts over the Resort on Monday morning. There’s a chance of a few light flurries Sunday. Monday should be dry with variable skies. Increasing cloud is expected Tuesday as a stronger front approaches from the west, with a chance of some light snow. Maximum temperatures in the Alpine will be near minus 8°C on Sunday, minus 7°C on Monday and minus 6°C on Tuesday. Village",
  "snow_report": {
-  "date": "2026-11-20 20:13:00",
-  "date_text": "November 20th at 8:13pm",
+  "date": "2026-11-21 05:03:00",
+  "date_text": "November 21st at 5:03am",
   "unit": "in",
   "overnight": 0,
   "new_amount": 0,
@@ -152,13 +152,6 @@
  "stations": {
   "top-of-the-world": [
    {
-    "t": "2026-11-20T03:22:57.046Z",
-    "temp_f": 18,
-    "wind_avg_mph": 17,
-    "wind_dir": 315,
-    "wind_max_mph": null
-   },
-   {
     "t": "2026-11-20T12:58:23.831Z",
     "temp_f": 21,
     "wind_avg_mph": 16,
@@ -178,14 +171,17 @@
     "wind_avg_mph": 12,
     "wind_dir": 315,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-21T11:11:33.830Z",
+    "temp_f": 16,
+    "wind_avg_mph": 5,
+    "wind_dir": 315,
+    "wind_max_mph": null
    }
   ],
   "mid-mountain": [
    {
-    "t": "2026-11-20T03:22:57.046Z",
-    "temp_f": 23
-   },
-   {
     "t": "2026-11-20T12:58:23.831Z",
     "temp_f": 25
    },
@@ -196,14 +192,14 @@
    {
     "t": "2026-11-21T02:21:40.228Z",
     "temp_f": 18
+   },
+   {
+    "t": "2026-11-21T11:11:33.830Z",
+    "temp_f": 14
    }
   ],
   "top-of-morrisey": [
    {
-    "t": "2026-11-20T03:22:57.046Z",
-    "temp_f": 16
-   },
-   {
     "t": "2026-11-20T12:58:23.831Z",
     "temp_f": 18
    },
@@ -214,13 +210,13 @@
    {
     "t": "2026-11-21T02:21:40.228Z",
     "temp_f": 18
+   },
+   {
+    "t": "2026-11-21T11:11:33.830Z",
+    "temp_f": 18
    }
   ],
   "valley": [
-   {
-    "t": "2026-11-20T03:22:57.046Z",
-    "temp_f": 21
-   },
    {
     "t": "2026-11-20T12:58:23.831Z",
     "temp_f": 23
@@ -232,15 +228,13 @@
    {
     "t": "2026-11-21T02:21:40.228Z",
     "temp_f": 23
+   },
+   {
+    "t": "2026-11-21T11:11:33.830Z",
+    "temp_f": 25
    }
   ],
   "sunburst-express-tower-18": [
-   {
-    "t": "2026-11-20T03:22:57.046Z",
-    "wind_avg_mph": 2,
-    "wind_dir": 270,
-    "wind_max_mph": null
-   },
    {
     "t": "2026-11-20T12:58:23.831Z",
     "wind_avg_mph": 0,
@@ -258,15 +252,15 @@
     "wind_avg_mph": 0,
     "wind_dir": 0,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-21T11:11:33.830Z",
+    "wind_avg_mph": 1,
+    "wind_dir": 292.5,
+    "wind_max_mph": null
    }
   ],
   "morrisey-express-tower-10": [
-   {
-    "t": "2026-11-20T03:22:57.046Z",
-    "wind_avg_mph": 1,
-    "wind_dir": 112.5,
-    "wind_max_mph": null
-   },
    {
     "t": "2026-11-20T12:58:23.831Z",
     "wind_avg_mph": 1,
@@ -282,6 +276,12 @@
    {
     "t": "2026-11-21T02:21:40.228Z",
     "wind_avg_mph": 2,
+    "wind_dir": 90,
+    "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-21T11:11:33.830Z",
+    "wind_avg_mph": 0,
     "wind_dir": 90,
     "wind_max_mph": null
    }
