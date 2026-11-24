@@ -1,12 +1,12 @@
 {
- "fetched_at": "2026-11-24T00:56:42.177Z",
+ "fetched_at": "2026-11-24T10:59:37.578Z",
  "source": "https://www.sunpeaksresort.com/ski-ride/weather-conditions-cams/weather-snow-report",
  "current": {
   "today": "A mix of sun and cloud. Chance of a light flurry."
  },
  "forecast": [
   {
-   "date": "2026-11-23",
+   "date": "2026-11-30",
    "temperature_high": 19,
    "temperature_low": 18,
    "description_short": "A mix of sun and cloud. Chance of a light flurry.",
@@ -43,12 +43,12 @@
  ],
  "discussion": "SYNOPSIS\n\nA mix of sun and cloud is expected today, with mainly cloudy conditions on Tuesday, as moisture at high levels pushes into the interior from a series of low-pressure systems tracking inland from the coast. Either day could feature a flurry or two. Winds will be generally light easterly today and will increase on Tuesday.\n\nEXTENDED OUTLOOK\n\nWednesday to Friday: Mainly cloudy conditions continue Wednesday and Thursday as a series of disturbances are ejected into the interior from a succession of coastal storms, carried by an increasing southwesterly flow aloft. Periods of light snow with minor accumulations are possible each day. A break in precipitation with partly cloudy skies is expected on Friday as a weak ridge builds over the southern interior. Maximum temperatures in the Alpine will be near minus 3°C on Wednesday and Thursday as the flow gradually warms, with highs again reaching near minus 3°C on Friday. Village highs will be near minus 1°C on Wednesday before rising to near zero on Thursday and Friday. Winds will continue to blow from the southeast 25 to 30 km/h on Wednesday, then shift to the southwest on Thursday at 25 to 35 km/h before diminishing to southwest 15 to 20 km/h on Friday.",
  "snow_report": {
-  "date": "2026-11-23 18:47:00",
-  "date_text": "November 23rd at 6:47pm",
+  "date": "2026-11-24 04:46:00",
+  "date_text": "November 24th at 4:46am",
   "unit": "in",
   "overnight": 0,
   "new_amount": 0,
-  "base_depth": 10.6,
+  "base_depth": 11,
   "base_mid": 8.3,
   "computed": {
    "24_hour": 0,
@@ -152,13 +152,6 @@
  "stations": {
   "top-of-the-world": [
    {
-    "t": "2026-11-23T02:50:00.090Z",
-    "temp_f": 18,
-    "wind_avg_mph": 4,
-    "wind_dir": 180,
-    "wind_max_mph": null
-   },
-   {
     "t": "2026-11-23T12:55:09.669Z",
     "temp_f": 14,
     "wind_avg_mph": 7,
@@ -171,13 +164,16 @@
     "wind_avg_mph": 9,
     "wind_dir": 112.5,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-24T10:59:37.578Z",
+    "temp_f": 18,
+    "wind_avg_mph": 11,
+    "wind_dir": 135,
+    "wind_max_mph": null
    }
   ],
   "mid-mountain": [
-   {
-    "t": "2026-11-23T02:50:00.090Z",
-    "temp_f": 18
-   },
    {
     "t": "2026-11-23T12:55:09.669Z",
     "temp_f": 18
@@ -185,13 +181,13 @@
    {
     "t": "2026-11-24T00:56:42.177Z",
     "temp_f": 19
+   },
+   {
+    "t": "2026-11-24T10:59:37.578Z",
+    "temp_f": 21
    }
   ],
   "top-of-morrisey": [
-   {
-    "t": "2026-11-23T02:50:00.090Z",
-    "temp_f": 18
-   },
    {
     "t": "2026-11-23T12:55:09.669Z",
     "temp_f": 16
@@ -199,13 +195,13 @@
    {
     "t": "2026-11-24T00:56:42.177Z",
     "temp_f": 21
+   },
+   {
+    "t": "2026-11-24T10:59:37.578Z",
+    "temp_f": 19
    }
   ],
   "valley": [
-   {
-    "t": "2026-11-23T02:50:00.090Z",
-    "temp_f": 25
-   },
    {
     "t": "2026-11-23T12:55:09.669Z",
     "temp_f": 25
@@ -213,15 +209,13 @@
    {
     "t": "2026-11-24T00:56:42.177Z",
     "temp_f": 27
+   },
+   {
+    "t": "2026-11-24T10:59:37.578Z",
+    "temp_f": 27
    }
   ],
   "sunburst-express-tower-18": [
-   {
-    "t": "2026-11-23T02:50:00.090Z",
-    "wind_avg_mph": 0,
-    "wind_dir": 315,
-    "wind_max_mph": null
-   },
    {
     "t": "2026-11-23T12:55:09.669Z",
     "wind_avg_mph": 2,
@@ -233,15 +227,15 @@
     "wind_avg_mph": 1,
     "wind_dir": 202.5,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-24T10:59:37.578Z",
+    "wind_avg_mph": 1,
+    "wind_dir": 337.5,
+    "wind_max_mph": null
    }
   ],
   "morrisey-express-tower-10": [
-   {
-    "t": "2026-11-23T02:50:00.090Z",
-    "wind_avg_mph": 4,
-    "wind_dir": 90,
-    "wind_max_mph": null
-   },
    {
     "t": "2026-11-23T12:55:09.669Z",
     "wind_avg_mph": 2,
@@ -252,6 +246,12 @@
     "t": "2026-11-24T00:56:42.177Z",
     "wind_avg_mph": 3,
     "wind_dir": 22.5,
+    "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-24T10:59:37.578Z",
+    "wind_avg_mph": 3,
+    "wind_dir": 45,
     "wind_max_mph": null
    }
   ]
