@@ -1,29 +1,22 @@
 {
- "fetched_at": "2026-11-25T04:20:33.188Z",
+ "fetched_at": "2026-11-25T15:40:26.624Z",
  "source": "https://www.sunpeaksresort.com/ski-ride/weather-conditions-cams/weather-snow-report",
  "current": {
-  "today": "Cloudy. A few flurries. Amounts 1 to 3 cm."
+  "today": "Partly cloudy. Chance of a flurry."
  },
  "forecast": [
   {
-   "date": "2026-11-24",
-   "temperature_high": 23,
-   "temperature_low": 23,
-   "description_short": "Cloudy. A few flurries. Amounts 1 to 3 cm.",
-   "precipitation_high": null
-  },
-  {
    "date": "2026-11-25",
-   "temperature_high": 30,
+   "temperature_high": 28,
    "temperature_low": 28,
-   "description_short": "Mainly cloudy. Chance of a flurry.",
+   "description_short": "Partly cloudy. Chance of a flurry.",
    "precipitation_high": null
   },
   {
    "date": "2026-11-26",
    "temperature_high": 32,
    "temperature_low": 28,
-   "description_short": "Cloudy. Periods of snow in the morning.",
+   "description_short": "Snow, mixed with rain on the lower slopes, ending early in the morning, then cloudy with a chance of alpine flurries. Amounts trace to 2 cm.",
    "precipitation_high": null
   },
   {
@@ -35,21 +28,28 @@
   },
   {
    "date": "2026-11-28",
-   "temperature_high": 23,
+   "temperature_high": 25,
    "temperature_low": 18,
-   "description_short": "A mix of sun and cloud.",
+   "description_short": "Mainly sunny.",
+   "precipitation_high": null
+  },
+  {
+   "date": "2026-11-29",
+   "temperature_high": 21,
+   "temperature_low": 16,
+   "description_short": "Sunny with increasing cloud in the afternoon.",
    "precipitation_high": null
   }
  ],
- "discussion": "SYNOPSIS\n\nA strong low-pressure system moving north off the BC coast will spread cloud and bands of light snow across the area today. Snowfall amounts of 1 to 3 cm are expected, mainly during the morning hours. Tonight and Wednesday, a strengthening southwesterly flow aloft will bring milder temperatures and limit precipitation to just a chance of a brief flurry or two. Winds will be generally light to moderate southeasterly with some gustiness in the alpine. Temperatures will climb slowly through the period.\n\nEXTENDED OUTLOOK\n\nThursday to Saturday: Another disturbance is forecast to move into the southern interior from the coast late Wednesday into Thursday morning, bringing the possibility of a few more cms of snow to the upper slopes. A break in precipitation with partly cloudy skies and cooler temperatures is expected on Friday and Saturday as a weak ridge of high pressure builds over the southern interior.",
+ "discussion": "SYNOPSIS\n\nToday, a strengthening southwesterly flow aloft will bring gusty winds and milder temperatures under partly cloudy skies, with precipitation limited to just a chance of a brief flurry or two. Another disturbance is forecast to move into the southern interior from the coast tonight into Thursday morning, bringing a few more cms of snow to the upper slopes, along with mixed rain and wet snow to the lower slopes and the village. Winds will be moderate south to southeasterly with some strong gusts in the high alpine. Temperatures will climb slowly through the period, peaking on Thursday afternoon.\n\nEXTENDED OUTLOOK\n\nFriday to Sunday: Partly cloudy skies and cooler temperatures are expected Friday as a weak ridge of high pressure begins to build over the southern interior. The cooler and drier conditions will continue over the weekend as the upper flow turns northwesterly and the ridge strengthens over the region. The next Pacific storm will approach the coast on Sunday and may bring increasing cloud on Sunday afternoon and a chance of a light snowfall Sunday night into Monday morning.",
  "snow_report": {
-  "date": "2026-11-24 21:13:00",
-  "date_text": "November 24th at 9:13pm",
+  "date": "2026-11-25 08:32:00",
+  "date_text": "November 25th at 8:32am",
   "unit": "in",
   "overnight": 0,
   "new_amount": 0,
-  "base_depth": 13.8,
-  "base_mid": 11.4,
+  "base_depth": 13.4,
+  "base_mid": 11,
   "computed": {
    "24_hour": 3.1,
    "48_hour": 3.1,
@@ -57,7 +57,7 @@
    "month": null,
    "total": null
   },
-  "report_text": "Winter 2026-27 Operations Update\n\nPosted November 17, 2026\n\nOpening Day of the 2026-27 winter season has been rescheduled to Thursday, November 26, weather depending.\n\nLearn More\n\nToday: Cloudy. A few flurries. Amounts 1 to 3 cm."
+  "report_text": "Winter 2026-27 Operations Update\n\nPosted November 17, 2026\n\nOpening Day of the 2026-27 winter season has been rescheduled to Thursday, November 26, weather depending.\n\nLearn More\n\nToday: Partly cloudy. Chance of a flurry."
  },
  "alerts": [],
  "lifts": [
@@ -152,13 +152,6 @@
  "stations": {
   "top-of-the-world": [
    {
-    "t": "2026-11-24T10:59:37.578Z",
-    "temp_f": 18,
-    "wind_avg_mph": 11,
-    "wind_dir": 135,
-    "wind_max_mph": null
-   },
-   {
     "t": "2026-11-24T21:16:40.031Z",
     "temp_f": 21,
     "wind_avg_mph": 10,
@@ -171,13 +164,16 @@
     "wind_avg_mph": 16,
     "wind_dir": 157.5,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-25T15:40:26.624Z",
+    "temp_f": 25,
+    "wind_avg_mph": 9,
+    "wind_dir": 135,
+    "wind_max_mph": null
    }
   ],
   "mid-mountain": [
-   {
-    "t": "2026-11-24T10:59:37.578Z",
-    "temp_f": 21
-   },
    {
     "t": "2026-11-24T21:16:40.031Z",
     "temp_f": 23
@@ -185,13 +181,13 @@
    {
     "t": "2026-11-25T04:20:33.188Z",
     "temp_f": 27
+   },
+   {
+    "t": "2026-11-25T15:40:26.624Z",
+    "temp_f": 27
    }
   ],
   "top-of-morrisey": [
-   {
-    "t": "2026-11-24T10:59:37.578Z",
-    "temp_f": 19
-   },
    {
     "t": "2026-11-24T21:16:40.031Z",
     "temp_f": 23
@@ -199,13 +195,13 @@
    {
     "t": "2026-11-25T04:20:33.188Z",
     "temp_f": 25
+   },
+   {
+    "t": "2026-11-25T15:40:26.624Z",
+    "temp_f": 27
    }
   ],
   "valley": [
-   {
-    "t": "2026-11-24T10:59:37.578Z",
-    "temp_f": 27
-   },
    {
     "t": "2026-11-24T21:16:40.031Z",
     "temp_f": 30
@@ -213,15 +209,13 @@
    {
     "t": "2026-11-25T04:20:33.188Z",
     "temp_f": 34
+   },
+   {
+    "t": "2026-11-25T15:40:26.624Z",
+    "temp_f": 34
    }
   ],
   "sunburst-express-tower-18": [
-   {
-    "t": "2026-11-24T10:59:37.578Z",
-    "wind_avg_mph": 1,
-    "wind_dir": 337.5,
-    "wind_max_mph": null
-   },
    {
     "t": "2026-11-24T21:16:40.031Z",
     "wind_avg_mph": 7,
@@ -233,15 +227,15 @@
     "wind_avg_mph": 10,
     "wind_dir": 157.5,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-25T15:40:26.624Z",
+    "wind_avg_mph": 2,
+    "wind_dir": 180,
+    "wind_max_mph": null
    }
   ],
   "morrisey-express-tower-10": [
-   {
-    "t": "2026-11-24T10:59:37.578Z",
-    "wind_avg_mph": 3,
-    "wind_dir": 45,
-    "wind_max_mph": null
-   },
    {
     "t": "2026-11-24T21:16:40.031Z",
     "wind_avg_mph": 3,
@@ -252,6 +246,12 @@
     "t": "2026-11-25T04:20:33.188Z",
     "wind_avg_mph": 3,
     "wind_dir": 315,
+    "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-25T15:40:26.624Z",
+    "wind_avg_mph": 4,
+    "wind_dir": 67.5,
     "wind_max_mph": null
    }
   ]
