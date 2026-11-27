@@ -1,12 +1,12 @@
 {
- "fetched_at": "2026-11-27T02:53:15.271Z",
+ "fetched_at": "2026-11-27T12:30:58.175Z",
  "source": "https://www.sunpeaksresort.com/ski-ride/weather-conditions-cams/weather-snow-report",
  "current": {
   "today": "Cloudy with sunny breaks. Chance of a brief flurry. Windy."
  },
  "forecast": [
   {
-   "date": "2026-11-26",
+   "date": "2026-12-03",
    "temperature_high": 32,
    "temperature_low": 21,
    "description_short": "Cloudy with sunny breaks. Chance of a brief flurry. Windy.",
@@ -43,8 +43,8 @@
  ],
  "discussion": "SYNOPSIS\n\nToday, a strong southwesterly flow aloft will bring gusty winds, mild temperatures and partly cloudy skies to the resort, with precipitation limited to just a chance of a brief flurry or two. Lighter winds and a cooling trend will begin tonight into Friday as the upper flow weakens and turns westerly, and a ridge of high pressure builds over the southern interior. Winds will be moderate south to southeasterly with strong gusts in the high alpine today, then become light southwesterly overnight and Friday. Temperatures will peak this afternoon, with freezing levels near mid-mountain, then fall a few degrees on Friday.\n\nEXTENDED OUTLOOK\n\nSaturday to Monday: The trend to cooler and drier conditions will continue over the weekend as the upper flow turns northwesterly and a high-pressure ridge strengthens over the region. The next Pacific storm will approach the coast late on Sunday and may bring increasing cloud on Sunday afternoon and a chance of a light snowfall Sunday night into Monday.",
  "snow_report": {
-  "date": "2026-11-26 19:42:00",
-  "date_text": "November 26th at 7:42pm",
+  "date": "2026-11-27 05:22:00",
+  "date_text": "November 27th at 5:22am",
   "unit": "in",
   "overnight": 0,
   "new_amount": 0,
@@ -143,15 +143,9 @@
  "trails": {
   "total": 157,
   "winter_total": 157,
-  "winter_open": 5,
-  "groomed": 0,
-  "open_names": [
-   "5 Mile Lower",
-   "Cahilty",
-   "Gentle Giant",
-   "Sunbeam",
-   "Terrain Park - Base Camp"
-  ]
+  "winter_open": 0,
+  "groomed": 5,
+  "open_names": []
  },
  "station_names": {
   "top-of-the-world": "Top of the World",
@@ -163,13 +157,6 @@
  },
  "stations": {
   "top-of-the-world": [
-   {
-    "t": "2026-11-26T09:35:26.810Z",
-    "temp_f": 28,
-    "wind_avg_mph": 16,
-    "wind_dir": 157.5,
-    "wind_max_mph": null
-   },
    {
     "t": "2026-11-26T19:39:36.414Z",
     "temp_f": 28,
@@ -183,41 +170,44 @@
     "wind_avg_mph": 10,
     "wind_dir": 202.5,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-27T12:30:58.175Z",
+    "temp_f": 21,
+    "wind_avg_mph": 13,
+    "wind_dir": 247.5,
+    "wind_max_mph": null
    }
   ],
   "mid-mountain": [
    {
-    "t": "2026-11-26T09:35:26.810Z",
-    "temp_f": 30
-   },
-   {
     "t": "2026-11-26T19:39:36.414Z",
     "temp_f": 30
    },
    {
     "t": "2026-11-27T02:53:15.271Z",
     "temp_f": 30
+   },
+   {
+    "t": "2026-11-27T12:30:58.175Z",
+    "temp_f": 25
    }
   ],
   "top-of-morrisey": [
    {
-    "t": "2026-11-26T09:35:26.810Z",
-    "temp_f": 28
-   },
-   {
     "t": "2026-11-26T19:39:36.414Z",
     "temp_f": 30
    },
    {
     "t": "2026-11-27T02:53:15.271Z",
     "temp_f": 28
+   },
+   {
+    "t": "2026-11-27T12:30:58.175Z",
+    "temp_f": 23
    }
   ],
   "valley": [
-   {
-    "t": "2026-11-26T09:35:26.810Z",
-    "temp_f": 36
-   },
    {
     "t": "2026-11-26T19:39:36.414Z",
     "temp_f": 37
@@ -225,15 +215,13 @@
    {
     "t": "2026-11-27T02:53:15.271Z",
     "temp_f": 37
+   },
+   {
+    "t": "2026-11-27T12:30:58.175Z",
+    "temp_f": 30
    }
   ],
   "sunburst-express-tower-18": [
-   {
-    "t": "2026-11-26T09:35:26.810Z",
-    "wind_avg_mph": 9,
-    "wind_dir": 157.5,
-    "wind_max_mph": null
-   },
    {
     "t": "2026-11-26T19:39:36.414Z",
     "wind_avg_mph": 6,
@@ -245,15 +233,15 @@
     "wind_avg_mph": 5,
     "wind_dir": 180,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-27T12:30:58.175Z",
+    "wind_avg_mph": 9,
+    "wind_dir": 270,
+    "wind_max_mph": null
    }
   ],
   "morrisey-express-tower-10": [
-   {
-    "t": "2026-11-26T09:35:26.810Z",
-    "wind_avg_mph": 1,
-    "wind_dir": 45,
-    "wind_max_mph": null
-   },
    {
     "t": "2026-11-26T19:39:36.414Z",
     "wind_avg_mph": 1,
@@ -264,6 +252,12 @@
     "t": "2026-11-27T02:53:15.271Z",
     "wind_avg_mph": 0,
     "wind_dir": 225,
+    "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-27T12:30:58.175Z",
+    "wind_avg_mph": 1,
+    "wind_dir": 247.5,
     "wind_max_mph": null
    }
   ]
