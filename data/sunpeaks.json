@@ -1,12 +1,12 @@
 {
- "fetched_at": "2026-11-28T03:56:09.549Z",
+ "fetched_at": "2026-11-28T13:05:29.538Z",
  "source": "https://www.sunpeaksresort.com/ski-ride/weather-conditions-cams/weather-snow-report",
  "current": {
   "today": "Mainly cloudy with a few afternoon flurries."
  },
  "forecast": [
   {
-   "date": "2026-11-27",
+   "date": "2026-12-04",
    "temperature_high": 28,
    "temperature_low": 18,
    "description_short": "Mainly cloudy with a few afternoon flurries.",
@@ -43,16 +43,16 @@
  ],
  "discussion": "SYNOPSIS\n\nA building ridge of high pressure over southern BC, combined with a weak westerly flow aloft, will maintain cooler temperatures today and through the weekend. Lingering moisture will keep skies mainly cloudy today and should bring a few flurries to the resort this afternoon. The ridge will strengthen tonight, leading to clearing skies, with mainly sunny conditions expected Saturday under a drier northwesterly flow aloft. Winds will be light southwesterly today, becoming light west to northwesterly tonight and Saturday.\n\nEXTENDED OUTLOOK\n\nSunday to Tuesday: The cooler, drier conditions will continue Sunday. The next Pacific storm is forecast to approach the coast late on Sunday and then weaken as it stalls just west of Vancouver Island. This scenario will likely bring light snow to the resort on Monday and a chance of flurries for Tuesday.",
  "snow_report": {
-  "date": "2026-11-27 20:46:00",
-  "date_text": "November 27th at 8:46pm",
+  "date": "2026-11-28 05:57:00",
+  "date_text": "November 28th at 5:57am",
   "unit": "in",
   "overnight": 0,
   "new_amount": 0,
-  "base_depth": 13.8,
+  "base_depth": 14.2,
   "base_mid": 11.8,
   "computed": {
    "24_hour": 0,
-   "48_hour": 0.8,
+   "48_hour": 0,
    "7_day": 3.5,
    "month": null,
    "total": null
@@ -143,14 +143,9 @@
  "trails": {
   "total": 157,
   "winter_total": 157,
-  "winter_open": 4,
-  "groomed": 1,
-  "open_names": [
-   "5 Mile Lower",
-   "Gentle Giant",
-   "Sunbeam",
-   "Terrain Park - Base Camp"
-  ]
+  "winter_open": 0,
+  "groomed": 5,
+  "open_names": []
  },
  "station_names": {
   "top-of-the-world": "Top of the World",
@@ -162,13 +157,6 @@
  },
  "stations": {
   "top-of-the-world": [
-   {
-    "t": "2026-11-27T12:30:58.175Z",
-    "temp_f": 21,
-    "wind_avg_mph": 13,
-    "wind_dir": 247.5,
-    "wind_max_mph": null
-   },
    {
     "t": "2026-11-27T22:00:15.588Z",
     "temp_f": 27,
@@ -182,13 +170,16 @@
     "wind_avg_mph": 16,
     "wind_dir": 292.5,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-28T13:05:29.538Z",
+    "temp_f": 19,
+    "wind_avg_mph": 13,
+    "wind_dir": 315,
+    "wind_max_mph": null
    }
   ],
   "mid-mountain": [
-   {
-    "t": "2026-11-27T12:30:58.175Z",
-    "temp_f": 25
-   },
    {
     "t": "2026-11-27T22:00:15.588Z",
     "temp_f": 28
@@ -196,13 +187,13 @@
    {
     "t": "2026-11-28T03:56:09.549Z",
     "temp_f": 27
+   },
+   {
+    "t": "2026-11-28T13:05:29.538Z",
+    "temp_f": 23
    }
   ],
   "top-of-morrisey": [
-   {
-    "t": "2026-11-27T12:30:58.175Z",
-    "temp_f": 23
-   },
    {
     "t": "2026-11-27T22:00:15.588Z",
     "temp_f": 32
@@ -210,13 +201,13 @@
    {
     "t": "2026-11-28T03:56:09.549Z",
     "temp_f": 23
+   },
+   {
+    "t": "2026-11-28T13:05:29.538Z",
+    "temp_f": 21
    }
   ],
   "valley": [
-   {
-    "t": "2026-11-27T12:30:58.175Z",
-    "temp_f": 30
-   },
    {
     "t": "2026-11-27T22:00:15.588Z",
     "temp_f": 37
@@ -224,15 +215,13 @@
    {
     "t": "2026-11-28T03:56:09.549Z",
     "temp_f": 30
+   },
+   {
+    "t": "2026-11-28T13:05:29.538Z",
+    "temp_f": 27
    }
   ],
   "sunburst-express-tower-18": [
-   {
-    "t": "2026-11-27T12:30:58.175Z",
-    "wind_avg_mph": 9,
-    "wind_dir": 270,
-    "wind_max_mph": null
-   },
    {
     "t": "2026-11-27T22:00:15.588Z",
     "wind_avg_mph": 1,
@@ -244,15 +233,15 @@
     "wind_avg_mph": 0,
     "wind_dir": 247.5,
     "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-28T13:05:29.538Z",
+    "wind_avg_mph": 1,
+    "wind_dir": 337.5,
+    "wind_max_mph": null
    }
   ],
   "morrisey-express-tower-10": [
-   {
-    "t": "2026-11-27T12:30:58.175Z",
-    "wind_avg_mph": 1,
-    "wind_dir": 247.5,
-    "wind_max_mph": null
-   },
    {
     "t": "2026-11-27T22:00:15.588Z",
     "wind_avg_mph": 1,
@@ -263,6 +252,12 @@
     "t": "2026-11-28T03:56:09.549Z",
     "wind_avg_mph": 1,
     "wind_dir": 157.5,
+    "wind_max_mph": null
+   },
+   {
+    "t": "2026-11-28T13:05:29.538Z",
+    "wind_avg_mph": 1,
+    "wind_dir": 180,
     "wind_max_mph": null
    }
   ]
